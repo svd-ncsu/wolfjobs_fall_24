@@ -84,23 +84,13 @@ const App = () => {
           />
           <Route
             path="/resumeviewer/:applicantId"
-            element={
-                <ResumeViewer />
-            }
+            element={<ResumeViewer />}
           />
           <Route
             path="/resume"
             element={
               <ProtectedRoute>
                 <Resume />
-              </ProtectedRoute>
-            }
-          />
-          <Route
-            path="/notifications"
-            element={
-              <ProtectedRoute>
-                <Notifications />
               </ProtectedRoute>
             }
           />
