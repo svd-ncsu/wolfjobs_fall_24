@@ -93,42 +93,40 @@ const ProfileEdit = ({ props }: { props: any }) => {
   };
 
   return (
-    <>
-      <div className="my-2">
-        <form onSubmit={handleSubmit(handleSaveProfile)} noValidate>
-          <Stack spacing={2} width={"620px"}>
+    <div className="my-1">
+      <form onSubmit={handleSubmit(handleSaveProfile)} noValidate>
+        <Stack direction="row" spacing={2} width={"100%"}> {/* Set horizontal direction */}
+          <Stack spacing={1} width={"50%"}> {/* Left half of the form */}
             <TextField
               label="Name"
               type="text"
-              {...register("name", {
-                required: "Name is required",
-              })}
+              {...register("name", { required: "Name is required" })}
               error={!!errors.name}
               helperText={errors.name?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
             />
             <TextField
               label="Email"
               type="email"
-              {...register("address", {
-                required: "Email is required",
-              })}
+              {...register("email", { required: "Email is required" })}
               error={!!errors.email}
               helperText={errors.email?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
               disabled
               value={email}
@@ -136,18 +134,17 @@ const ProfileEdit = ({ props }: { props: any }) => {
             <TextField
               label="Role"
               type="text"
-              {...register("role", {
-                required: "Email is required",
-              })}
+              {...register("role", { required: "Role is required" })}
               error={!!errors.role}
               helperText={errors.role?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
               disabled
               value={role}
@@ -160,11 +157,12 @@ const ProfileEdit = ({ props }: { props: any }) => {
               helperText={errors.address?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
             />
             <TextField
@@ -175,13 +173,17 @@ const ProfileEdit = ({ props }: { props: any }) => {
               helperText={errors.skills?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
             />
+          </Stack>
+
+          <Stack spacing={1} width={"50%"}> {/* Right half of the form */}
             <TextField
               label="Phone number"
               type="text"
@@ -190,28 +192,14 @@ const ProfileEdit = ({ props }: { props: any }) => {
               helperText={errors.phonenumber?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
             />
-            {/* <TextField
-              label="Availability"
-              type="text"
-              {...register("availability")}
-              error={!!errors.availability}
-              helperText={errors.availability?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
-                  borderRadius: "10px",
-                },
-              }}
-            /> */}
             <FormControl>
               <InputLabel id="available-id">Availability</InputLabel>
               <Select
@@ -221,18 +209,16 @@ const ProfileEdit = ({ props }: { props: any }) => {
                 id="available-id-1"
                 sx={{
                   "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
                   "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.0),
+                    paddingLeft: (theme) => theme.spacing(1),
                     borderRadius: "10px",
                   },
+                  margin: '0',
                 }}
                 onChange={(e: SelectChangeEvent) => {
-                  // setRole(e.target.value);
                   setAvailabilityDtop(e.target.value);
                 }}
               >
-                {/* <MenuItem value={"0 Hours"}>0 Hours</MenuItem> */}
                 <MenuItem value={"4 Hours"}>4 Hours</MenuItem>
                 <MenuItem value={"8 Hours"}>8 Hours</MenuItem>
                 <MenuItem value={"12 Hours"}>12 Hours</MenuItem>
@@ -248,45 +234,32 @@ const ProfileEdit = ({ props }: { props: any }) => {
               helperText={errors.gender?.message}
               sx={{
                 "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                "& input": { paddingLeft: (theme) => theme.spacing(2) },
                 "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
+                  paddingLeft: (theme) => theme.spacing(1),
                   borderRadius: "10px",
                 },
+                margin: '0',
               }}
             />
-            {/* <TextField
-              label="Hours"
-              type="text"
-              {...register("hours")}
-              error={!!errors.hours}
-              helperText={errors.hours?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1.5),
-                  borderRadius: "10px",
-                },
-              }}
-            /> */}
             <Button
               type="submit"
               variant="contained"
               color="primary"
               style={{
-                background: "#FF5353",
+                background: "#1E90FF",
                 borderRadius: "10px",
                 textTransform: "none",
                 fontSize: "16px",
+                marginTop: '8px', // Reduced top margin for button
               }}
             >
               Save Profile
             </Button>
           </Stack>
-        </form>
-      </div>
-    </>
+        </Stack>
+      </form>
+    </div>
   );
 };
 
