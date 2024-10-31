@@ -74,7 +74,7 @@ const CreateJob = () => {
             </div>
             <div className="inline-flex items-center flex-row  ">
               <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Preview</span>
+              <span className="ml-2 text-xl text-[#000000]">Preview</span>
             </div>
             <div className="inline-flex items-center flex-row  ">
               <AiFillCheckCircle color="#CBCBCB" size="20px" />
