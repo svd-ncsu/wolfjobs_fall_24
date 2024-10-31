@@ -69,108 +69,98 @@ const JobPreview = () => {
 
   return (
     <>
-      <div className="flex flex-row">
-        <div
-          className="w-3/12  pt-10 border-r"
-          style={{ height: "calc(100vh - 72px)" }}
-        >
-          <div className="text-2xl  translate-x-10">Create New Job Listing</div>
-          <div className="flex flex-col items-start  ml-10  mt-10 ">
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">Add details</span>
-            </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">
-                Fill Questionnaire
-              </span>
-            </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">Preview</span>
-            </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Confirm</span>
+      <div className="bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('/images/M.png')" }}>
+        <div className="flex flex-col">
+          <div className="w-full bg-[#1E90FF] p-4 shadow-lg">
+            <div className="text-2xl text-white text-center">Create New Job Listing</div>
+            <div className="flex justify-between mt-4">
+              <div className="inline-flex items-center flex-row">
+                <AiFillCheckCircle color="#CBCBCB" size="20px" />
+                <span className="ml-2 text-lg text-white">Add details</span>
+              </div>
+              <div className="inline-flex items-center flex-row">
+                <AiFillCheckCircle color="#CBCBCB" size="20px" />
+                <span className="ml-2 text-lg text-[#CBCBCB]">Fill Questionnaire</span>
+              </div>
+              <div className="inline-flex items-center flex-row bg-[#1E90FF] p-1 rounded">
+                <AiFillCheckCircle color="#FFD700" size="20px" />
+                <span className="ml-2 text-lg text-white font-bold bg-green-500 px-2 py-1 rounded">Preview</span>
+              </div>
+              <div className="inline-flex items-center flex-row">
+                <AiFillCheckCircle color="#ffffff" size="20px" />
+                <span className="ml-2 text-lg text-[#CBCBCB]">Confirm</span>
+              </div>
             </div>
           </div>
-        </div>
-        <div className="w-6/12">
-          <div className="flex flex-col m-10 ">
-            <div className="text-xl border-b border-gray-300 font-bold">
-              Job Details
-            </div>
-            <div className="flex flex-row justify-between m-2">
-              <div className="flex flex-col ">
-                <div>
-                  <span className="font-semibold text-lg">Role:</span>&nbsp;
-                  {details["role"]}
+
+          <div className="flex flex-col w-full bg-white bg-opacity-80 h-auto p-6 rounded-lg shadow-lg mx-auto my-4">
+            <div className="text-xl font-bold mb-4">Job Details</div>
+            <div className="flex flex-row justify-between">
+              {/* Left Column */}
+              <div className="flex flex-col w-1/2 p-2">
+                <div className="bg-white bg-opacity-90 p-2 mb-4 rounded shadow">
+                  <span className="font-semibold text-lg">Role:</span>
+                  <div>{details["role"]}</div>
                 </div>
-                <div>
+
+                <div className="bg-white bg-opacity-90 p-2 mb-4 rounded shadow">
                   <span className="font-semibold text-lg">Job Status:</span>
-                  &nbsp;
-                  <span className={`capitalize ${"text-green-500"}`}>open</span>
+                  <div className={`capitalize text-green-500`}>open</div>
                 </div>
-                <div>
-                  <span className="font-semibold text-lg capitalize">
-                    Type:
-                  </span>
-                  &nbsp;
-                  <span className="capitalize">
-                    {details["jobtype"].split("-").join(" ")}
-                  </span>
+
+                <div className="bg-white bg-opacity-90 p-2 mb-4 rounded shadow">
+                  <span className="font-semibold text-lg capitalize">Type:</span>
+                  <div className="capitalize">{details["jobtype"].split("-").join(" ")}</div>
                 </div>
-                <div>
+              </div>
+
+              {/* Right Column */}
+              <div className="flex flex-col w-1/2 p-2">
+                <div className="bg-white bg-opacity-90 p-2 mb-4 rounded shadow">
                   <span className="font-semibold text-lg">Location:</span>
-                  &nbsp;
-                  {details["location"]}
+                  <div>{details["location"]}</div>
                 </div>
-                <div>
+
+                <div className="bg-white bg-opacity-90 p-2 mb-4 rounded shadow">
                   <span className="font-semibold text-lg">Pay:</span>
-                  &nbsp;
-                  {details["pay"]}$/hr
+                  <div>{details["pay"]}$/hr</div>
                 </div>
               </div>
             </div>
-            <div className="text-lg border-b border-gray-300 mb-2 font-bold">
-              Description
-            </div>
-            <div className="text-[#686868] mx-2">{details["description"]}</div>
 
-            <div className="text-lg border-b border-gray-300 mb-2 font-bold">
-              Required Skills
+            {/* Description Section */}
+            <div className="text-lg border-b border-gray-300 mb-2 font-bold">Description</div>
+            <div className="bg-white bg-opacity-90 p-3 mb-4 rounded shadow text-[#686868] mx-2">
+              {details["description"]}
             </div>
-            <div className="text-[#686868] mx-2">
+
+            {/* Required Skills Section */}
+            <div className="text-lg border-b border-gray-300 mb-2 font-bold">Required Skills</div>
+            <div className="bg-white bg-opacity-90 p-3 mb-4 rounded shadow text-[#686868] mx-2">
               {details.requiredSkills}
             </div>
 
-            <div className="text-lg border-b border-gray-300 mb-2 font-bold">
-              Questions
+            {/* Questions Section */}
+            <div className="text-lg border-b border-gray-300 mb-2 font-bold">Questions</div>
+            <div className="bg-white bg-opacity-90 p-3 mb-4 rounded shadow text-[#686868] mx-2">
+              <div>1: {questions["question1"]}</div>
+              <div>2: {questions["question2"]}</div>
+              <div>3: {questions["question3"]}</div>
+              <div>4: {questions["question4"]}</div>
             </div>
-            <div className="text-[#686868] mx-2">
-              1: {questions["question1"]}
-            </div>
-            <div className="text-[#686868] mx-2">
-              2: {questions["question2"]}
-            </div>
-            <div className="text-[#686868] mx-2">
-              3: {questions["question3"]}
-            </div>
-            <div className="text-[#686868] mx-2">
-              4: {questions["question4"]}
-            </div>
-            <div className="mt-4 ">
+
+            <div className="mt-4">
               <Button
                 onClick={onSubmit}
                 type="submit"
                 variant="contained"
                 color="primary"
                 style={{
-                  background: "#FF5353",
+                  background: "#1E90FF",
                   borderRadius: "10px",
                   textTransform: "none",
                   fontSize: "16px",
+                  color: "white",
                 }}
               >
                 Add Listing
@@ -184,3 +174,4 @@ const JobPreview = () => {
 };
 
 export default JobPreview;
+
