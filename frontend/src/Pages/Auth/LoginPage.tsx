@@ -121,7 +121,6 @@ const LoginPage = () => {
             </p>
           </div>
         </div>
-        {/* comment */}
       </div>
       {/* <DevTool control={control}></DevTool> */}
     </>
