@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-mongoose.connect('mongodb+srv://harshchaudhari882:S0wDrxspsjyELBHZ@cluster0.ycsoz.mongodb.net/?retryWrites=true&w=majority&appName=Cluster0');
+mongoose.connect('mongodb://localhost/wolfjobs_development');
 
 const db = mongoose.connection;
 
