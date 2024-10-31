@@ -19,6 +19,8 @@ import JobPreview from "./Pages/CreateJob/jobPreview";
 import Resume from "./Pages/Resume/Resume";
 import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
+import InformationPage from "./Pages/InformationPage"; // Import the InformationPage
+
 
 const App = () => {
   return (
@@ -118,7 +120,7 @@ const App = () => {
               </ProtectedRoute>
             }
           />
-
+          <Route path="/information" element={<InformationPage />} /> {/* Add this route */}
           <Route path="*" element={<>Error 404</>} />
         </Routes>
       </div>
