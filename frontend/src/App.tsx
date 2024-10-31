@@ -21,8 +21,7 @@ import ResumeViewer from "./components/Resume/ResumeViewer";
 import Notifications from "./Pages/Notifications/Notifications";
 import InformationPage from "./Pages/InformationPage"; // Import the InformationPage
 import Admin from "./Pages/Admin";
-
-
+import Message from "./Pages/Message";
 const App = () => {
   return (
     <>
@@ -123,6 +122,7 @@ const App = () => {
           />
           <Route path="/information" element={<InformationPage />} /> {/* Add this route */}
           <Route path="/admin" element={<Admin />} />
+          <Route path="/message" element={<Message />} />
           <Route path="*" element={<>Error 404</>} />
         </Routes>
       </div>
