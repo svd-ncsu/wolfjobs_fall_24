@@ -1,5 +1,4 @@
 import axios from "axios";
-
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store/UserStore";
@@ -9,11 +8,11 @@ import JobsListView from "../../components/Job/JobListView";
 import JobDetailView from "../../components/Job/JobDetailView";
 import { useJobStore } from "../../store/JobStore";
 import { useApplicationStore } from "../../store/ApplicationStore";
-// const userId = useUserStore((state) => state.id);
 
 const Explore = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
+  // User Store Update Functions
   const updateName = useUserStore((state) => state.updateName);
   const updateAddress = useUserStore((state) => state.updateAddress);
   const updateRole = useUserStore((state) => state.updateRole);
@@ -25,59 +24,52 @@ const Explore = () => {
   const updateGender = useUserStore((state) => state.updateGender);
   const updateHours = useUserStore((state) => state.updateHours);
   const updateIsLoggedIn = useUserStore((state) => state.updateIsLoggedIn);
-  const updateResume = useUserStore((state) => state.updateResume)
+  const updateResume = useUserStore((state) => state.updateResume);
   const updateResumeId = useUserStore((state) => state.updateResumeId);
-
-
-  const updateApplicationList = useApplicationStore(
-    (state) => state.updateApplicationList
-  );
-  // const userId = useUserStore((state) => state.id);
-
-  // const [displayList, setDisplayList] = useState<Job[]>([]);
-
+  
+  const updateApplicationList = useApplicationStore((state) => state.updateApplicationList);
+  
   const updateEmail = useUserStore((state) => state.updateEmail);
-
+  
   const updateJobList = useJobStore((state) => state.updateJobList);
   const jobList: Job[] = useJobStore((state) => state.jobList);
-  // const applicationList = useApplicationStore((state) => state.applicationList);
-
+  
   const [searchTerm, setSearchTerm] = useState("");
   const [filteredJobList, setFilteredJobList] = useState<Job[]>([]);
   const [sortHighestPay, setSortHighestPay] = useState(false);
   const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] = useState(false);
-  const [sortByEmploymentType, setSortByEmploymentType] = useState(false);
-  const [showOpenJobs, setShowOpenJobs] = useState(true);  // true for open jobs, false for closed jobs
-
+  const [employmentType, setEmploymentType] = useState<"full-time" | "part-time" | "both">("both");
+  const [showOpenJobs, setShowOpenJobs] = useState(true);
+  
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
   };
-
+  
   const handleSortChange = () => {
     setSortHighestPay(!sortHighestPay);
   };
-
+  
   const handleSortCityChange = () => {
     setSortAlphabeticallyByCity(!sortAlphabeticallyByCity);
   };
-
-  const handleSortEmploymenyTypeChange = () => {
-    setSortByEmploymentType(!sortByEmploymentType);
+  
+  const handleEmploymentTypeChange = (type: "full-time" | "part-time") => {
+    setEmploymentType(type);
   };
-
+  
   const toggleJobStatus = () => {
     setShowOpenJobs(!showOpenJobs);
   };
-
+  
   useEffect(() => {
     const token: string = localStorage.getItem("token")!;
     if (!!!token) {
-      naviagte("/login");
+      navigate("/login");
     }
     if (!!token) {
       const tokenInfo = token.split(".");
       const userInfo = JSON.parse(atob(tokenInfo[1]));
-
+  
       updateName(userInfo.name);
       updateEmail(userInfo.email);
       updateAddress(userInfo.address);
@@ -94,7 +86,7 @@ const Explore = () => {
       updateResumeId(userInfo.resumeId);
     }
   }, []);
-
+  
   useEffect(() => {
     axios
       .get("http://localhost:8000/api/v1/users/fetchapplications")
@@ -105,7 +97,7 @@ const Explore = () => {
         }
         updateApplicationList(res.data.application as Application[]);
       });
-
+  
     axios
       .get("http://localhost:8000/api/v1/users", {
         params: { page: 1, limit: 25 },
@@ -116,65 +108,103 @@ const Explore = () => {
           return;
         }
         updateJobList(res.data.jobs as Job[]);
-      });
+      }); 
   }, []);
-
+  
   useEffect(() => {
     let updatedList = jobList;
-
+  
     if (searchTerm !== "") {
       updatedList = updatedList.filter((job) =>
         job.name.toLowerCase().includes(searchTerm.toLowerCase())
       );
     }
-
+  
     if (sortHighestPay) {
-      updatedList = [...updatedList].sort((a, b) => parseFloat(b.pay) - parseFloat(a.pay));
+      updatedList = [...updatedList].sort(
+        (a, b) => parseFloat(b.pay) - parseFloat(a.pay)
+      );
     }
-
+  
     if (sortAlphabeticallyByCity) {
-
       updatedList = [...updatedList].sort((a, b) => {
-        return a.location.localeCompare(b.location)
+        return a.location.localeCompare(b.location);
       });
     }
-
-    if (sortByEmploymentType) {
-
-      updatedList = [...updatedList].sort((a, b) => {
-        return a.type.localeCompare(b.type)
-      });
+  
+    if (employmentType !== "both") {
+      updatedList = updatedList.filter((job) => job.type === employmentType);
     }
-
-    updatedList = updatedList.filter(job => showOpenJobs ? job.status === "open" : job.status === "closed");
-
+  
+    updatedList = updatedList.filter((job) =>
+      showOpenJobs ? job.status === "open" : job.status === "closed"
+    );
+  
     setFilteredJobList(updatedList);
-  }, [searchTerm, jobList, sortHighestPay, sortAlphabeticallyByCity, sortByEmploymentType, showOpenJobs]);
+  }, [
+    searchTerm,
+    jobList,
+    sortHighestPay,
+    sortAlphabeticallyByCity,
+    employmentType,
+    showOpenJobs,
+  ]);
+
+  // Add the useEffect here for changing text color
+  useEffect(() => {
+    const inputElement = document.querySelector<HTMLInputElement>("input[type='text']");
+    if (inputElement) {
+      inputElement.style.setProperty("color", "#000000"); // Change text color to black
+      inputElement.style.setProperty("--placeholder-color", "#000000"); // Change placeholder color to black
+    }
+  }, []);  
 
   return (
     <>
       <div className="content bg-slate-50">
         <div className="flex flex-col">
-          <div className="p-4 search-bar-container">
+          <div className="p-4 search-bar-container flex justify-center">
             <input
               type="text"
-              placeholder="Search jobs..."
+              placeholder="Search Jobs"
               value={searchTerm}
               onChange={handleSearchChange}
-              className="w-full p-2"
+              className="p-3 w-1/3 rounded-lg border-2 border-blue-500 bg-white shadow-md outline-none transition duration-200 ease-in-out transform hover:scale-105 focus:scale-105 focus:border-blue-700 focus:ring-2 focus:ring-blue-300"
+              style={{
+                backgroundColor: "#d3ebfb", // Light blue background
+                textAlign: "center", // Center align the text
+              }}
             />
           </div>
           <div>
-            <button onClick={handleSortChange} className="p-2 ml-2 border">
+            <button
+              onClick={handleSortChange}
+              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            >
               {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
             </button>
-            <button onClick={handleSortCityChange} className="p-2 ml-2 border">
-              {sortAlphabeticallyByCity ? "Sort by City : On" : "Sort by City : Off"}
+            <button
+              onClick={handleSortCityChange}
+              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            >
+              {sortAlphabeticallyByCity ? "Sort by Location : On" : "Sort by Location : Off"}
             </button>
-            <button onClick={handleSortEmploymenyTypeChange} className="p-2 ml-2 border">
-              {sortByEmploymentType ? "Sort by Employment Type : On" : "Sort by Employment Type : Off"}
+            <button
+              onClick={() => handleEmploymentTypeChange("full-time")}
+              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            >
+              {employmentType === "full-time" ? "Show Full-Time Jobs : On" : "Show Full-Time Jobs : Off"}
             </button>
-            <button onClick={toggleJobStatus} className="p-2 ml-2 border">
+            <button
+              onClick={() => handleEmploymentTypeChange("part-time")}
+              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            >
+              {employmentType === "part-time" ? "Show Part-Time Jobs : On" : "Show Part-Time Jobs : Off"}
+            </button>
+            <button
+              onClick={toggleJobStatus}
+              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            >
               {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
             </button>
           </div>
@@ -189,3 +219,5 @@ const Explore = () => {
 };
 
 export default Explore;
+
+
