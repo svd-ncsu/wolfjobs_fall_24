@@ -56,7 +56,7 @@ const CreateJob = () => {
   };
 
   return (
-    <div className="bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('/images/M.png')" }}>
+    <div className="bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('/images/tiles_bg.png')" }}>
       <div className="flex flex-col">
         <div className="w-full bg-[#1E90FF] p-2 shadow-lg">
           <div className="text-xl text-white text-center">Create New Job Listing</div>
