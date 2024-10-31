@@ -10,8 +10,9 @@ import JobListTile from "../../components/Job/JobListTile";
 import { Button } from "@mui/material";
 
 const Dashboard = () => {
-  const naviagte = useNavigate();
+  const navigate = useNavigate();
 
+  // User store actions
   const updateName = useUserStore((state) => state.updateName);
   const updateEmail = useUserStore((state) => state.updateEmail);
   const updatePassword = useUserStore((state) => state.updatePassword);
@@ -31,28 +32,26 @@ const Dashboard = () => {
   const role = useUserStore((state) => state.role);
   const managerId = useUserStore((state) => state.id);
 
+  // Job store actions
   const updateJobList = useJobStore((state) => state.updateJobList);
   const jobList: Job[] = useJobStore((state) => state.jobList);
 
-  const updateApplicationList = useApplicationStore(
-    (state) => state.updateApplicationList
-  );
-
-  const applicationList: Application[] = useApplicationStore(
-    (state) => state.applicationList
-  );
+  // Application store actions
+  const updateApplicationList = useApplicationStore((state) => state.updateApplicationList);
+  const applicationList: Application[] = useApplicationStore((state) => state.applicationList);
 
   const [displayList, setDisplayList] = useState<Job[]>([]);
 
   useEffect(() => {
     const token: string = localStorage.getItem("token")!;
-    if (!!!token) {
-      naviagte("/login");
+    if (!token) {
+      navigate("/login");
     }
-    if (!!token) {
+    if (token) {
       const tokenInfo = token.split(".");
       const userInfo = JSON.parse(atob(tokenInfo[1]));
 
+      // Update user state
       updateName(userInfo.name);
       updateEmail(userInfo.email);
       updatePassword(userInfo.password);
@@ -72,103 +71,122 @@ const Dashboard = () => {
   }, []);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/v1/users/fetchapplications")
-      .then((res) => {
-        if (res.status !== 200) {
-          toast.error("Error fetching applications");
-          return;
-        }
-        updateApplicationList(res.data.application as Application[]);
-      });
+    // Fetch applications
+    axios.get("http://localhost:8000/api/v1/users/fetchapplications").then((res) => {
+      if (res.status !== 200) {
+        toast.error("Error fetching applications");
+        return;
+      }
+      updateApplicationList(res.data.application as Application[]);
+    });
 
-    axios
-      .get("http://localhost:8000/api/v1/users", {
-        params: { page: 1, limit: 25 },
-      })
-      .then((res) => {
-        if (res.status !== 200) {
-          toast.error("Error fetching jobs");
-          return;
-        }
-        updateJobList(res.data.jobs as Job[]);
-      });
+    // Fetch jobs
+    axios.get("http://localhost:8000/api/v1/users", { params: { page: 1, limit: 25 } }).then((res) => {
+      if (res.status !== 200) {
+        toast.error("Error fetching jobs");
+        return;
+      }
+      updateJobList(res.data.jobs as Job[]);
+    });
   }, []);
 
   useEffect(() => {
+    // Filter jobs based on role
     if (role === "Manager") {
-      const temp = jobList.filter((item) => {
-        return item.managerid === managerId;
-      });
+      const temp = jobList.filter((item) => item.managerid === managerId);
       setDisplayList(temp);
     } else if (role === "Applicant") {
-      const applicantsJobs: Application[] = applicationList.filter(
-        (item) => item.applicantid
-      );
-      const ids: string[] = [];
-      for (let i = 0; i < applicantsJobs.length; i++) {
-        const id = applicantsJobs[i]?.jobid || "";
-        ids.push(id);
-      }
+      const applicantsJobs: Application[] = applicationList.filter((item) => item.applicantid);
+      const ids: string[] = applicantsJobs.map((job) => job.jobid || "");
       const temp = jobList.filter((item) => ids.includes(item._id));
       setDisplayList(temp);
     }
   }, [role, jobList, applicationList]);
 
+  // Function to handle admin-only page access
+  const handleAdminAccess = () => {
+    if (role !== "Admin") {
+      toast.error("Access Denied. Admins only!");
+    } else {
+      navigate("/admin");
+    }
+  };
+
+  // Function to navigate to the reset password page
+  const handleResetPassword = () => {
+    navigate("/message");
+  };
+
   return (
     <>
-      <div className="content bg-slate-50">
-        <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
-          <>
-            <div className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-white/60 px-9">
-              <div className="py-4 text-2xl">
-                {role === "Manager" ? "My Listings" : "My Applications"}
-              </div>
-              {displayList?.map((job: Job) => {
-                let action;
-
-                if (role === "Manager") {
-                  action = "view-application";
-                } else {
-                  const application = applicationList?.find(
-                    (item) =>
-                      item.jobid === job._id && item.status === "screening"
-                  );
-                  action = application
-                    ? "view-questionnaire"
-                    : "view-application";
-                }
-
-                return <JobListTile data={job} key={job._id} action={action} />;
-              })}
+      <div className="content bg-white min-h-screen relative font-lato">
+        <div className="flex flex-row h-[calc(100vh-72px)]">
+          <div className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-blue-50 px-9">
+            <div className="py-4 text-2xl font-semibold text-blue-700 flex justify-between items-center">
+              <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
+              {role === "Manager" && (
+                <Button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    navigate("/createjob");
+                  }}
+                  type="button"
+                  className="text-white bg-[#1E90FF] rounded-lg text-lg font-lato transition-transform hover:scale-105 hover:shadow-lg hover:bg-opacity-90"
+                  variant="contained"
+                >
+                  Create Job +
+                </Button>
+              )}
             </div>
-          </>
+            {displayList?.map((job: Job) => {
+              let action;
+
+              if (role === "Manager") {
+                action = "view-application";
+              } else {
+                const application = applicationList?.find((item) => item.jobid === job._id && item.status === "screening");
+                action = application ? "view-questionnaire" : "view-application";
+              }
+
+              return <JobListTile data={job} key={job._id} action={action} />;
+            })}
+          </div>
           <JobDetailView />
         </div>
-      </div>
-      {role === "Manager" && (
-        <div className="fixed p-4 bottom-3 right-3">
+        <div className="absolute top-4 right-4 z-10 flex space-x-3">
+          <Button
+            onClick={handleResetPassword}
+            type="button"
+            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
+            variant="contained"
+          >
+            Message
+          </Button>
+
           <Button
             onClick={(e) => {
               e.preventDefault();
-              naviagte("/createjob");
+              navigate("/information");
             }}
             type="button"
-            className="text-white bg-red-400 "
-            style={{
-              background: "#FF5353",
-              borderRadius: "10px",
-              textTransform: "none",
-              fontSize: "18px",
-              width: "250px",
-            }}
+            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
             variant="contained"
           >
-            Create Job +
+            Information
+          </Button>
+
+          <Button
+            onClick={handleAdminAccess}
+            type="button"
+            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
+            variant="contained"
+          >
+            Admin Only
           </Button>
         </div>
-      )}
+      </div>
     </>
   );
 };
+
 export default Dashboard;
