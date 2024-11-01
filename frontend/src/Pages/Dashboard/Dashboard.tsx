@@ -115,6 +115,7 @@ const Dashboard = () => {
   return (
     <>
       <div
+        data-testid="dashboard-content"
         className="content bg-white min-h-screen relative font-lato"
         style={{
           backgroundImage: "url('./images/dashboard.svg')",
@@ -123,7 +124,7 @@ const Dashboard = () => {
         }}
       >
         <div className="flex flex-row h-[calc(100vh-72px)]">
-          <div className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-transparent px-9">
+          <div data-testid="job-list-container" className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-transparent px-9">
             <div className="py-4 text-2xl font-semibold text-black-900 flex justify-between items-center">
               <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
               {role === "Manager" && (
@@ -153,7 +154,7 @@ const Dashboard = () => {
               return <JobListTile data={job} key={job._id} action={action} />;
             })}
           </div>
-          <JobDetailView />
+          <JobDetailView data-testid="job-detail-view"/>
         </div>
         <div className="absolute top-4 right-4 z-10 flex space-x-3">
           <Button

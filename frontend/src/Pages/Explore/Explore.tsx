@@ -160,7 +160,8 @@ const Explore = () => {
   }, []);  
 
   return (
-    <div 
+    <div
+      data-testid="explore-content" 
       className="content bg-slate-50 bg-cover bg-center"
       style={{ backgroundImage: "url('./images/dashboard.svg')" }} // Set the background image
     >
@@ -192,12 +193,14 @@ const Explore = () => {
             {sortAlphabeticallyByCity ? "Sort by Location : On" : "Sort by Location : Off"}
           </button>
           <button
+            name="show-full-time-jobs"
             onClick={() => handleEmploymentTypeChange("full-time")}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
           >
             {employmentType === "full-time" ? "Show Full-Time Jobs : On" : "Show Full-Time Jobs : Off"}
           </button>
           <button
+            name="show-part-time-jobs"
             onClick={() => handleEmploymentTypeChange("part-time")}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
           >
