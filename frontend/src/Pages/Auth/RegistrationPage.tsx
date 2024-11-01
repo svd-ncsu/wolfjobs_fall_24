@@ -60,8 +60,8 @@ const RegistrationPage = () => {
     <Grid
       container
       style={{
-        height: "100vh",
-        backgroundImage: "url('/images/M.png')", // Set your background image
+        height: "120vh",
+        backgroundImage: "url('/images/WJ4.png')", // Set your background image
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
