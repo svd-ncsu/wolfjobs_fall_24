@@ -42,19 +42,27 @@ const LoginPage = () => {
           position: "relative",
           height: "100vh",
           overflow: "hidden",
-          backgroundImage: "url('/images/M.png')", // Set your background image
+          backgroundImage: "url('/images/WJ4.png')", // Set your background image
           backgroundSize: "cover",
           backgroundPosition: "center",
           backgroundRepeat: "no-repeat",
         }}
       >
-        <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center h-full">
-          <div className="p-4 border rounded bg-white">
+        <div className="mx-auto flex flex-col justify-center items-center h-full">
+          <div
+            className="p-4 border rounded"
+            style={{
+              backgroundColor: "rgba(255, 255, 255, 0.8)", // Semi-transparent white
+              backdropFilter: "blur(10px)", // Optional: Adds a blur effect behind the div
+              width: "100%",
+              maxWidth: "400px", // Limit the width for better responsiveness
+            }}
+          >
             <div className="text-xl justify-center text-black mb-4">
               Sign In to your Account
             </div>
             <form onSubmit={handleSubmit(onSubmit)} noValidate>
-              <Stack spacing={2} width={400}>
+              <Stack spacing={2} width="100%">
                 <TextField
                   label="Email Id"
                   type="email"
@@ -128,3 +136,5 @@ const LoginPage = () => {
 };
 
 export default LoginPage;
+
+
