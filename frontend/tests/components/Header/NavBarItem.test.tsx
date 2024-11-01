@@ -13,4 +13,16 @@ describe("NavBarItem", () => {
     const headline = screen.getByText(/Home/i);
     expect(headline).toBeInTheDocument();
   });
+
+  it("renders the correct text", () => {
+    render(
+      <MemoryRouter>
+        <NavBarItem link="/test" text="Test Link" />
+      </MemoryRouter>
+    );
+
+    // Check if the text is rendered correctly
+    const linkElement = screen.getByText("Test Link");
+    expect(linkElement).toBeInTheDocument();
+  });
 });
