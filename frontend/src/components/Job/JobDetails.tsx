@@ -2,7 +2,6 @@ import axios from "axios";
 import { useUserStore } from "../../store/UserStore";
 import { useForm } from "react-hook-form";
 import { Button, Stack, TextField } from "@mui/material";
-import { Button, Stack, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useApplicationStore } from "../../store/ApplicationStore";
@@ -18,7 +17,6 @@ type FormValues = {
 const JobDetail = (props: any) => {
   const { jobData }: { jobData: Job } = props;
 
-  const jobType = jobData.type === "part-time" ? "Part Time" : "Full Time";
   const jobType = jobData.type === "part-time" ? "Part Time" : "Full Time";
   const applicationList: Application[] = useApplicationStore(
     (state) => state.applicationList
@@ -131,12 +129,7 @@ const JobDetail = (props: any) => {
   return (
     <div
       className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg"
-      style={{
-        fontFamily: "'Poppins', sans-serif",
-        backgroundImage: 'url("/images/jd.svg")',
-        backgroundSize: 'cover',
-        backgroundPosition: 'center',
-      }}
+      style={{ fontFamily: "'Poppins', sans-serif" }}
     >
       {/* Job Details Section */}
       <div className="mb-8">
@@ -181,25 +174,13 @@ const JobDetail = (props: any) => {
                 </span>
               </div>
             )}
-            )}
           </div>
-          <div className="text-right text-4xl font-extrabold text-blue-700">
-            {jobData.pay}$/hr
           <div className="text-right text-4xl font-extrabold text-blue-700">
             {jobData.pay}$/hr
           </div>
         </div>
       </div>
 
-      {/* Description Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
-          Description
-        </h2>
-        <p className="text-gray-700 text-lg">{jobData.description}</p>
-      </div>
-
-      {/* Application and Questionnaire Section */}
       {/* Description Section */}
       <div className="mb-8">
         <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
@@ -256,50 +237,6 @@ const JobDetail = (props: any) => {
                   </Button>
                 </Stack>
               </form>
-            <div className="mb-8">
-              <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
-                Fill Questionnaire
-              </h2>
-              <form onSubmit={handleSubmit(handleAnswerQuestionnaire)} noValidate>
-                <Stack spacing={3}>
-                  <TextField
-                    label={jobData.question1}
-                    variant="outlined"
-                    {...register("answer1")}
-                    fullWidth
-                  />
-                  <TextField
-                    label={jobData.question2}
-                    variant="outlined"
-                    {...register("answer2")}
-                    fullWidth
-                  />
-                  <TextField
-                    label={jobData.question3}
-                    variant="outlined"
-                    {...register("answer3")}
-                    fullWidth
-                  />
-                  <TextField
-                    label={jobData.question4}
-                    variant="outlined"
-                    {...register("answer4")}
-                    fullWidth
-                  />
-                  <Button
-                    type="submit"
-                    variant="contained"
-                    style={{
-                      backgroundColor: "#1E90FF",
-                      color: "#FFF",
-                      borderRadius: "8px",
-                      textTransform: "none",
-                    }}
-                  >
-                    Submit
-                  </Button>
-                </Stack>
-              </form>
             </div>
           )}
 
@@ -311,12 +248,7 @@ const JobDetail = (props: any) => {
                 backgroundColor: "#1E90FF",
                 color: "#FFF",
                 borderRadius: "8px",
-                backgroundColor: "#1E90FF",
-                color: "#FFF",
-                borderRadius: "8px",
                 textTransform: "none",
-                fontSize: "16px",
-                padding: "10px 20px",
                 fontSize: "16px",
                 padding: "10px 20px",
               }}
@@ -327,13 +259,6 @@ const JobDetail = (props: any) => {
         </div>
       )}
 
-      {/* Manager View */}
-      {role === "Manager" && userId === jobData.managerid && jobData.status === "open" && (
-        <div>
-          <JobManagerView jobData={jobData} />
-        </div>
-      )}
-    </div>
       {/* Manager View */}
       {role === "Manager" && userId === jobData.managerid && jobData.status === "open" && (
         <div>
