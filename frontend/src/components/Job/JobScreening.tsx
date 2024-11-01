@@ -4,25 +4,45 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
+import emailjs from "emailjs-com"; // Import EmailJS
 
 const JobScreening = (props: any) => {
   const { jobData }: { jobData: Job } = props;
   const [searchParams] = useSearchParams();
-
   const [displayList, setDisplayList] = useState<Application[]>([]);
-
   const applicationList = useApplicationStore((state) => state.applicationList);
 
   useEffect(() => {
-    // let displayList: Application[] = [];s
     setDisplayList(
       applicationList.filter(
         (item) => item.jobid === jobData._id && item.status === "applied"
       )
     );
-  }, [searchParams]);
+  }, [searchParams, applicationList, jobData._id]);
 
-  const handleAccept = (applicationId: string) => {
+  const sendEmailNotification = async (recipientEmail: string, applicantName: string, status: string) => {
+    const templateParams = {
+      to_email: recipientEmail,
+      to_name: applicantName,
+      status: status,
+    };
+
+    try {
+      const response = await emailjs.send(
+        "service_46pw691", // Replace with your EmailJS service ID
+        "template_rk6i5tv", // Replace with your EmailJS template ID
+        templateParams,
+        "HeiTyoRUqB2qPodAb" // Replace with your EmailJS user ID
+      );
+      console.log("Email successfully sent!", response.status, response.text);
+      return true; // Indicate success
+    } catch (error) {
+      console.error("Failed to send email:", error);
+      return false; // Indicate failure
+    }
+  };
+
+  const handleAccept = async (applicationId: string, email: string, name: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
 
     const body = {
@@ -30,17 +50,27 @@ const JobScreening = (props: any) => {
       status: "screening",
     };
 
-    axios.post(url, body).then((res) => {
-      if (res.status == 200) {
+    try {
+      const res = await axios.post(url, body);
+      if (res.status === 200) {
         toast.success("Accepted candidate");
-        location.reload();
-
-        return;
+        const emailSent = await sendEmailNotification(email, name, "accepted");
+        if (emailSent) {
+          toast.success("Email notification sent.");
+        } else {
+          toast.error("Failed to send email notification.");
+        }
+        setDisplayList(prevList => prevList.filter(item => item._id !== applicationId));
+      } else {
+        toast.error("Failed to accept candidate");
       }
-      toast.error("Failed to accept candidate");
-    });
+    } catch (error) {
+      console.error("Error accepting candidate:", error);
+      toast.error("An error occurred while accepting the candidate.");
+    }
   };
-  const handleReject = (applicationId: string) => {
+
+  const handleReject = async (applicationId: string, email: string, name: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
 
     const body = {
@@ -48,59 +78,78 @@ const JobScreening = (props: any) => {
       status: "rejected",
     };
 
-    axios.post(url, body).then((res) => {
-      if (res.status == 200) {
+    try {
+      const res = await axios.post(url, body);
+      if (res.status === 200) {
         toast.success("Rejected candidate");
-        location.reload();
-
-        return;
+        const emailSent = await sendEmailNotification(email, name, "rejected");
+        if (emailSent) {
+          toast.success("Email notification sent.");
+        } else {
+          toast.error("Failed to send email notification.");
+        }
+        setDisplayList(prevList => prevList.filter(item => item._id !== applicationId));
+      } else {
+        toast.error("Failed to reject candidate");
       }
-      toast.error("Failed to reject candidate");
-    });
+    } catch (error) {
+      console.error("Error rejecting candidate:", error);
+      toast.error("An error occurred while rejecting the candidate.");
+    }
   };
 
   return (
     <>
-      <div className="text-xl">Screening</div>
+      <div className="text-2xl font-semibold text-gray-700 dark:text-black mb-4">
+        Screening
+      </div>
       {displayList.length === 0 && (
         <div className="text-base text-gray-500">List empty</div>
       )}
       {displayList?.map((item: Application) => (
-        <div className="p-1 ">
-          <div className="p-2 mx-1 my-2 bg-white rounded-lg">
-            <div className="flex flex-row justify-between ">
-              <div className="flex flex-col">
-                <div> Name: {item.applicantname} </div>
-                {!!item?.phonenumber && <div>Phone: {item.phonenumber} </div>}
+        <div className="p-2" key={item._id}>
+          <div className="p-4 mx-1 my-2 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+            <div className="flex flex-row justify-between items-center">
+              <div className="flex flex-col text-gray-700 dark:text-gray-200">
+                <div className="text-white-600 font-medium">Name: {item.applicantname}</div>
+                {!!item?.phonenumber && <div>Phone: {item.phonenumber}</div>}
                 <div>Email: {item.applicantemail}</div>
-                {!!item?.applicantSkills && (
-                  <div>Skills: {item.applicantSkills}</div>
-                )}
-                <div className="flex justify-center px-2 py-1 ml-2 border border-gray-300 rounded-md">
+                {!!item?.applicantSkills && <div>Skills: {item.applicantSkills}</div>}
+                <div className="flex justify-center px-2 py-1 mt-2 border border-gray-300 rounded-md">
                   <a
                     href={`/resumeviewer/${item.applicantid}`}
-                    className="text-red-500"
+                    className="text-blue-600 underline hover:text-blue-700 transition-colors duration-150"
                   >
                     View Resume
                   </a>
                 </div>
               </div>
-              <div className="flex flex-row">
+              <div className="flex flex-row gap-2">
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
-                    return handleAccept(item._id);
+                    handleAccept(item._id, item.applicantemail, item.applicantname);
                   }}
-                  style={{ color: "#FF5353" }}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#4CAF50",
+                    color: "#ffffff",
+                    "&:hover": { backgroundColor: "#388E3C" },
+                  }}
                 >
                   Accept
                 </Button>
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
-                    return handleReject(item._id);
+                    handleReject(item._id, item.applicantemail, item.applicantname);
                   }}
-                  style={{ color: "#FF5353" }}
+                  variant="contained"
+                  sx={{
+                    backgroundColor: "#FF5353",
+                    color: "#ffffff",
+                    "&:hover": { backgroundColor: "#D32F2F" },
+                  }}
                 >
                   Reject
                 </Button>
@@ -114,3 +163,5 @@ const JobScreening = (props: any) => {
 };
 
 export default JobScreening;
+
+

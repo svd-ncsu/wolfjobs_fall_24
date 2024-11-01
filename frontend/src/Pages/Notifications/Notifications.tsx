@@ -7,8 +7,6 @@ import { useJobStore } from '../../store/JobStore';
 import { useApplicationStore } from '../../store/ApplicationStore';
 import JobListTile from '../../components/Job/JobListTile';
 
-// This is the notifications class
-
 const Notifications = () => {
   const updateJobList = useJobStore((state) => state.updateJobList);
   const jobList = useJobStore((state) => state.jobList);
@@ -68,48 +66,78 @@ const Notifications = () => {
   };
 
   return (
-    <div className="notifications-page">
-      <h1>
-        Accepted Jobs ({acceptedJobs.length})
-        <span onClick={toggleAcceptedVisibility} style={{ cursor: 'pointer' }}>
-          {isAcceptedVisible ? '▼' : '▲'}
-        </span>
-      </h1>
-      {isAcceptedVisible && (
-        <div className="notifications-list">
-          {acceptedJobs.length > 0 ? (
-            acceptedJobs.map(job => (
-              <div onClick={() => handleJobClick(job._id)} key={job._id}>
-                <JobListTile data={job} action="view-details" />
-              </div>
-            ))
-          ) : (
-            <p>No accepted job notifications.</p>
+    <div 
+      className="min-h-screen bg-cover bg-center flex items-center justify-center" 
+      style={{
+        backgroundImage: "url('/images/profile.svg')",
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
+    >
+      <div className="bg-white bg-opacity-80 backdrop-blur-lg p-8 rounded-lg shadow-md w-full max-w-3xl">
+        {/* Accepted Jobs Section */}
+        <div className="mb-8">
+          <h1 className="flex items-center justify-between text-2xl font-semibold text-[#1e90ff] mb-4">
+            Accepted Jobs ({acceptedJobs.length})
+            <span 
+              onClick={toggleAcceptedVisibility} 
+              className="cursor-pointer text-lg transition-transform duration-200"
+            >
+              {isAcceptedVisible ? '▼' : '▲'}
+            </span>
+          </h1>
+          {isAcceptedVisible && (
+            <div className="space-y-4">
+              {acceptedJobs.length > 0 ? (
+                acceptedJobs.map(job => (
+                  <div 
+                    key={job._id} 
+                    onClick={() => handleJobClick(job._id)} 
+                    className="p-4 bg-[#1e90ff] rounded-lg shadow-md text-white cursor-pointer hover:bg-blue-600 transition duration-200"
+                  >
+                    <JobListTile data={job} action="view-details" />
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-600">No accepted job notifications.</p>
+              )}
+            </div>
           )}
         </div>
-      )}
 
-      <h1>
-        Rejected Jobs ({rejectedJobs.length})
-        <span onClick={toggleRejectedVisibility} style={{ cursor: 'pointer' }}>
-          {isRejectedVisible ? '▼' : '▲'}
-        </span>
-      </h1>
-      {isRejectedVisible && (
-        <div className="notifications-list">
-          {rejectedJobs.length > 0 ? (
-            rejectedJobs.map(job => (
-              <div onClick={() => handleJobClick(job._id)} key={job._id}>
-                <JobListTile data={job} action="view-details" />
-              </div>
-            ))
-          ) : (
-            <p>No rejected job notifications.</p>
+        {/* Rejected Jobs Section */}
+        <div className="mb-8">
+          <h1 className="flex items-center justify-between text-2xl font-semibold text-[#1e90ff] mb-4">
+            Rejected Jobs ({rejectedJobs.length})
+            <span 
+              onClick={toggleRejectedVisibility} 
+              className="cursor-pointer text-lg transition-transform duration-200"
+            >
+              {isRejectedVisible ? '▼' : '▲'}
+            </span>
+          </h1>
+          {isRejectedVisible && (
+            <div className="space-y-4">
+              {rejectedJobs.length > 0 ? (
+                rejectedJobs.map(job => (
+                  <div 
+                    key={job._id} 
+                    onClick={() => handleJobClick(job._id)} 
+                    className="p-4 bg-gray-200 rounded-lg shadow-md cursor-pointer hover:bg-gray-300 transition duration-200"
+                  >
+                    <JobListTile data={job} action="view-details" />
+                  </div>
+                ))
+              ) : (
+                <p className="text-gray-600">No rejected job notifications.</p>
+              )}
+            </div>
           )}
         </div>
-      )}
+      </div>
     </div>
   );
 };
 
 export default Notifications;
+

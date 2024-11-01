@@ -10,14 +10,29 @@ const JobsListView = (props: any) => {
 
   return (
     <>
-      <div className="w-4/12 bg-white/60 overflow-y-scroll overflow-x-hidden pt-2 px-9">
-        <div className="text-2xl py-4">{title || "All jobs"}</div>
-        {jobsList?.map((job: Job) => {
-          return <JobListTile data={job} key={job._id} />;
-        })}
+      <div className="h-screen w-4/12 overflow-y-auto overflow-x-hidden pt-2 px-9" style={{ backgroundColor: "transparent" }}>
+        <div className="text-2xl text-[#000000] py-4">{title || "All jobs"}</div>
+        <div className="grid gap-4">
+          {jobsList?.map((job: Job) => {
+            return (
+              <div
+                key={job._id}
+                className="transform transition-transform duration-200 ease-in-out hover:translate-y-[-10px] hover:shadow-lg p-3 rounded-xl shadow-sm bg-cover bg-center"
+                style={{
+                  backgroundImage: "url('/images/tiles_bg.png')",
+                  backgroundColor: "#333333",
+                }}
+              >
+                <JobListTile data={job} />
+              </div>
+            );
+          })}
+        </div>
       </div>
     </>
   );
 };
 
 export default JobsListView;
+
+

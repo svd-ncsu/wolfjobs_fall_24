@@ -13,7 +13,7 @@ const LandingPage = () => {
           left: 0,
           width: "100%",
           height: "100%",
-          backgroundImage: "url('/images/M.png')", // Updated to the new image path
+          backgroundImage: "url('/images/WJ4.png')", // Updated to the new image path
           backgroundSize: "cover", // Cover the entire area
           backgroundPosition: "center", // Center the image
           backgroundRepeat: "no-repeat", // No repeating of the image
@@ -28,12 +28,12 @@ const LandingPage = () => {
             width: "600px",
             height: "120px",
             margin: "40px auto 0", // Centered at the top
-            fontFamily: "Urbanist",
+            fontFamily: "Lato",
             fontStyle: "normal",
             fontWeight: 600,
             fontSize: "48px", // Increased font size
             lineHeight: "56px",
-            color: "#0000FF", // Changed to blue
+            color: "#000000", // Changed to blue
             textAlign: "center", // Center the text
           }}
         >
@@ -45,12 +45,12 @@ const LandingPage = () => {
             width: "600px",
             height: "72px",
             margin: "20px auto 40px", // Centered with spacing
-            fontFamily: "Urbanist",
+            fontFamily: "Lato",
             fontStyle: "normal",
             fontWeight: "400",
-            fontSize: "22px", // Increased font size
+            fontSize: "24px", // Increased font size
             lineHeight: "28px",
-            color: "#4682B4", // Changed to steel blue
+            color: "#000000", // Changed to steel blue
             textAlign: "center", // Center the text
           }}
         >
@@ -124,3 +124,4 @@ const LandingPage = () => {
 };
 
 export default LandingPage;
+
