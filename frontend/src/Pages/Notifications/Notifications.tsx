@@ -66,7 +66,8 @@ const Notifications = () => {
   };
 
   return (
-    <div 
+    <div
+      data-testid="notifications-content" 
       className="min-h-screen bg-cover bg-center flex items-center justify-center" 
       style={{
         backgroundImage: "url('/images/profile.svg')",
@@ -140,4 +141,3 @@ const Notifications = () => {
 };
 
 export default Notifications;
-
