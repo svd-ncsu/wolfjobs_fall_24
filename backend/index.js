@@ -8,58 +8,58 @@ const expressLayouts = require("express-ejs-layouts");
 
 const db = require("./config/mongoose");
 
-// Use CORS middleware to allow requests from your frontend
-app.use(cors({
-  origin: 'http://localhost:5173', // Your frontend origin
-  methods: ['GET', 'POST'], // Specify allowed methods
-  credentials: true, // Allow credentials (if needed)
-}));
+//Used for session cookie
 
-// Middleware
-app.use(express.urlencoded({ extended: true })); // Recommended to set extended: true for nested objects
+const session = require("express-session");
+
+const passport = require("passport");
+
+const passportLocal = require("./config/passport-local-strategy");
+
+const passportJWT = require("./config/passport-jwt-strategy");
+
+app.use(cors());
+
+app.use(express.urlencoded());
+
 app.use(cookieParser());
+
 app.use(express.static("./assets"));
+
 app.use(expressLayouts);
+
 app.set("layout extractStyles", true);
 app.set("layout extractScripts", true);
 
-// Set up view engine
+//Set up view engine
+
 app.set("view engine", "ejs");
+
 app.set("views", "./views");
 
-// Session configuration
-const session = require("express-session");
 app.use(
   session({
     name: "wolfjobs",
-    secret: "blahsomething", // Change this before deploying
+    //TODO change the secret before deployment in production mode
+    secret: "blahsomething",
     saveUninitialized: false,
     resave: false,
     cookie: {
-      maxAge: 1000 * 60 * 100, // Adjust as necessary
+      maxAge: 1000 * 60 * 100,
     },
   })
 );
-app.use(express.json()); // Add this line to parse JSON request bodies
 
-
-// Passport configuration
-const passport = require("passport");
-const passportLocal = require("./config/passport-local-strategy");
-const passportJWT = require("./config/passport-jwt-strategy");
 app.use(passport.initialize());
+
 app.use(passport.session());
+
 app.use(passport.setAuthenticatedUser);
 
-// Route handlers
-const messagesRoutes = require("./routes/api/v1/messages");
-const userRoutes = require("./routes/api/v1/users");
+//Use express router
 
-app.use("/api/v1", messagesRoutes);
-app.use("/api/v1/users", userRoutes);
 app.use("/", require("./routes"));
 
-// Start server
 app.listen(port, function (err) {
   if (err) {
     console.log("Error", err);
