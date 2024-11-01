@@ -56,44 +56,34 @@ const CreateJob = () => {
   };
 
   return (
-    <>
-      <div className="flex flex-row">
-        <div
-          className="w-3/12  pt-10 border-r"
-          style={{ height: "calc(100vh - 72px)" }}
-        >
-          <div className="text-2xl  translate-x-10">Create New Job Listing</div>
-          <div className="flex flex-col items-start  ml-10  mt-10 ">
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">Add details</span>
+    <div className="bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('/images/M.png')" }}>
+      <div className="flex flex-col">
+        <div className="w-full bg-[#1E90FF] p-2 shadow-lg">
+          <div className="text-xl text-white text-center">Create New Job Listing</div>
+          <div className="flex justify-between mt-2">
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#FFD700" size="18px" />
+              <span className="ml-1 text-md text-white font-bold bg-green-500 px-1 py-1 rounded">Add details</span>
             </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Fill Questionnaire</span>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#CBCBCB" size="18px" />
+              <span className="ml-1 text-md text-[#CBCBCB]">Fill Questionnaire</span>
             </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Preview</span>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#CBCBCB" size="18px" />
+              <span className="ml-1 text-md text-[#CBCBCB]">Preview</span>
             </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Confirm</span>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#CBCBCB" size="18px" />
+              <span className="ml-1 text-md text-[#CBCBCB]">Confirm</span>
             </div>
           </div>
         </div>
-        <div
-          className="w-9/12 pt-10 pl-10"
-          style={{ height: "calc(100vh - 72px)" }}
-        >
-          <div className="text-2xl translate-x-10">Add Details</div>
-          <div className="flex flex-col">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-              className="m-4 mx-10"
-            >
-              <Stack spacing={2} width={600}>
+        <div className="flex flex-col justify-center items-center w-full pt-5" style={{ height: "calc(100vh - 72px)" }}>
+          <div className="text-xl text-white">Add Details</div>
+          <div className="flex flex-col w-full max-w-md px-2"> {/* Adjusted padding */}
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="m-4">
+              <Stack spacing={1}> {/* Reduced spacing */}
                 <TextField
                   label="Job Role"
                   type="text"
@@ -103,16 +93,17 @@ const CreateJob = () => {
                   error={!!errors.role}
                   helperText={errors.role?.message}
                   sx={{
-                    "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                    "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                    backgroundColor: "#ffffff",
+                    "& label": { color: "#2196F3" },
+                    "& input": { paddingLeft: (theme) => theme.spacing(1.5) }, // Reduced padding
                     "& fieldset": {
-                      paddingLeft: (theme) => theme.spacing(1.5),
-                      borderRadius: "10px",
+                      borderColor: "#2196F3",
+                      borderRadius: "8px", // Reduced border radius
                     },
                   }}
                 />
                 <FormControl>
-                  <InputLabel id="role-id">Job Type</InputLabel>
+                  <InputLabel id="role-id" className="text-white">Job Type</InputLabel>
                   <Select
                     value={jobType}
                     labelId="role-id"
@@ -122,11 +113,11 @@ const CreateJob = () => {
                       setJobType(e.target.value);
                     }}
                     sx={{
-                      "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                      "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                      backgroundColor: "#ffffff",
+                      "& label": { color: "#2196F3" },
                       "& fieldset": {
-                        paddingLeft: (theme) => theme.spacing(0.75),
-                        borderRadius: "10px",
+                        borderColor: "#2196F3",
+                        borderRadius: "8px", // Reduced border radius
                       },
                     }}
                   >
@@ -141,11 +132,12 @@ const CreateJob = () => {
                   error={!!errors.location}
                   helperText={errors.location?.message}
                   sx={{
-                    "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                    "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                    backgroundColor: "#ffffff",
+                    "& label": { color: "#2196F3" },
+                    "& input": { paddingLeft: (theme) => theme.spacing(1.5) }, // Reduced padding
                     "& fieldset": {
-                      paddingLeft: (theme) => theme.spacing(1.5),
-                      borderRadius: "10px",
+                      borderColor: "#2196F3",
+                      borderRadius: "8px", // Reduced border radius
                     },
                   }}
                 />
@@ -158,11 +150,12 @@ const CreateJob = () => {
                   error={!!errors.pay}
                   helperText={errors.pay?.message}
                   sx={{
-                    "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                    "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                    backgroundColor: "#ffffff",
+                    "& label": { color: "#2196F3" },
+                    "& input": { paddingLeft: (theme) => theme.spacing(1.5) }, // Reduced padding
                     "& fieldset": {
-                      paddingLeft: (theme) => theme.spacing(1.5),
-                      borderRadius: "10px",
+                      borderColor: "#2196F3",
+                      borderRadius: "8px", // Reduced border radius
                     },
                   }}
                 />
@@ -173,14 +166,15 @@ const CreateJob = () => {
                   error={!!errors.description}
                   helperText={errors.description?.message}
                   sx={{
-                    "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                    "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                    backgroundColor: "#ffffff",
+                    "& label": { color: "#2196F3" },
+                    "& input": { paddingLeft: (theme) => theme.spacing(1.5) }, // Reduced padding
                     "& fieldset": {
-                      paddingLeft: (theme) => theme.spacing(1.5),
-                      borderRadius: "10px",
+                      borderColor: "#2196F3",
+                      borderRadius: "8px", // Reduced border radius
                     },
                   }}
-                  minRows={4}
+                  minRows={3} // Reduced min rows
                   multiline
                 />
                 <TextField
@@ -194,23 +188,25 @@ const CreateJob = () => {
                   error={!!errors.requiredSkills}
                   helperText={errors.requiredSkills?.message}
                   sx={{
-                    "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                    "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
+                    backgroundColor: "#ffffff",
+                    "& label": { color: "#2196F3" },
+                    "& input": { paddingLeft: (theme) => theme.spacing(1.5) }, // Reduced padding
                     "& fieldset": {
-                      paddingLeft: (theme) => theme.spacing(1.5),
-                      borderRadius: "10px",
+                      borderColor: "#2196F3",
+                      borderRadius: "8px", // Reduced border radius
                     },
                   }}
                 />
                 <Button
                   type="submit"
-                  variant="outlined"
+                  variant="contained"
                   style={{
-                    color: "#FF5353",
-                    borderColor: "#FF5353",
+                    backgroundColor: "#2196F3",
+                    color: "#ffffff",
                     textTransform: "none",
-                    fontSize: "16px",
-                    minWidth: "200px",
+                    fontSize: "14px", // Reduced font size
+                    borderRadius: "8px", // Reduced border radius
+                    boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
                   }}
                 >
                   Proceed
@@ -220,8 +216,9 @@ const CreateJob = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default CreateJob;
+
