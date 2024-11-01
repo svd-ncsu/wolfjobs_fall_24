@@ -129,7 +129,12 @@ const JobDetail = (props: any) => {
   return (
     <div
       className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg"
-      style={{ fontFamily: "'Poppins', sans-serif" }}
+      style={{
+        fontFamily: "'Poppins', sans-serif",
+        backgroundImage: 'url("/images/jd.svg")',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
+      }}
     >
       {/* Job Details Section */}
       <div className="mb-8">
@@ -270,4 +275,3 @@ const JobDetail = (props: any) => {
 };
 
 export default JobDetail;
-
