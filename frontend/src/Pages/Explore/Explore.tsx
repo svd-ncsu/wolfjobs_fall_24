@@ -160,64 +160,67 @@ const Explore = () => {
   }, []);  
 
   return (
-    <>
-      <div className="content bg-slate-50">
-        <div className="flex flex-col">
-          <div className="p-4 search-bar-container flex justify-center">
-            <input
-              type="text"
-              placeholder="Search Jobs"
-              value={searchTerm}
-              onChange={handleSearchChange}
-              className="p-3 w-1/3 rounded-lg border-2 border-blue-500 bg-white shadow-md outline-none transition duration-200 ease-in-out transform hover:scale-105 focus:scale-105 focus:border-blue-700 focus:ring-2 focus:ring-blue-300"
-              style={{
-                backgroundColor: "#d3ebfb", // Light blue background
-                textAlign: "center", // Center align the text
-              }}
-            />
-          </div>
-          <div>
-            <button
-              onClick={handleSortChange}
-              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
-            >
-              {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
-            </button>
-            <button
-              onClick={handleSortCityChange}
-              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
-            >
-              {sortAlphabeticallyByCity ? "Sort by Location : On" : "Sort by Location : Off"}
-            </button>
-            <button
-              onClick={() => handleEmploymentTypeChange("full-time")}
-              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
-            >
-              {employmentType === "full-time" ? "Show Full-Time Jobs : On" : "Show Full-Time Jobs : Off"}
-            </button>
-            <button
-              onClick={() => handleEmploymentTypeChange("part-time")}
-              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
-            >
-              {employmentType === "part-time" ? "Show Part-Time Jobs : On" : "Show Part-Time Jobs : Off"}
-            </button>
-            <button
-              onClick={toggleJobStatus}
-              className="p-2 ml-2 border bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
-            >
-              {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
-            </button>
-          </div>
+    <div
+      data-testid="explore-content" 
+      className="content bg-slate-50 bg-cover bg-center"
+      style={{ backgroundImage: "url('./images/dashboard.svg')" }} // Set the background image
+    >
+      <div className="flex flex-col items-center">
+        <div className="p-4 search-bar-container flex justify-center">
+          <input
+            type="text"
+            placeholder="Search Jobs"
+            value={searchTerm}
+            onChange={handleSearchChange}
+            className="p-3 w-full rounded-lg border-2 border-blue-500 bg-white shadow-md outline-none transition duration-200 ease-in-out transform hover:scale-105 focus:scale-105 focus:border-blue-700 focus:ring-2 focus:ring-blue-300"
+            style={{
+              backgroundColor: "#d3ebfb", // Light blue background
+              textAlign: "center", // Center align the text
+            }}
+          />
         </div>
-        <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
-          <JobsListView jobsList={filteredJobList} />
-          <JobDetailView />
+        <div className="flex justify-center space-x-2 mt-4">
+          <button
+            onClick={handleSortChange}
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+          >
+            {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
+          </button>
+          <button
+            onClick={handleSortCityChange}
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+          >
+            {sortAlphabeticallyByCity ? "Sort by Location : On" : "Sort by Location : Off"}
+          </button>
+          <button
+            name="show-full-time-jobs"
+            onClick={() => handleEmploymentTypeChange("full-time")}
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+          >
+            {employmentType === "full-time" ? "Show Full-Time Jobs : On" : "Show Full-Time Jobs : Off"}
+          </button>
+          <button
+            name="show-part-time-jobs"
+            onClick={() => handleEmploymentTypeChange("part-time")}
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+          >
+            {employmentType === "part-time" ? "Show Part-Time Jobs : On" : "Show Part-Time Jobs : Off"}
+          </button>
+          <button
+            onClick={toggleJobStatus}
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+          >
+            {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
+          </button>
         </div>
       </div>
-    </>
+      <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
+        <JobsListView jobsList={filteredJobList} />
+        <JobDetailView />
+      </div>
+    </div>
   );
 };
 
 export default Explore;
-
 

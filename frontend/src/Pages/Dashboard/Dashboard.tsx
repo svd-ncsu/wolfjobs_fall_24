@@ -112,17 +112,20 @@ const Dashboard = () => {
     }
   };
 
-  // Function to navigate to the reset password page
-  const handleResetPassword = () => {
-    navigate("/message");
-  };
-
   return (
     <>
-      <div className="content bg-white min-h-screen relative font-lato">
+      <div
+        data-testid="dashboard-content"
+        className="content bg-white min-h-screen relative font-lato"
+        style={{
+          backgroundImage: "url('./images/dashboard.svg')",
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+        }}
+      >
         <div className="flex flex-row h-[calc(100vh-72px)]">
-          <div className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-blue-50 px-9">
-            <div className="py-4 text-2xl font-semibold text-blue-700 flex justify-between items-center">
+          <div data-testid="job-list-container" className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-transparent px-9">
+            <div className="py-4 text-2xl font-semibold text-black-900 flex justify-between items-center">
               <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
               {role === "Manager" && (
                 <Button
@@ -151,18 +154,9 @@ const Dashboard = () => {
               return <JobListTile data={job} key={job._id} action={action} />;
             })}
           </div>
-          <JobDetailView />
+          <JobDetailView data-testid="job-detail-view"/>
         </div>
         <div className="absolute top-4 right-4 z-10 flex space-x-3">
-          <Button
-            onClick={handleResetPassword}
-            type="button"
-            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
-            variant="contained"
-          >
-            Message
-          </Button>
-
           <Button
             onClick={(e) => {
               e.preventDefault();

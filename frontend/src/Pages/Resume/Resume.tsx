@@ -43,7 +43,8 @@ const Resume: React.FC = () => {
   };
 
   return (
-    <div 
+    <div
+      data-testid="resume-background" 
       className="flex flex-col items-center justify-center min-h-screen"
       style={{
         backgroundImage: "url('/images/profile.svg')", // Update the path accordingly
