@@ -1,11 +1,10 @@
 import axios from "axios";
 import { useUserStore } from "../../store/UserStore";
 import { useForm } from "react-hook-form";
-import { Button } from "@mui/material";
+import { Button, Stack, TextField } from "@mui/material";
 import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useApplicationStore } from "../../store/ApplicationStore";
-import { Stack, TextField } from "@mui/material";
 import JobManagerView from "./JobManagerView";
 
 type FormValues = {
@@ -18,8 +17,7 @@ type FormValues = {
 const JobDetail = (props: any) => {
   const { jobData }: { jobData: Job } = props;
 
-  const jobType = jobData.type === "part-time" ? "Part time" : "Full time";
-
+  const jobType = jobData.type === "part-time" ? "Part Time" : "Full Time";
   const applicationList: Application[] = useApplicationStore(
     (state) => state.applicationList
   );
@@ -129,224 +127,130 @@ const JobDetail = (props: any) => {
   };
 
   return (
-    <>
-      <div className="w-7/12">
-        <div className="flex flex-col m-4 ">
-          <div className="text-xl border-b border-gray-300 font-bold">
-            Job Details
-          </div>
-          <div className="flex flex-row justify-between m-2">
-            <div className="flex flex-col">
-              <div>
-                <span className="font-semibold text-lg">Role:</span>&nbsp;
-                {jobData.name}
-              </div>
-              <div>
-                <span className="font-semibold text-lg">Job Status:</span>
-                &nbsp;
-                <span
-                  className={`capitalize ${
-                    jobData.status === "open"
-                      ? "text-green-500"
-                      : "text-red-500"
-                  }`}
-                >
-                  {jobData.status}
+    <div
+      className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg"
+      style={{ fontFamily: "'Poppins', sans-serif" }}
+    >
+      {/* Job Details Section */}
+      <div className="mb-8">
+        <h2 className="text-3xl font-extrabold text-blue-700 mb-4">
+          Job Details
+        </h2>
+        <div className="grid grid-cols-2 gap-4">
+          <div>
+            <div className="text-xl font-semibold">
+              Role: <span className="font-normal">{jobData.name}</span>
+            </div>
+            <div className="text-xl font-semibold">
+              Job Status:{" "}
+              <span
+                className={`font-normal ${
+                  jobData.status === "open"
+                    ? "text-green-600"
+                    : "text-red-600"
+                }`}
+              >
+                {jobData.status}
+              </span>
+            </div>
+            <div className="text-xl font-semibold">
+              Type: <span className="font-normal">{jobType}</span>
+            </div>
+            <div className="text-xl font-semibold">
+              Location: <span className="font-normal">{jobData.location}</span>
+            </div>
+            <div className="text-xl font-semibold">
+              Required Skills:{" "}
+              <span className="font-normal">{jobData.requiredSkills}</span>
+            </div>
+            {userRole === "Applicant" && (
+              <div className="text-xl font-semibold mt-4">
+                Application Status:{" "}
+                <span className="font-normal">
+                  {application?.status
+                    ? application.status.charAt(0).toUpperCase() +
+                      application.status.slice(1)
+                    : "In Review"}
                 </span>
               </div>
-              <div>
-                <span className="font-semibold text-lg capitalize">Type:</span>
-                &nbsp;
-                {jobType}
-              </div>
-              <div>
-                <span className="font-semibold text-lg">Location:</span>&nbsp;
-                {jobData.location}
-              </div>
-              <div>
-                <span className="font-semibold text-lg">Required Skills:</span>&nbsp;
-                {jobData.requiredSkills}
-              </div>
-              <div>
-                {userRole === "Applicant" &&
-                  (application?.status === "accepted" ||
-                  application?.status === "rejected" ? (
-                    <>
-                      <b>Application Status:</b>
-                      <span className="capitalize">
-                        &nbsp;{application?.status}
-                      </span>
-                    </>
-                  ) : (
-                    <>
-                      <b>Application Status:</b>&nbsp;In Review
-                    </>
-                  ))}
-              </div>
-            </div>
-            <div className="text-3xl p-4">{jobData.pay}$/hr</div>
+            )}
           </div>
-          <div className="h-6" />
-          <div className="text-lg border-b border-gray-300 mb-2 font-bold">
-            Description
+          <div className="text-right text-4xl font-extrabold text-blue-700">
+            {jobData.pay}$/hr
           </div>
-          <div className="text-[#686868] mx-2">{jobData.description}</div>
         </div>
       </div>
 
+      {/* Description Section */}
+      <div className="mb-8">
+        <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
+          Description
+        </h2>
+        <p className="text-gray-700 text-lg">{jobData.description}</p>
+      </div>
+
+      {/* Application and Questionnaire Section */}
       {role === "Applicant" && jobData.status === "open" && (
         <div>
           {showQuestionnaire && (
-            <div className="w-7/12 mb-10">
-              <div className="flex flex-col m-4 ">
-                <div className="text-xl border-b border-gray-300 font-bold">
-                  Fill Questionnaire
-                </div>
-
-                <form
-                  onSubmit={handleSubmit(handleAnswerQuestionnaire)}
-                  noValidate
-                >
-                  <div className="flex flex-row justify-between m-2">
-                    <div className="flex flex-col ">
-                      <div>
-                        <span className="font-semibold text-lg">1:</span>
-                        &nbsp;
-                        {jobData.question1}
-                      </div>
-                    </div>
-                  </div>
-                  <Stack spacing={2} width={400}>
-                    <TextField
-                      label="Answer 1"
-                      type="text"
-                      {...register("answer1")}
-                      sx={{
-                        "& label": {
-                          paddingLeft: (theme) => theme.spacing(1),
-                        },
-                        "& input": {
-                          paddingLeft: (theme) => theme.spacing(2.5),
-                        },
-                        "& fieldset": {
-                          paddingLeft: (theme) => theme.spacing(1.5),
-                          borderRadius: "10px",
-                        },
-                      }}
-                    />
-
-                    <div className="flex flex-row justify-between m-2">
-                      <div className="flex flex-col ">
-                        <div>
-                          <span className="font-semibold text-lg">2:</span>
-                          &nbsp;
-                          {jobData.question2}
-                        </div>
-                      </div>
-                    </div>
-
-                    <TextField
-                      label="Answer 2"
-                      type="text"
-                      {...register("answer2")}
-                      sx={{
-                        "& label": {
-                          paddingLeft: (theme) => theme.spacing(1),
-                        },
-                        "& input": {
-                          paddingLeft: (theme) => theme.spacing(2.5),
-                        },
-                        "& fieldset": {
-                          paddingLeft: (theme) => theme.spacing(1.5),
-                          borderRadius: "10px",
-                        },
-                      }}
-                    />
-
-                    <div className="flex flex-row justify-between m-2">
-                      <div className="flex flex-col ">
-                        <div>
-                          <span className="font-semibold text-lg">3:</span>
-                          &nbsp;
-                          {jobData.question3}
-                        </div>
-                      </div>
-                    </div>
-
-                    <TextField
-                      label="Answer 3"
-                      type="text"
-                      {...register("answer3")}
-                      sx={{
-                        "& label": {
-                          paddingLeft: (theme) => theme.spacing(1),
-                        },
-                        "& input": {
-                          paddingLeft: (theme) => theme.spacing(2.5),
-                        },
-                        "& fieldset": {
-                          paddingLeft: (theme) => theme.spacing(1.5),
-                          borderRadius: "10px",
-                        },
-                      }}
-                    />
-                    <div className="flex flex-row justify-between m-2">
-                      <div className="flex flex-col ">
-                        <div>
-                          <span className="font-semibold text-lg">4:</span>
-                          &nbsp;
-                          {jobData.question4}
-                        </div>
-                      </div>
-                    </div>
-
-                    <TextField
-                      label="Answer 4"
-                      type="text"
-                      {...register("answer4")}
-                      sx={{
-                        "& label": {
-                          paddingLeft: (theme) => theme.spacing(1),
-                        },
-                        "& input": {
-                          paddingLeft: (theme) => theme.spacing(2.5),
-                        },
-                        "& fieldset": {
-                          paddingLeft: (theme) => theme.spacing(1.5),
-                          borderRadius: "10px",
-                        },
-                      }}
-                    />
-                    <Button
-                      type="submit"
-                      variant="contained"
-                      color="primary"
-                      style={{
-                        background: "#FF5353",
-                        borderRadius: "10px",
-                        textTransform: "none",
-                        fontSize: "16px",
-                      }}
-                    >
-                      Submit
-                    </Button>
-                  </Stack>
-                </form>
-              </div>
+            <div className="mb-8">
+              <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
+                Fill Questionnaire
+              </h2>
+              <form onSubmit={handleSubmit(handleAnswerQuestionnaire)} noValidate>
+                <Stack spacing={3}>
+                  <TextField
+                    label={jobData.question1}
+                    variant="outlined"
+                    {...register("answer1")}
+                    fullWidth
+                  />
+                  <TextField
+                    label={jobData.question2}
+                    variant="outlined"
+                    {...register("answer2")}
+                    fullWidth
+                  />
+                  <TextField
+                    label={jobData.question3}
+                    variant="outlined"
+                    {...register("answer3")}
+                    fullWidth
+                  />
+                  <TextField
+                    label={jobData.question4}
+                    variant="outlined"
+                    {...register("answer4")}
+                    fullWidth
+                  />
+                  <Button
+                    type="submit"
+                    variant="contained"
+                    style={{
+                      backgroundColor: "#1E90FF",
+                      color: "#FFF",
+                      borderRadius: "8px",
+                      textTransform: "none",
+                    }}
+                  >
+                    Submit
+                  </Button>
+                </Stack>
+              </form>
             </div>
           )}
 
           {showApply && (
             <Button
               onClick={handleApplyJob}
-              type="button"
               variant="contained"
               style={{
-                background: "#FF5353",
-                borderRadius: "10px",
+                backgroundColor: "#1E90FF",
+                color: "#FFF",
+                borderRadius: "8px",
                 textTransform: "none",
-                fontSize: "18px",
-                width: "250px",
+                fontSize: "16px",
+                padding: "10px 20px",
               }}
             >
               Apply Now
@@ -355,16 +259,15 @@ const JobDetail = (props: any) => {
         </div>
       )}
 
-      {role === "Manager" &&
-        userId === jobData.managerid &&
-        jobData.status === "open" && (
-          <>
-            <JobManagerView jobData={jobData} />
-            <div className="h-40"></div>
-          </>
-        )}
-    </>
+      {/* Manager View */}
+      {role === "Manager" && userId === jobData.managerid && jobData.status === "open" && (
+        <div>
+          <JobManagerView jobData={jobData} />
+        </div>
+      )}
+    </div>
   );
 };
 
 export default JobDetail;
+
