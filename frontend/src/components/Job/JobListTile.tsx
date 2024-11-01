@@ -5,43 +5,41 @@ import { useApplicationStore } from "../../store/ApplicationStore";
 import { useUserStore } from "../../store/UserStore";
 
 const JobListTile = (props: any) => {
-  // const { data, action }: { data: Job; action: string | undefined } = props;
   const { data }: { data: Job } = props;
   let action = "view-more";
 
-  const getMatchStatus = (job: Job) => {
-    let matchStatus = {
-      text: "Low Match",
-      style: { backgroundColor: "#FF5757", color: "white" },
-    };
-
+  const calculateMatchPercentage = (job: Job) => {
     const skills = useUserStore((state) => state.skills);
-    if (skills && job.requiredSkills) {
-      const applicantSkillsArray = skills
-        .split(",")
-        .map((skill) => skill.trim().toLowerCase());
-      const requiredSkillsArray = job.requiredSkills
-        .split(",")
-        .map((skill) => skill.trim().toLowerCase());
-      const isMatch = requiredSkillsArray.some((skill) =>
-        applicantSkillsArray.includes(skill)
-      );
 
-      if (isMatch) {
-        matchStatus = {
-          text: "Match",
-          style: { backgroundColor: "#00E000", color: "white" },
-        };
-      }
-    }
+    if (!skills || !job.requiredSkills) return 0; // If either is missing, return 0%
 
-    return matchStatus;
+    const applicantSkillsArray = skills
+      .split(",")
+      .map((skill) => skill.trim().toLowerCase());
+    const requiredSkillsArray = job.requiredSkills
+      .split(",")
+      .map((skill) => skill.trim().toLowerCase());
+
+    const matchedSkills = requiredSkillsArray.filter((skill) =>
+      applicantSkillsArray.includes(skill)
+    );
+
+    const matchPercentage =
+      (matchedSkills.length / requiredSkillsArray.length) * 100;
+
+    return Math.round(matchPercentage); // Return rounded percentage
+  };
+
+  const getMatchColor = (percentage: number) => {
+    if (percentage < 10) return "#FF5353"; // Red for below 10%
+    if (percentage < 50) return "#FFA500"; // Orange for below 50%
+    if (percentage < 80) return "#FFD700"; // Yellow for below 80%
+    return "#00E000"; // Green for 80% and above
   };
 
   const [active, setActive] = useState<boolean>(true);
   const [searchParams, setSearchParams] = useSearchParams();
   const userId = useUserStore((state) => state.id);
-
   const userRole = useUserStore((state) => state.role);
 
   const applicationList: Application[] = useApplicationStore(
@@ -56,7 +54,6 @@ const JobListTile = (props: any) => {
         item.jobid === data._id && item.applicantid === userId
     );
     setApplication(temp || null);
-    console.log("Found Application:", temp);
   }, [data, applicationList, userId]);
 
   const affilation = data.managerAffilication;
@@ -89,26 +86,20 @@ const JobListTile = (props: any) => {
     return "bg-[#FF2A2A]/10";
   };
 
-  // const isClosed = data.status !== "0";
-
   const handleKnowMore = (e: any) => {
     e.stopPropagation();
-    console.log("Know more");
   };
-  const handleFillQuestionnaire = (e: any) => {
-    e.stopPropagation();
-    console.log("Fill Questionnaire");
-  };
-  const handleViewApplication = (e: any) => {
-    e.stopPropagation();
-    console.log("View Application");
-  };
+
   return (
     <div className="my-3" onClick={handleClick}>
       <div
-        className={`p-3 bg-white rounded-xl shadow-sm ${
-          active ? "border-black" : "border-white"
-        } border`}
+        className={[
+          "transform transition-transform duration-200 ease-in-out",
+          "hover:translate-y-[-10px] hover:shadow-lg",
+          active ? "border-black" : "border-white",
+          "p-3 rounded-xl shadow-sm bg-cover bg-center"
+        ].join(" ")} // Join array of classes into a single string
+        style={{ backgroundImage: "url('/images/tiles_bg.png')" }}
       >
         <div className="flex flex-row">
           <div className="w-4/6">
@@ -116,42 +107,64 @@ const JobListTile = (props: any) => {
               <div
                 className={`w-fit ${getAffiliationColour(
                   affilation
-                )} rounded-2xl px-3 py-0`}
+                )} rounded-2xl px-3 py-0 bg-opacity-50`} // Semi-translucent background for affiliation
+                style={{
+                  backgroundColor: getAffiliationColour(affilation),
+                  borderRadius: "8px",
+                }}
               >
-                <p className="inline text-xs" style={{ width: "fit-content" }}>
+                <p
+                  className="inline text-xs text-white"
+                  style={{
+                    width: "fit-content",
+                    fontFamily: "'Poppins', sans-serif", // Apply font style here
+                  }}
+                >
                   {getAffiliationTag(affilation).toUpperCase()}
                 </p>
               </div>
               {userRole === "Applicant" && (
                 <div
-                  className={`ml-2 rounded-full px-3 py-0`}
-                  style={getMatchStatus(data).style}
+                  className="ml-2 rounded-full px-3 py-0 bg-opacity-50"
+                  style={{
+                    backgroundColor: getMatchColor(calculateMatchPercentage(data)),
+                    color: "white",
+                    borderRadius: "8px",
+                    fontFamily: "'Poppins', sans-serif", // Apply font style here
+                  }}
                 >
-                  <p className="inline text-xs">{getMatchStatus(data).text}</p>
+                  <p className="inline text-xs">
+                    {calculateMatchPercentage(data)}% Match
+                  </p>
                 </div>
               )}
             </div>
             <div className="h-1"></div>
 
             <div className="pl-2">
-              <p className="text-base">
+              <p className="text-base text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 <b>Role:</b> {role}
               </p>
-              <p className="text-base">
+              <p className="text-base text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 <b>Job Status:</b>
                 <span
                   className={`${
-                    data.status === "closed" ? "text-[#FF5353]" : ""
-                  }`}
+                    data.status === "closed" ? "text-[#FF5353]" : "text-[#00E000]"
+                  }`} // Apply red for closed and light green for open status
                 >
                   &nbsp;<span className="capitalize">{data.status}</span>
                 </span>
               </p>
 
-              <p className="text-base">
+              <p className="text-base text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 <b>Type:</b> <span className="capitalize"> {jobType} </span>
               </p>
-              <p className="text-base">
+
+              <p className="text-base text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
+                <b>Location:</b> {data.location || "Not specified"}
+              </p>
+
+              <p className="text-base text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
                 {userRole === "Applicant" &&
                   ((application !== null &&
                     application?.status === "accepted") ||
@@ -179,29 +192,9 @@ const JobListTile = (props: any) => {
             ) : (
               <></>
             )}
-            {action === "view-questionnaire" ? (
-              <p
-                className="inline-flex items-center flex-row-reverse text-xs text-[#00B633]"
-                onClick={handleFillQuestionnaire}
-              >
-                <HiOutlineArrowRight />
-                Fill Questionnaire&nbsp;
-              </p>
-            ) : (
-              <></>
-            )}
-            {action === "view-application" ? (
-              <p
-                className="inline-flex items-center flex-row-reverse text-xs text-[#656565]"
-                onClick={handleViewApplication}
-              >
-                <HiOutlineArrowRight />
-                View Application&nbsp;
-              </p>
-            ) : (
-              <></>
-            )}
-            <p className="text-3xl">{pay}$/hr</p>
+            <p className="text-3xl text-white" style={{ fontFamily: "'Poppins', sans-serif" }}>
+              {pay}$/hr
+            </p>
           </div>
         </div>
       </div>
@@ -210,3 +203,4 @@ const JobListTile = (props: any) => {
 };
 
 export default JobListTile;
+
