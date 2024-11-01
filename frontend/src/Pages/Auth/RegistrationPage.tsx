@@ -4,13 +4,15 @@ import { useForm } from "react-hook-form";
 import { useState } from "react";
 import {
   Button,
-  Stack,
+  Grid,
+  Paper,
   TextField,
   Select,
   MenuItem,
   SelectChangeEvent,
   InputLabel,
   FormControl,
+  Typography,
 } from "@mui/material";
 
 type FormValues = {
@@ -55,116 +57,32 @@ const RegistrationPage = () => {
   };
 
   return (
-    <>
-      <div className="mx-auto bg-slate-50 content flex flex-col justify-center items-center">
-        <div className=" p-4  border rounded bg-white">
-          <div className="text-xl justify-center text-black mb-4 ">
+    <Grid
+      container
+      style={{
+        height: "100vh",
+        backgroundImage: "url('/images/M.png')", // Set your background image
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+        backgroundRepeat: "no-repeat",
+      }}
+    >
+      <Grid item xs={12} sm={6} md={4} component={Paper} elevation={6} square>
+        <div
+          style={{
+            padding: "40px 20px",
+            borderRadius: "15px",
+            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            backdropFilter: "blur(10px)",
+          }}
+        >
+          <Typography variant="h5" align="center" gutterBottom>
             Create New Account
-          </div>
-          <form onSubmit={handleSubmit(onSubmit)} noValidate>
-            <Stack spacing={2} width={400}>
-              <TextField
-                label="Name"
-                type="text"
-                {...register("name", {
-                  required: "Name is required",
-                })}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-                sx={{
-                  "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.5),
-                    borderRadius: "10px",
-                  },
-                }}
-              />
+          </Typography>
 
-              <TextField
-                label="Email Id"
-                type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                    message: "Enter a valid email",
-                  },
-                })}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-                sx={{
-                  "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.5),
-                    borderRadius: "10px",
-                  },
-                }}
-              />
-              <TextField
-                label="Password"
-                type="password"
-                {...register("password", {
-                  required: "Password is required",
-                })}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-                sx={{
-                  "& label": {
-                    paddingLeft: (theme) => theme.spacing(1),
-                  },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.5),
-                    borderRadius: "10px",
-                  },
-                }}
-              />
-              <TextField
-                label="Confirm password"
-                type="password"
-                {...register("confirmPassword", {
-                  required: "Password is required",
-                  validate: (val: string) => {
-                    if (watch("password") !== val) {
-                      return "Passwords don't match";
-                    }
-                  },
-                })}
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword?.message}
-                sx={{
-                  "& label": {
-                    paddingLeft: (theme) => theme.spacing(1),
-                  },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.5),
-                    borderRadius: "10px",
-                  },
-                }}
-              />
-              <TextField
-                label="Skills"
-                type="text"
-                {...register("skills", {
-                  required: "Skills is required",
-                })}
-                error={!!errors.skills}
-                helperText={errors.skills?.message}
-                sx={{
-                  "& label": {
-                    paddingLeft: (theme) => theme.spacing(1),
-                  },
-                  "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1.5),
-                    borderRadius: "10px",
-                  },
-                }}
-              />
-              <FormControl>
+          <Grid container spacing={2}>
+            <Grid item xs={12}>
+              <FormControl fullWidth>
                 <InputLabel id="role-id">Role</InputLabel>
                 <Select
                   value={role}
@@ -177,65 +95,145 @@ const RegistrationPage = () => {
                 >
                   <MenuItem value={"Manager"}>Manager</MenuItem>
                   <MenuItem value={"Applicant"}>Applicant</MenuItem>
+                  <MenuItem value={"Admin"}>Admin</MenuItem> {/* Added Admin */}
                 </Select>
               </FormControl>
-              {role === "Manager" && (
-                <FormControl>
-                  <InputLabel id="affiliation-id">Role</InputLabel>
+            </Grid>
+
+            {/* Affiliation dropdown, only for Managers */}
+            {role === "Manager" && (
+              <Grid item xs={12}>
+                <FormControl fullWidth>
+                  <InputLabel id="affiliation-id">Affiliation</InputLabel>
                   <Select
                     value={affilation}
                     labelId="affiliation-id"
-                    label="Role"
-                    id="role"
+                    label="Affiliation"
+                    id="affiliation"
                     onChange={(e: SelectChangeEvent) => {
                       setAffiliation(e.target.value);
                     }}
                   >
-                    <MenuItem value={"nc-state-dining"}>
-                      NC State Dining
-                    </MenuItem>
-                    <MenuItem value={"campus-enterprises"}>
-                      Campus Enterprises
-                    </MenuItem>
-                    <MenuItem value={"wolfpack-outfitters"}>
-                      Wolfpack Outfitters
-                    </MenuItem>
+                    <MenuItem value={"nc-state-dining"}>NC State Dining</MenuItem>
+                    <MenuItem value={"campus-enterprises"}>Campus Enterprises</MenuItem>
+                    <MenuItem value={"wolfpack-outfitters"}>Wolfpack Outfitters</MenuItem>
                   </Select>
                 </FormControl>
-              )}
+              </Grid>
+            )}
+
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Name"
+                type="text"
+                {...register("name", {
+                  required: "Name is required",
+                })}
+                error={!!errors.name}
+                helperText={errors.name?.message}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Email Id"
+                type="email"
+                {...register("email", {
+                  required: "Email is required",
+                  pattern: {
+                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
+                    message: "Enter a valid email",
+                  },
+                })}
+                error={!!errors.email}
+                helperText={errors.email?.message}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Password"
+                type="password"
+                {...register("password", {
+                  required: "Password is required",
+                })}
+                error={!!errors.password}
+                helperText={errors.password?.message}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Confirm password"
+                type="password"
+                {...register("confirmPassword", {
+                  required: "Password is required",
+                  validate: (val: string) => {
+                    if (watch("password") !== val) {
+                      return "Passwords don't match";
+                    }
+                  },
+                })}
+                error={!!errors.confirmPassword}
+                helperText={errors.confirmPassword?.message}
+              />
+            </Grid>
+            <Grid item xs={12}>
+              <TextField
+                fullWidth
+                label="Skills"
+                type="text"
+                {...register("skills", {
+                  required: "Skills are required",
+                })}
+                error={!!errors.skills}
+                helperText={errors.skills?.message}
+              />
+            </Grid>
+            <Grid item xs={12}>
               <Button
                 type="submit"
                 variant="contained"
                 color="primary"
+                fullWidth
                 style={{
-                  background: "#FF5353",
+                  background: "#1E90FF",
                   borderRadius: "10px",
                   textTransform: "none",
                   fontSize: "16px",
                 }}
+                onClick={handleSubmit(onSubmit)} // Submit when button is clicked
               >
                 Sign up
               </Button>
-            </Stack>
-          </form>
-          <div className="mx-auto"></div>
-          <br />
-          <div className="mv-1 border-t mx-16" />
-          <div className="flex justify-center">
-            <p className="-mt-3 bg-white px-3 text-[#CCCCCC]">OR</p>
+            </Grid>
+          </Grid>
+
+          <div style={{ textAlign: "center", margin: "20px 0" }}>
+            <hr style={{ borderColor: "#CCCCCC" }} />
+            <Typography variant="body2" color="#AAAAAA">
+              OR
+            </Typography>
+            <hr style={{ borderColor: "#CCCCCC" }} />
           </div>
-          <br />
-          <p
-            className="text-[#656565] text-center"
+          <Typography
+            variant="body2"
+            color="#656565"
+            align="center"
             onClick={() => {
               navigate("/login");
             }}
+            style={{
+              cursor: "pointer",
+              textDecoration: "underline",
+            }}
           >
             Already have an Account? Login Here
-          </p>
+          </Typography>
         </div>
-      </div>
-    </>
+      </Grid>
+    </Grid>
   );
 };
 

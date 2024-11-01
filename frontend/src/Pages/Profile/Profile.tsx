@@ -1,4 +1,3 @@
-// import CreateIcon from '@mui/';
 import { BiSolidPencil } from "react-icons/bi";
 import { AiOutlineClose } from "react-icons/ai";
 import { useUserStore } from "../../store/UserStore";
@@ -18,30 +17,36 @@ const Profile = () => {
   const hours = useUserStore((state) => state.hours);
   const resume = useUserStore((state) => state.resume);
 
-  const widthCard = "700px";
-
+  const widthCard = "800px"; // Adjusted width
   const [editMode, setEditMode] = useState(false);
+
+  // Ensure skills is an array or fallback to an empty array
+  const skillsArray = Array.isArray(skills) ? skills : [];
 
   return (
     <>
       <div
-        className="flex flex-col items-center justify-center bg-gray-50 "
-        style={{ height: "calc(100vh - 72px)" }}
+        className="flex flex-col items-center justify-center bg-cover bg-center"
+        style={{
+          height: "calc(100vh - 100px)", // Adjusted height
+          backgroundImage: `url('/images/M.png')`,
+          backgroundSize: "cover",
+          filter: "brightness(0.8)",
+          padding: "20px 0", // Add padding to the top and bottom
+        }}
       >
         <div
-          className="flex flex-col p-4 py-4 pb-20 m-6 mx-10 overflow-y-scroll bg-white rounded-xl"
-          style={{ width: `${widthCard}` }}
+          className="flex flex-col p-4 mx-6 rounded-2xl shadow-lg" // Reduced padding and margin
+          style={{ width: `${widthCard}`, backgroundColor: "#e3f2fd" }} // Light blue background
         >
-          <div
-            className="relative h-0"
-            style={{ left: `calc(${widthCard} - 60px)`, top: "9px" }}
-          >
+          <div className="relative">
             {editMode ? (
               <AiOutlineClose
                 onClick={(e: any) => {
                   e.preventDefault();
                   setEditMode(false);
                 }}
+                className="cursor-pointer text-red-500 hover:text-red-700 absolute top-0 right-0"
               />
             ) : (
               <BiSolidPencil
@@ -49,62 +54,74 @@ const Profile = () => {
                   e.preventDefault();
                   setEditMode(true);
                 }}
+                className="cursor-pointer text-blue-500 hover:text-blue-700 absolute top-0 right-0"
               />
             )}
           </div>
-          <div className="my-2 text-xl border-b">Profile</div>
-          {!editMode && (
-            <>
-              <div>
-                <span className="text-lg">Name: </span>
-                <span className="text-gray-500">{name || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Email: </span>
-                <span className="text-gray-500">{email || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Role: </span>
-                <span className="text-gray-500">{role || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Address: </span>
-                <span className="text-gray-500">{address || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Skills: </span>
-                <span className="text-gray-500">{skills || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Phone Number: </span>
-                <span className="text-gray-500">{phonenumber || " -- "}</span>
-              </div>
-              {!!affiliation && (
-                <div>
-                  <span className="text-lg">Affiliation: </span>
-                  <span className="text-gray-500">
-                    {affiliation || " -- "}{" "}
-                  </span>
-                </div>
+          <div className="my-2 text-2xl font-bold text-center">Profile</div> {/* Reduced font size */}
+          <div className="flex justify-between gap-6"> {/* Adjusted gap */}
+            {/* Left Column */}
+            <div className="flex flex-col gap-2 w-1/2"> {/* Reduced gap */}
+              {!editMode && (
+                <>
+                  {[{ label: "Name", value: name },
+                    { label: "Email", value: email },
+                    { label: "Role", value: role },
+                    { label: "Address", value: address },
+                    { label: "Phone Number", value: phonenumber },
+                  ].map(({ label, value }) => (
+                    <div
+                      className="flex flex-col items-center justify-center border-2 border-gray-300 rounded-lg p-3 w-full shadow-md hover:shadow-xl transition-all"
+                      key={label}
+                      style={{ backgroundColor: "#ffffff", minWidth: "180px" }} // White background for details
+                    >
+                      <span className="text-lg font-semibold">{label}:</span>
+                      <span className="text-gray-700 text-center">{value || " -- "}</span>
+                    </div>
+                  ))}
+                </>
               )}
-              <div>
-                <span className="text-lg">Availability: </span>
-                <span className="text-gray-500">{availability || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Gender: </span>
-                <span className="text-gray-500">{gender || " -- "}</span>
-              </div>
-              <div>
-                <span className="text-lg">Resume: </span>
-                <span className="text-gray-500">{resume || " -- "}</span>
-              </div>
-              {/* <div>
-                <span className="text-lg">Hours: </span>
-                <span className="text-gray-500">{hours || " -- "}</span>
-              </div> */}
-            </>
-          )}
+            </div>
+
+            {/* Right Column */}
+            <div className="flex flex-col gap-2 w-1/2"> {/* Reduced gap */}
+              {!editMode && (
+                <>
+                  {[{
+                    label: "Skills",
+                    value: skillsArray.length > 0 ? (
+                      <div className="flex flex-wrap justify-center gap-1"> {/* Adjusted gap */}
+                        {skillsArray.map((skill, index) => (
+                          <span
+                            key={index}
+                            className="bg-blue-600 text-white px-2 py-1 rounded-full text-sm shadow-lg"
+                          >
+                            {skill}
+                          </span>
+                        ))}
+                      </div>
+                    ) : (
+                      "No skills available"
+                    ),
+                  },
+                  { label: "Affiliation", value: affiliation },
+                  { label: "Availability", value: availability },
+                  { label: "Gender", value: gender },
+                  { label: "Resume", value: resume },
+                  ].map(({ label, value }) => (
+                    <div
+                      className="flex flex-col items-center justify-center border-2 border-gray-300 rounded-lg p-3 w-full shadow-md hover:shadow-xl transition-all"
+                      key={label}
+                      style={{ backgroundColor: "#ffffff", minWidth: "180px" }} // White background for details
+                    >
+                      <span className="text-lg font-semibold">{label}:</span>
+                      <span className="text-gray-700 text-center">{value || " -- "}</span>
+                    </div>
+                  ))}
+                </>
+              )}
+            </div>
+          </div>
           {editMode && (
             <ProfileEdit
               props={{
@@ -112,7 +129,7 @@ const Profile = () => {
                 email,
                 address,
                 role,
-                skills,
+                skills: skillsArray,
                 phonenumber,
                 affiliation,
                 availability,
