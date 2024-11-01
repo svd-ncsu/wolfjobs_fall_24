@@ -38,6 +38,7 @@ const LoginPage = () => {
   return (
     <>
       <div
+        data-testid="login-background"
         style={{
           position: "relative",
           height: "100vh",
