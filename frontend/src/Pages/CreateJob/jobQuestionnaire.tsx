@@ -14,7 +14,6 @@ type FormValues = {
 const JobQuestionnaire = () => {
   const location = useLocation();
   const { state } = location;
-
   const navigate = useNavigate();
 
   const form = useForm<FormValues>({
@@ -43,46 +42,35 @@ const JobQuestionnaire = () => {
     };
     navigate("/job_preview", body);
   };
+
   return (
-    <>
-      <div className="flex flex-row">
-        <div
-          className="w-3/12  pt-10 border-r"
-          style={{ height: "calc(100vh - 72px)" }}
-        >
-          <div className="text-2xl  translate-x-10">Create New Job Listing</div>
-          <div className="flex flex-col items-start  ml-10  mt-10 ">
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">Add details</span>
-            </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#1E1E1E" size="20px" />
-              <span className="ml-2 text-xl text-[#1E1E1E]">
-                Fill Questionnaire
-              </span>
-            </div>
-            <div className="inline-flex items-center flex-row  ">
+    <div className="bg-cover bg-center min-h-screen" style={{ backgroundImage: "url('/images/tiles_bg.png')" }}>
+      <div className="flex flex-col">
+        <div className="w-full bg-[#1E90FF] p-4 shadow-lg">
+          <div className="text-2xl text-white text-center">Create New Job Listing</div>
+          <div className="flex justify-between mt-4">
+            <div className="inline-flex items-center flex-row">
               <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Preview</span>
+              <span className="ml-2 text-lg text-white">Add details</span>
             </div>
-            <div className="inline-flex items-center flex-row  ">
-              <AiFillCheckCircle color="#CBCBCB" size="20px" />
-              <span className="ml-2 text-xl text-[#CBCBCB]">Confirm</span>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#FFD700" size="20px" /> {/* Gold color for the icon */}
+              <span className="ml-2 text-lg text-white font-bold bg-green-500 px-2 py-1 rounded">Fill Questionnaire</span> {/* Bold, white text with green background */}
+            </div>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#ffffff" size="20px" />
+              <span className="ml-2 text-lg text-[#CBCBCB]">Preview</span>
+            </div>
+            <div className="inline-flex items-center flex-row">
+              <AiFillCheckCircle color="#ffffff" size="20px" />
+              <span className="ml-2 text-lg text-[#CBCBCB]">Confirm</span>
             </div>
           </div>
         </div>
-        <div
-          className="w-9/12 pt-10 pl-10"
-          style={{ height: "calc(100vh - 72px)" }}
-        >
-          <div className="text-2xl translate-x-10">Add Details</div>
-          <div className="flex flex-col">
-            <form
-              onSubmit={handleSubmit(onSubmit)}
-              noValidate
-              className="m-4 mx-10"
-            >
+        <div className="flex flex-col w-full pt-10 pl-10">
+          <div className="text-2xl text-blue-600 text-center">Add Questions</div> {/* Centered title */}
+          <div className="flex flex-col items-center mt-5">
+            <form onSubmit={handleSubmit(onSubmit)} noValidate className="m-4 mx-10 bg-white rounded-lg p-6 shadow-md">
               <Stack spacing={2} width={600}>
                 <TextField
                   label="Question 1"
@@ -93,6 +81,7 @@ const JobQuestionnaire = () => {
                   error={!!errors.question1}
                   helperText={errors.question1?.message}
                   sx={{
+                    backgroundColor: "#f0f8ff", // Light blue background for text fields
                     "& label": { paddingLeft: (theme) => theme.spacing(1) },
                     "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
                     "& fieldset": {
@@ -110,6 +99,7 @@ const JobQuestionnaire = () => {
                   error={!!errors.question2}
                   helperText={errors.question2?.message}
                   sx={{
+                    backgroundColor: "#f0f8ff", // Light blue background for text fields
                     "& label": { paddingLeft: (theme) => theme.spacing(1) },
                     "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
                     "& fieldset": {
@@ -127,6 +117,7 @@ const JobQuestionnaire = () => {
                   error={!!errors.question3}
                   helperText={errors.question3?.message}
                   sx={{
+                    backgroundColor: "#f0f8ff", // Light blue background for text fields
                     "& label": { paddingLeft: (theme) => theme.spacing(1) },
                     "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
                     "& fieldset": {
@@ -144,6 +135,7 @@ const JobQuestionnaire = () => {
                   error={!!errors.question4}
                   helperText={errors.question4?.message}
                   sx={{
+                    backgroundColor: "#f0f8ff", // Light blue background for text fields
                     "& label": { paddingLeft: (theme) => theme.spacing(1) },
                     "& input": { paddingLeft: (theme) => theme.spacing(2.5) },
                     "& fieldset": {
@@ -154,10 +146,10 @@ const JobQuestionnaire = () => {
                 />
                 <Button
                   type="submit"
-                  variant="outlined"
+                  variant="contained"
                   style={{
-                    color: "#FF5353",
-                    borderColor: "#FF5353",
+                    backgroundColor: "#1E90FF", // Button background color
+                    color: "white", // Button text color
                     textTransform: "none",
                     fontSize: "16px",
                     minWidth: "200px",
@@ -170,8 +162,9 @@ const JobQuestionnaire = () => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
 export default JobQuestionnaire;
+
