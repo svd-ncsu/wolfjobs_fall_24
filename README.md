@@ -8,7 +8,7 @@
 [![Issues Closed](https://img.shields.io/github/issues-closed/deepr41/wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 ![last commit](https://img.shields.io/github/last-commit/deepr41/Wolfjobs)
 ![Lines of code](https://tokei.rs/b1/github/deepr41/wolfjobs)
-[![Repo-size](https://img.shields.io/github/repo-size/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
+[![Repo-size](https://img.shields.io/github/repo-size/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
 [![file_count](https://img.shields.io/github/directory-file-count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![language_count](https://img.shields.io/github/languages/count/deepr41/Wolfjobs)](https://GitHub.com/deepr41/Wolfjobs/)
 [![Downloads](https://img.shields.io/github/downloads/deepr41/WolfJobs/total)](https://GitHub.com/deepr41/Wolfjobs/)
