@@ -54,8 +54,8 @@ const JobManagerView = (props: any) => {
                 type="button"
                 variant="outlined"
                 style={{
-                  color: "#FF5353",
-                  borderColor: "#FF5353",
+                  color: "#1E90FF",
+                  borderColor: "#1E90FF",
                   // borderRadius: "10px",
                   textTransform: "none",
                   fontSize: "16px",
@@ -66,7 +66,7 @@ const JobManagerView = (props: any) => {
                 Close job
               </Button>
             </div>
-            <div className="text-2xl my-4">Candidates Review</div>
+            <div className="text-2xl my-4 text-blue-800">Candidates Review</div>
             <div className="flex flex-row justify-around">
               <Button
                 onClick={() => {
@@ -79,9 +79,9 @@ const JobManagerView = (props: any) => {
                 style={{
                   borderColor: viewManager === "job-screening" ? "" : "#FF5353",
                   color:
-                    viewManager === "job-screening" ? "#FFFFFF" : "#FF5353",
+                    viewManager === "job-screening" ? "#FFFFFF" : "#1E90FF",
                   backgroundColor:
-                    viewManager === "job-screening" ? "#FF5353" : "",
+                    viewManager === "job-screening" ? "#1E90FF" : "",
                 }}
               >
                 Screening
@@ -97,9 +97,9 @@ const JobManagerView = (props: any) => {
                 fullWidth={true}
                 style={{
                   borderColor: viewManager === "job-grading" ? "" : "#FF5353",
-                  color: viewManager === "job-grading" ? "#FFFFFF" : "#FF5353",
+                  color: viewManager === "job-grading" ? "#FFFFFF" : "#1E90FF",
                   backgroundColor:
-                    viewManager === "job-grading" ? "#FF5353" : "",
+                    viewManager === "job-grading" ? "#1E90FF" : "",
                 }}
               >
                 Grading
@@ -114,9 +114,9 @@ const JobManagerView = (props: any) => {
                 fullWidth={true}
                 style={{
                   // borderColor: viewManager === "job-rating" ? "" : "#FF5353",
-                  color: viewManager === "job-rating" ? "#FFFFFF" : "#FF5353",
+                  color: viewManager === "job-rating" ? "#FFFFFF" : "#1E90FF",
                   backgroundColor:
-                    viewManager === "job-rating" ? "#FF5353" : "",
+                    viewManager === "job-rating" ? "#1E90FF" : "",
                 }}
               >
                 Rating
@@ -135,9 +135,9 @@ const JobManagerView = (props: any) => {
                   borderColor:
                     viewManager === "job-final-review" ? "" : "#FF5353",
                   color:
-                    viewManager === "job-final-review" ? "#FFFFFF" : "#FF5353",
+                    viewManager === "job-final-review" ? "#FFFFFF" : "#1E90FF",
                   backgroundColor:
-                    viewManager === "job-final-review" ? "#FF5353" : "",
+                    viewManager === "job-final-review" ? "#1E90FF" : "",
                 }}
               >
                 Review
@@ -158,3 +158,5 @@ const JobManagerView = (props: any) => {
 };
 
 export default JobManagerView;
+
+
