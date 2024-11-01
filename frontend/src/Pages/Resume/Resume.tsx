@@ -44,9 +44,9 @@ const Resume: React.FC = () => {
 
   return (
     <div 
-      className="flex flex-col items-center justify-center h-screen"
+      className="flex flex-col items-center justify-center min-h-screen"
       style={{
-        backgroundImage: "url('/images/M.png')", // Update the path accordingly
+        backgroundImage: "url('/images/profile.svg')", // Update the path accordingly
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
@@ -72,7 +72,7 @@ const Resume: React.FC = () => {
 
         {resumeName && (
           <div className="mt-6 text-center">
-            <p className="text-gray-800">Your current resume is: <span className="font-semibold">{resumeName}</span></p>
+            <p className="text-white">Your current resume is: <span className="font-semibold">{resumeName}</span></p>
             <a
               href={`/resumeviewer/${userId}`}
               target="_blank"
