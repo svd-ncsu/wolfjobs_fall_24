@@ -26,10 +26,10 @@ const Profile = () => {
   return (
     <>
       <div
-        className="flex flex-col items-center justify-center bg-cover bg-center"
+        className="flex flex-col items-center justify-center bg-cover bg-center min-h-screen"
         style={{
           height: "calc(100vh - 100px)", // Adjusted height
-          backgroundImage: `url('/images/M.png')`,
+          backgroundImage: `url('/images/profile.svg')`,
           backgroundSize: "cover",
           filter: "brightness(0.8)",
           padding: "20px 0", // Add padding to the top and bottom
@@ -145,3 +145,4 @@ const Profile = () => {
 };
 
 export default Profile;
+
