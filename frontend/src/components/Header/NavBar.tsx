@@ -15,8 +15,8 @@ const NavBar = () => {
         .then((res) => {
           if (res.status === 200) {
             const applications = res.data.application;
-            const acceptedCount = applications.filter(app => app.status === 'accepted').length;
-            const rejectedCount = applications.filter(app => app.status === 'rejected').length;
+            const acceptedCount = applications.filter((app: { status: string }) => app.status === 'accepted').length;
+            const rejectedCount = applications.filter((app: { status: string }) => app.status === 'rejected').length;
             setNotificationCount(acceptedCount + rejectedCount);
           }
         })
@@ -27,19 +27,18 @@ const NavBar = () => {
   }, [isLoggedIn, role]);
 
   return (
-    <>
-      <div className="relative items-center hidden ml-auto lg:flex">
-        <nav className="text-sm font-semibold leading-6 text-slate-700 ">
-          <ul className="flex space-x-8">
-            {isLoggedIn && <NavBarItem link="/profile" text="Profile" />}
-            {isLoggedIn && role == "Applicant" && <NavBarItem link="/resume" text="Upload Resume" />}
-            {isLoggedIn && role === "Applicant" && <NavBarItem link="/notifications" text={`Notifications (${notificationCount})`} />}
-            {isLoggedIn && <NavBarItem link="/logout" text="Log Out" />}
-          </ul>
-        </nav>
-      </div>
-    </>
+    <div className="relative items-center hidden ml-auto lg:flex">
+      <nav className="text-sm font-semibold leading-6 text-gray-700">
+        <ul className="flex space-x-8">
+          {isLoggedIn && <NavBarItem link="/profile" text="Profile" />}
+          {isLoggedIn && role === "Applicant" && <NavBarItem link="/resume" text="Upload Resume" />}
+          {isLoggedIn && role === "Applicant" && <NavBarItem link="/notifications" text={`Notifications (${notificationCount})`} />}
+          {isLoggedIn && <NavBarItem link="/logout" text="Log Out" />}
+        </ul>
+      </nav>
+    </div>
   );
 };
 
 export default NavBar;
+
