@@ -166,6 +166,10 @@ Your app is ready to be deployed!
 
 **6. System Stability and Speed Improvements** –  Enhancements will ensure faster loading times and greater stability, eliminating glitches for a smoother user experience.
 
+# Acknowledgments
+We would like to express our gratitude to the original creators of this project, whose work provided a solid foundation for our development. This project builds upon their codebase, and we appreciate the efforts they invested in establishing a robust framework that we could enhance and extend.
+
+Repository Link: https://github.com/sanjitkverma/WolfJobs
 
 
 
