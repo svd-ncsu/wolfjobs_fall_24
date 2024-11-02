@@ -31,16 +31,17 @@
 
 # What's New:
 
- - **New Screens Added!**
+ - **Automated Email Notifications: Instant updates keep applicants informed of every status change in their application journey.**
  - Branding, Colours and Typography
  - Components & States
  - Mutliple UI Screens _flows_ for Student & Manager Roles
- - [https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs](https://www.figma.com/file/sqt0gh5H7bZEkryKZ9jFnK/WolfJobs)
 
- - Seamless Resume Upload and Parsing: We've made it a breeze for applicants to submit their resumes for each job posting, while employers can effortlessly access and view the stored PDFs in MongoDB.
- - Precision Application Matching: Say goodbye to the uncertainty of job applications! With our enhanced system, applicants now have the power to identify which jobs align perfectly with their skills and qualifications. WolfJobs will analyze your profile and inform you if you're a strong fit for a position.
- - Revamped Job Sorting and Search:  Our revamped job sorting and search features allows you to easily organize opportunities by pay, city, and employment type. Plus, you can perform specific job searches to find the perfect match.
-- Stay Informed with the Notifications Tab: Introduced our brand-new Notifications tab to WolfJobs. Now, you can receive timely updates on the status of your applications, ensuring you're always in the know about your job prospects. 
+
+ - Enhanced User Security: Passwords are securely hashed in MongoDB, ensuring stronger protection for user data.
+ - Job Match Percentage: Applicants can now see a "match percentage" that shows how well their skills align with job requirements.
+ - Visual and UI Enhancements: High-quality images and an intuitive, interactive design make the platform more engaging, professional, and user-friendly.
+ - New functionalities or added to sort jobs in Explore page. 
+- University Admin Role: A new University Admin user type enables structured oversight and management of both students and hiring managers.
 
 
 # Presentation Video
@@ -110,7 +111,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 - Download and install the latest version of MongoDB from [MongoDB Official Website.](https://www.mongodb.com/try/download/community)
 - Make sure you have React version 18.0
 
-**Step 1: Clone the Repository from this [link](https://github.com/deepr41/WolfJobs.git)**
+**Step 1: Clone the Repository from this [link](https://github.com/YHY-NCSU/wolfjobs_fall_24.git)**
 
 **Step 2: Backend Setup**
 
@@ -153,46 +154,19 @@ Your app is ready to be deployed!
 
 # Future Improvements✨
 
-**1. Email Service📧** - On getting selected/rejected to a job, the applicant should be getting an email about it.
+**1. Email Service📧** - More emails will be sent for creating an accound or applying to a job or creating a new job.
 
 **2. Interview Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
 
-**3. Job Analysis🔍** – WolfJobs will provide the functionality of analysing various aspects of a job. Job Analysis based on various parameters using graphical representation will help in making prediction on which jobs are more preferred and for which jobs applicants have more inclination. Hiring managers can then decide what rewards and salary to be given to the applicants of that job. Even applicants will get to know, which job is being preferred among other applicants.
+**3. Enhanced Admin Functionality** –  Expanded features for admin users will streamline management and improve oversight capabilities.
 
-**4. Chatbot Integration🤖** – Our platform WolfJobs will also provide the functionality of Chatbot integrated with our website so that user can easily interact with the bot and get to know about various features of our web application and have a nice interactive experience.
+**4. UI Enhancements with Dark Mode** –  Introducing a dark mode option wherever possible and additional UI changes to enhance visual quality and user comfort..
 
-**5. Interview Appointment Scheduling📆** – WolfJobs will also provide the facility for the hiring manager to organize an interview appointment for the job based on applicant’s availability and convenient time uploaded by the hiring manager. Either of the users can upload their availability time in the G-sheet and using google calendar appointments can be organised.
+**5. General Messaging Page** –  A new messaging feature will promote communication among users, fostering a more interactive community.
 
-**6. Candidate Matching Percentage** – WolfJobs applicant skill matching feature will include a percentage to how fit a candidate's skills are based on the job's required skills. Applicants will see a match percentage indicating how likely they are to get accepted and recieve an interview. 
-
-**7. Matching based on Resume** – WolfJobs applicants will be able to parse their resume and WolfJobs will extract key skills from the resume and compare it with required job skills to give candidates job matching status.
-
-**8. Database Security and Hashing** – WolfJobs currently does not securely store the password and user information in the database. This data needs to be protected and hashed to ensure security.
+**6. System Stability and Speed Improvements** –  Enhancements will ensure faster loading times and greater stability, eliminating glitches for a smoother user experience.
 
 
-# Contributors
-
-  <table>
-  <tr>
-    <td align="center"><a href="https://github.com/deepr41"><img src="https://avatars.githubusercontent.com/deepr41" width="100px;" alt=""/><br /><b>Deepak Rajendran</b></a></td>
-    <td align="center"><a href="https://github.com/shafa112"><img src="https://avatars.githubusercontent.com/shafa112" width="100px;" alt=""/><br /><b>Shafa Hassan</b></a><br /></td>
-    <td align="center"><a href="https://github.com/Janhavi-23"><img src="https://avatars.githubusercontent.com/Janhavi-23" width="100px;" alt=""/><br /><b>Janhavi Pendse</b></a><br /></td>
-    <td align="center"><a href="https://github.com/deepp2905"><img src="https://avatars.githubusercontent.com/deepp2905" width="100px;" alt=""/><br /><b>Deep Patel</b></a><br /></td>
 
 
-   
-  </tr>
-</table>
 
-## Iteration 2:
- <table>
-  <tr>
-    <td align="center"><a href="https://github.com/sanjitkverma"><img src="https://avatars.githubusercontent.com/sanjitkverma" width="100px;" alt=""/><br /><b>Sanjit Verma</b></a></td>
-    <td align="center"><a href="https://github.com/arul28"><img src="https://avatars.githubusercontent.com/arul28" width="100px;" alt=""/><br /><b>Arul Sharma</b></a><br /></td>
-    <td align="center"><a href="https://github.com/Harris-A-Khan"><img src="https://avatars.githubusercontent.com/Harris-A-Khan" width="100px;" alt=""/><br /><b>Harris Khan </b></a><br /></td>
-    <td align="center"><a href="https://github.com/Sarvesh-Somasundaram"><img src="https://avatars.githubusercontent.com/Sarvesh-Somasundaram" width="100px;" alt=""/><br /><b>Sarvesh Somasundaram</b></a><br /></td>
-
-
-   
-  </tr>
-</table>
