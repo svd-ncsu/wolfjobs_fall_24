@@ -15,7 +15,7 @@
 [![Top Language](https://img.shields.io/github/languages/top/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
 [![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/YHY-NCSU/wolfjobs_fall_24)
-[![codecov](https://codecov.io/gh/YHY-NCSU/wolfjobs_fall_24/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/YHY-NCSU/wolfjobs_fall_24)
+[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
 
 <!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
