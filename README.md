@@ -46,7 +46,7 @@
 
 # Presentation Video
 
-[![Watch the video](https://github.com/deepr41/WolfJobs/blob/master/GIFs/Video%20Thumbnail.png)](http://www.youtube.com/watch?v=kMgLUrDiYEw)
+[![Watch the video](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/thumbnail.jpg)](https://drive.google.com/drive/u/2/folders/1Ys8NtxcmsuSIcsw4gpXddhQqAyLdBx-f)
 
 # About Us
 
@@ -72,35 +72,35 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 ### Signup & Login
 
-![Signup & Login](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Student%20-%20Sign%20Up%20%26%20Login.gif)
+![Signup & Login](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/applicantsignup%26login.gif)
 
 ### Student Applies for Job
 
-![Apply for Job](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Student%20Applies%20to%20a%20Job.gif)
+![Apply for Job](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/studentloginandapply.gif)
 
 ### Application Status & Questionaire
 
-![Questionaire](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Applicant%20Filling%20answers.gif)
+![Questionaire](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/applicationstatus%26questionaire.gif)
 
 ## Manager Side
 
 ### Manager Sign Up
-![Manager Sign Up](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Sign%20Up.gif)
+![Manager Sign Up](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/managersignup.gif)
 
 ### Manager Login
-![Manager Login](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Login.gif)
+![Manager Login](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/managerlogin.gif)
 
 ### Edit Profile
-![Edit Profile](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Open%20%26%20Edit%20Profile.gif)
+![Edit Profile](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/editprofile.gif)
 
 ### Add/Close Job
-![Add/Close Job](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Add%20%26%20Close%20Job.gif)
+![Add/Close Job](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/createclosejob.gif)
 
 ### Screening
-![Screening](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Screening.gif)
+![Screening](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/screening.gif)
 
 ### Review & Accept Applications
-![Review Applications](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Manager%20-%20Grade%2C%20Review%20%26%20Accept%20Candidates.gif)
+![Review Applications](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/reviewaccept.gif)
 
 
 # Installation Instructions for Project Setup
