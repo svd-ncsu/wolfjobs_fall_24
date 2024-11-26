@@ -5,9 +5,9 @@ name: daily-build-check
 
 on:
   push:
-    branches: ["master"]
+    branches: ["v2.0"]
   pull_request:
-    branches: ["master"]
+    branches: ["v2.0"]
   schedule:
     - cron: "0 3 * * *"
 
