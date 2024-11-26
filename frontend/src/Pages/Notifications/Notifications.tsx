@@ -103,7 +103,7 @@ const Notifications = () => {
         onClick={toggleDarkMode} 
         style={{ 
           position: "absolute",
-          top: "10px", // Lowered position
+          top: "-120px", // Lowered position
           right: "-300px", 
           padding: "10px 15px", 
           borderRadius: "5px", 

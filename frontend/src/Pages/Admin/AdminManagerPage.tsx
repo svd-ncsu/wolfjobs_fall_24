@@ -76,8 +76,8 @@ const AdminManagerPage = () => {
           right: "20px",
           padding: "10px 15px",
           borderRadius: "5px",
-          backgroundColor: isDarkMode ? "#4CAF50" : "#FFEB3B",
-          color: isDarkMode ? "#FFFFFF" : "#000000",
+          backgroundColor: isDarkMode ? "#1E90FF" : "#FFFFA0", // Gold for light mode, blue for dark mode
+          color: isDarkMode ? "#333" : "#fff",
           border: "none",
           cursor: "pointer",
         }}
