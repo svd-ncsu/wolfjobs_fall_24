@@ -15,7 +15,8 @@ type FormValues = {
 };
 
 const JobDetail = (props: any) => {
-  const { jobData }: { jobData: Job } = props;
+  const { jobData, isDarkMode }: { jobData: Job; isDarkMode: boolean } = props;
+  console.log("isDarkMode:", isDarkMode);
 
   const jobType = jobData.type === "part-time" ? "Part Time" : "Full Time";
   const applicationList: Application[] = useApplicationStore(
@@ -130,23 +131,27 @@ const JobDetail = (props: any) => {
     <div
       className="w-full max-w-4xl mx-auto p-6 bg-white rounded-lg shadow-lg"
       style={{
+        marginTop: "80px",
         fontFamily: "'Poppins', sans-serif",
-        backgroundImage: 'url("/images/jd.svg")',
+        backgroundImage: isDarkMode ? "url('/images/dashboardd.png')" : 'url("/images/jd.svg")',
         backgroundSize: 'cover',
         backgroundPosition: 'center',
+        backgroundColor: isDarkMode ? "#000" : "#FFF",
       }}
     >
       {/* Job Details Section */}
       <div className="mb-8">
-        <h2 className="text-3xl font-extrabold text-blue-700 mb-4">
+        <h2 className="text-3xl font-extrabold text-blue-700 mb-4"
+          style={{color: isDarkMode ? "#E2B127" : "#1D4ED8"}}
+        >
           Job Details
         </h2>
         <div className="grid grid-cols-2 gap-4">
           <div>
-            <div className="text-xl font-semibold">
-              Role: <span className="font-normal">{jobData.name}</span>
+            <div className="text-xl font-semibold" style={{color: isDarkMode ? "#FFF" : "#000"}}>
+              Role: <span className="font-normal" >{jobData.name}</span>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-semibold" style={{color: isDarkMode ? "#FFF" : "#000"}}>
               Job Status:{" "}
               <span
                 className={`font-normal ${
@@ -158,18 +163,18 @@ const JobDetail = (props: any) => {
                 {jobData.status}
               </span>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-semibold" style={{color: isDarkMode ? "#FFF" : "#000"}}>
               Type: <span className="font-normal">{jobType}</span>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-semibold" style={{color: isDarkMode ? "#FFF" : "#000"}}>
               Location: <span className="font-normal">{jobData.location}</span>
             </div>
-            <div className="text-xl font-semibold">
+            <div className="text-xl font-semibold" style={{color: isDarkMode ? "#FFF" : "#000"}}>
               Required Skills:{" "}
               <span className="font-normal">{jobData.requiredSkills}</span>
             </div>
             {userRole === "Applicant" && (
-              <div className="text-xl font-semibold mt-4">
+              <div className="text-xl font-semibold mt-4" style={{color: isDarkMode ? "#FFF" : "#000"}}>
                 Application Status:{" "}
                 <span className="font-normal">
                   {application?.status
@@ -180,7 +185,9 @@ const JobDetail = (props: any) => {
               </div>
             )}
           </div>
-          <div className="text-right text-4xl font-extrabold text-blue-700">
+          <div className="text-right text-4xl font-extrabold text-blue-700"
+          style={{color: isDarkMode ? "#E2B127" : "#1D4ED8"}}
+          >
             {jobData.pay}$/hr
           </div>
         </div>
@@ -188,10 +195,13 @@ const JobDetail = (props: any) => {
 
       {/* Description Section */}
       <div className="mb-8">
-        <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
+        <h2 className="text-2xl font-extrabold text-blue-700 mb-4"
+          style={{color: isDarkMode ? "#E2B127" : "#1D4ED8"}}
+          >
           Description
         </h2>
-        <p className="text-gray-700 text-lg">{jobData.description}</p>
+        <p className="text-gray-700 text-lg" style={{color: isDarkMode ? "#C8BEAE" : "#374151"}}
+        >{jobData.description}</p>
       </div>
 
       {/* Application and Questionnaire Section */}
@@ -199,7 +209,9 @@ const JobDetail = (props: any) => {
         <div>
           {showQuestionnaire && (
             <div className="mb-8">
-              <h2 className="text-2xl font-extrabold text-blue-700 mb-4">
+              <h2 className="text-2xl font-extrabold text-blue-700 mb-4"
+              style={{color: isDarkMode ? "#E2B127" : "#1D4ED8"}}
+              >
                 Fill Questionnaire
               </h2>
               <form onSubmit={handleSubmit(handleAnswerQuestionnaire)} noValidate>
@@ -232,8 +244,8 @@ const JobDetail = (props: any) => {
                     type="submit"
                     variant="contained"
                     style={{
-                      backgroundColor: "#1E90FF",
-                      color: "#FFF",
+                      backgroundColor: isDarkMode ? "#E16F00" : "#1E90FF",
+                      color: isDarkMode ? "#000" : "#FFF",
                       borderRadius: "8px",
                       textTransform: "none",
                     }}
@@ -250,8 +262,8 @@ const JobDetail = (props: any) => {
               onClick={handleApplyJob}
               variant="contained"
               style={{
-                backgroundColor: "#1E90FF",
-                color: "#FFF",
+                backgroundColor: isDarkMode ? "#E16F00" : "#1E90FF",
+                color: isDarkMode ? "#000" : "#FFF",
                 borderRadius: "8px",
                 textTransform: "none",
                 fontSize: "16px",
@@ -267,7 +279,7 @@ const JobDetail = (props: any) => {
       {/* Manager View */}
       {role === "Manager" && userId === jobData.managerid && jobData.status === "open" && (
         <div>
-          <JobManagerView jobData={jobData} />
+          <JobManagerView isDarkMode={isDarkMode} jobData={jobData} />
         </div>
       )}
     </div>
