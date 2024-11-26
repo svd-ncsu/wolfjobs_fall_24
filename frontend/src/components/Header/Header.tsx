@@ -29,6 +29,17 @@ const Header = () => {
                 <NavBarItem link="/dashboard" text="My Applications" />
               )}
               {isLoggedIn && <NavBarItem link="/explore" text="All Jobs" />}
+              {role === "Admin" && isLoggedIn && (
+                <NavBarItem link="/AdminApplicationsPage" text="All Applications" />
+              )}
+              {role === "Admin" && isLoggedIn && (
+                <NavBarItem link="/AdminManagerPage" text="All Managers" />
+              )}
+              {isLoggedIn && (
+                <NavBarItem link="/Message" text="Chat" />
+              )}
+              
+              
             </ul>
             <NavBar />
           </div>
