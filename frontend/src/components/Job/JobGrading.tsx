@@ -4,6 +4,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
+import { sendEmailNotification } from "../../utils/emailUtils";
 
 const JobGrading = (props: any) => {
   const { jobData }: { jobData: Job } = props;
@@ -21,23 +22,44 @@ const JobGrading = (props: any) => {
     );
   }, [searchParams]);
 
-  const handleScoring = (applicationId: string, grade: string) => {
+  const handleScoring = async (applicationId: string, grade: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
-
+  
     const body = {
       applicationId: applicationId,
-      status: "rating",
-      rating: grade,
+      status: "rating", // Proceeding to the next stage
+      rating: grade, // Include the grade
     };
-
-    axios.post(url, body).then((res) => {
+  
+    try {
+      const res = await axios.post(url, body);
+  
       if (res.status === 200) {
-        toast.success("Rejected candidate");
-        location.reload();
+        toast.success(`Successfully graded the application`);
+        
+        // Optional: Notify the applicant
+        const applicant = displayList.find((item) => item._id === applicationId);
+        if (applicant) {
+          await sendEmailNotification(
+            applicant.applicantemail,
+            applicant.applicantname,
+            "Graded",
+            `Your application has been graded with a score of ${grade}. It is now under review.`
+          );
+        }
+  
+        // Refresh the list to reflect updates
+        setDisplayList((prevList) =>
+          prevList.filter((item) => item._id !== applicationId)
+        );
+  
         return;
       }
-      toast.error("Failed to reject candidate");
-    });
+      toast.error("Failed to grade the application. Please try again.");
+    } catch (error) {
+      console.error("Error grading the application:", error);
+      toast.error("An error occurred while grading the application.");
+    }
   };
 
   return (
