@@ -28,6 +28,7 @@ const Dashboard = () => {
   const updateIsLoggedIn = useUserStore((state) => state.updateIsLoggedIn);
   const updateResume = useUserStore((state) => state.updateResume);
   const updateResumeId = useUserStore((state) => state.updateResumeId);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to manage dark mode
 
   const role = useUserStore((state) => state.role);
   const managerId = useUserStore((state) => state.id);
@@ -112,20 +113,48 @@ const Dashboard = () => {
     }
   };
 
+  // Toggle Dark Mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
     <>
       <div
         data-testid="dashboard-content"
         className="content bg-white min-h-screen relative font-lato"
         style={{
-          backgroundImage: "url('./images/dashboard.svg')",
+          backgroundImage: isDarkMode ? "url('./images/dashboard_d.png')" : "url('./images/dashboard.png')",
           backgroundSize: "cover",
           backgroundPosition: "center",
+          backgroundColor: isDarkMode ? "#000" : "#FFF",
         }}
       >
+        {/* Dark Mode Toggle */}
+        <button 
+        onClick={toggleDarkMode} 
+        style={{ 
+          position: "absolute",
+          top: "10px", // Lowered position
+          right: "270px", 
+          padding: "10px 15px", 
+          borderRadius: "5px", 
+          backgroundColor: isDarkMode ? "#1E90FF" : "#FFFFA0", // Gold for light mode, blue for dark mode
+          color: isDarkMode ? "#333" : "#fff", 
+          border: "none", 
+          cursor: "pointer",
+          fontSize: "18px",
+          transition: "background-color 0.3s, color 0.3s"
+        }}
+      >
+        {isDarkMode ? "🌙" : "☀️"} {/* Sun for light mode, moon for dark mode */}
+      </button>
+
         <div className="flex flex-row h-[calc(100vh-72px)]">
           <div data-testid="job-list-container" className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-transparent px-9">
-            <div className="py-4 text-2xl font-semibold text-black-900 flex justify-between items-center">
+            <div className="py-4 text-2xl font-semibold text-black-900 flex justify-between items-center" 
+              style={{color: isDarkMode ? "#FFF" : "#000"}}
+            >
               <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
               {role === "Manager" && (
                 <Button
@@ -134,8 +163,9 @@ const Dashboard = () => {
                     navigate("/createjob");
                   }}
                   type="button"
-                  className="text-white bg-[#1E90FF] rounded-lg text-lg font-lato transition-transform hover:scale-105 hover:shadow-lg hover:bg-opacity-90"
-                  variant="contained"
+                  className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+                  // variant="contained"
+                  style={{color: "#FFF", backgroundColor: isDarkMode ? "#1E3A5F" : "#1E90FF", border: "1px solid", borderColor: isDarkMode ? "#FFF" : "#1E90FF"}}
                 >
                   Create Job +
                 </Button>
@@ -154,7 +184,7 @@ const Dashboard = () => {
               return <JobListTile data={job} key={job._id} action={action} />;
             })}
           </div>
-          <JobDetailView data-testid="job-detail-view"/>
+          <JobDetailView data-testid="job-detail-view" isDarkMode={isDarkMode}/>
         </div>
         <div className="absolute top-4 right-4 z-10 flex space-x-3">
           <Button
@@ -162,18 +192,21 @@ const Dashboard = () => {
               e.preventDefault();
               navigate("/information");
             }}
-            type="button"
-            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
-            variant="contained"
+            // type="button"
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            // variant="contained"
+            style={{color: "#FFF", backgroundColor: isDarkMode ? "#1E3A5F" : "#1E90FF", border: "1px solid", borderColor: isDarkMode ? "#FFF" : "#1E90FF"}}
+
           >
             Information
           </Button>
 
           <Button
             onClick={handleAdminAccess}
-            type="button"
-            className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
-            variant="contained"
+            // type="button"
+            className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            // variant="contained"
+            style={{color: "#FFF", backgroundColor: isDarkMode ? "#1E3A5F" : "#1E90FF", border: "1px solid", borderColor: isDarkMode ? "#FFF" : "#1E90FF"}}
           >
             Admin Only
           </Button>
