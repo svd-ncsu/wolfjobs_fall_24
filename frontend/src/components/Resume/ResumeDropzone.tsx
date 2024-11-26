@@ -40,7 +40,7 @@ const ResumeDropzone: React.FC<ResumeDropzoneProps> = ({ onFileUpload, isDarkMod
       {
         isDragActive ? 
           <p className="text-lg">{isDarkMode ? "Drop the files here ..." : "Drop the files here ..."}</p> : 
-          <p className="text-lg">{isDarkMode ? "Drop a file here or click to select one" : "Drag 'n' drop some files here, or click to select files"}</p>
+          <p className="text-lg">{isDarkMode ? "Drop a file here or click to select one" : "Drop a file here or click to select one"}</p>
       }
     </div>
   );
