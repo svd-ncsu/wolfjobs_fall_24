@@ -23,7 +23,7 @@ module.exports.createSession = async function (req, res) {
     return res.json(200, {
       message: "Sign In Successful, here is your token, please keep it safe",
       data: {
-        token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "100000" }),
+        token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "7h" }),
         user: user,
       },
       success: true,
@@ -81,7 +81,7 @@ module.exports.signUp = async function (req, res) {
             //user.JSON() part gets encrypted
 
             token: jwt.sign(user.toJSON(), "wolfjobs", {
-              expiresIn: "100000",
+              expiresIn: "7h",
             }),
             user,
           },
@@ -106,7 +106,7 @@ module.exports.signUp = async function (req, res) {
               //user.JSON() part gets encrypted
 
               token: jwt.sign(user.toJSON(), "wolfjobs", {
-                expiresIn: "100000",
+                expiresIn: "7h",
               }),
               user,
             },
@@ -138,7 +138,7 @@ module.exports.getProfile = async function (req, res) {
       data: {
         //user.JSON() part gets encrypted
 
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" }),
         user: user,
       },
       success: true,
@@ -177,7 +177,7 @@ module.exports.editProfile = async function (req, res) {
         //user.JSON() part gets encrypted
 
         // token: jwt.sign(user.toJSON(), env.jwt_secret, {
-        //   expiresIn: "100000",
+        //   expiresIn: "7h",
         // }),
         user,
       },
@@ -208,7 +208,7 @@ module.exports.searchUser = async function (req, res) {
       data: {
         //user.JSON() part gets encrypted
 
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" }),
         users: users,
       },
       success: true,
@@ -235,7 +235,7 @@ module.exports.getHistory = async function (req, res) {
       data: {
         //user.JSON() part gets encrypted
 
-        // token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
+        // token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" }),
         history: history,
       },
       success: true,
@@ -261,7 +261,7 @@ module.exports.getManagers = async function (req, res) {
       data: {
         //user.JSON() part gets encrypted
 
-        // token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
+        // token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" }),
         managers: managers,
       },
       success: true,
@@ -327,7 +327,7 @@ module.exports.createJob = async function (req, res) {
     return res.json(200, {
       data: {
         job: job,
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" })
       },
       message: "Job Created!!",
       success: true,
@@ -445,7 +445,7 @@ module.exports.createApplication = async function (req, res) {
     return res.json(200, {
       data: {
         application: application,
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" })
       },
       message: "Job Created!!",
       success: true,
@@ -509,7 +509,7 @@ module.exports.acceptApplication = async function (req, res) {
         //user.JSON() part gets encrypted
 
         // token: jwt.sign(user.toJSON(), env.jwt_secret, {
-        //   expiresIn: "100000",
+        //   expiresIn: "7h",
         // }),
         application,
       },
@@ -539,7 +539,7 @@ module.exports.rejectApplication = async function (req, res) {
         //user.JSON() part gets encrypted
 
         // token: jwt.sign(user.toJSON(), env.jwt_secret, {
-        //   expiresIn: "100000",
+        //   expiresIn: "7h",
         // }),
         application,
       },
@@ -569,7 +569,7 @@ module.exports.closeJob = async function (req, res) {
         //user.JSON() part gets encrypted
 
         // token: jwt.sign(user.toJSON(), env.jwt_secret, {
-        //   expiresIn: "100000",
+        //   expiresIn: "7h",
         // }),
         job,
       },

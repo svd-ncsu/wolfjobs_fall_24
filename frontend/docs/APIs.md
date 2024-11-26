@@ -20,7 +20,7 @@ Response: 2
 res.json(200, {
       message: "Sign In Successful, here is your token, please keep it safe",
       data: {
-        token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "100000" }),
+        token: jwt.sign(user.toJSON(), "wolfjobs", { expiresIn: "7h" }),
         user: user,
       },
       success: true,
@@ -48,7 +48,7 @@ res.json(200, {
           message: "Sign Up Successful, here is your token, plz keep it safe",
           data: {
             token: jwt.sign(user.toJSON(), "wolfjobs", {
-              expiresIn: "100000",
+              expiresIn: "7h",
             }),
             user,
           },
@@ -109,7 +109,7 @@ Response 1:
 res.json(200, {
       data: {
         job: job,
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" })
       },
       message: "Job Created!!",
       success: true,
@@ -171,7 +171,7 @@ Response 2:
 res.json(200, {
       data: {
         application: application,
-        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" })
+        //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" })
       },
       message: "Job Created!!",
       success: true,
