@@ -10,28 +10,19 @@ interface Manager {
   affiliation?: string; // Optional field
 }
 
-
 const AdminManagerPage = () => {
-
-  
-
   const [managers, setManagers] = useState<Manager[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
+  const [isDarkMode, setIsDarkMode] = useState(false); // State for dark mode
 
   useEffect(() => {
     // Fetch managers from the backend
     const fetchManagers = async () => {
       try {
-        //console.log("before ")
         const response = await axios.get("http://localhost:8000/api/v1/users/getmanagers"); // Replace with your backend URL
-        //console.log("before ")
         if (response.data.success) {
           setManagers(response.data.data.managers);
-          //console.log("data")
-          //console.log(response.data.data.managers);
-          //console.log("Managers:")
-          //console.log(managers)
         } else {
           setError("Failed to fetch managers");
         }
@@ -49,13 +40,12 @@ const AdminManagerPage = () => {
   const deleteManager = async (managerId: string) => {
     try {
       const response = await axios.post("http://localhost:8000/api/v1/users/deletemanager", {
-        managerId, // Send the manager ID in the request body
+        managerId,
       });
 
       if (response.data.success) {
-        // Update the state to remove the deleted manager
         setManagers(managers.filter((manager) => manager._id !== managerId));
-        toast.success("Succesfully Deleted Manager");
+        toast.success("Successfully Deleted Manager");
       } else {
         console.error("Failed to delete manager");
         toast.error("Failed to delete");
@@ -65,49 +55,91 @@ const AdminManagerPage = () => {
     }
   };
 
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <div className="container mx-auto p-4">
-      <h1 className="text-2xl font-bold mb-4">Managers</h1>
+    <div
+      style={{
+        backgroundColor: isDarkMode ? "#1E2A3A" : "#B0C4DE",
+        color: isDarkMode ? "#FFFFFF" : "#000000",
+        minHeight: "100vh",
+        padding: "20px",
+      }}
+    >
+      <button
+        onClick={toggleDarkMode}
+        style={{
+          position: "absolute",
+          top: "80px",
+          right: "20px",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          backgroundColor: isDarkMode ? "#4CAF50" : "#FFEB3B",
+          color: isDarkMode ? "#FFFFFF" : "#000000",
+          border: "none",
+          cursor: "pointer",
+        }}
+      >
+        {isDarkMode ? "🌙" : "☀️"}
+      </button>
+
+      <h1 className="text-2xl font-bold mb-4" style={{ textAlign: "center" }}>
+        Managers
+      </h1>
 
       {loading ? (
         <p>Loading...</p>
       ) : error ? (
-        <p className="text-red-500">{error}</p>
+        <p style={{ color: "red" }}>{error}</p>
       ) : (
-        <div className="overflow-x-auto mx-4 lg:mx-8">
-
-        <table className="min-w-full bg-white border">
-          <thead>
-            <tr>
-            <th className="border px-4 py-2">S.No</th>
-              <th className="border px-4 py-2">Name</th>
-              <th className="border px-4 py-2">Email</th>
-              <th className="border px-4 py-2">Password</th>
-              <th className="border px-4 py-2">Affiliation</th>
-              <th className="border px-4 py-2">Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {managers.map((manager,index) => (
-              // <tr key={manager._id}>
+        <div style={{ overflowX: "auto", margin: "20px auto" }}>
+          <table
+            style={{
+              width: "100%",
+              backgroundColor: isDarkMode ? "#2A2A2A" : "#FFFFFF",
+              color: isDarkMode ? "#FFFFFF" : "#000000",
+              borderCollapse: "collapse",
+            }}
+          >
+            <thead>
               <tr>
-                <td className="border px-4 py-2">{index + 1}</td>
-                <td className="border px-4 py-2">{manager.name}</td>
-                <td className="border px-4 py-2">{manager.email}</td>
-                <td className="border px-4 py-2">{manager.password}</td>
-                <td className="border px-4 py-2">{manager.affiliation}</td>
-                <td className="border px-4 py-2">
-                  <button
-                    onClick={() => deleteManager(manager._id)}
-                    className="bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
-                  >
-                    Delete
-                  </button>
-                </td>
+                <th style={{ border: "1px solid", padding: "8px" }}>S.No</th>
+                <th style={{ border: "1px solid", padding: "8px" }}>Name</th>
+                <th style={{ border: "1px solid", padding: "8px" }}>Email</th>
+                <th style={{ border: "1px solid", padding: "8px" }}>Password</th>
+                <th style={{ border: "1px solid", padding: "8px" }}>Affiliation</th>
+                <th style={{ border: "1px solid", padding: "8px" }}>Actions</th>
               </tr>
-            ))}
-          </tbody>
-        </table>
+            </thead>
+            <tbody>
+              {managers.map((manager, index) => (
+                <tr key={manager._id}>
+                  <td style={{ border: "1px solid", padding: "8px" }}>{index + 1}</td>
+                  <td style={{ border: "1px solid", padding: "8px" }}>{manager.name}</td>
+                  <td style={{ border: "1px solid", padding: "8px" }}>{manager.email}</td>
+                  <td style={{ border: "1px solid", padding: "8px" }}>{manager.password}</td>
+                  <td style={{ border: "1px solid", padding: "8px" }}>{manager.affiliation || "N/A"}</td>
+                  <td style={{ border: "1px solid", padding: "8px" }}>
+                    <button
+                      onClick={() => deleteManager(manager._id)}
+                      style={{
+                        backgroundColor: isDarkMode ? "#E74C3C" : "#F44336",
+                        color: "#FFFFFF",
+                        padding: "8px 12px",
+                        borderRadius: "4px",
+                        cursor: "pointer",
+                        border: "none",
+                      }}
+                    >
+                      Delete
+                    </button>
+                  </td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
         </div>
       )}
     </div>
