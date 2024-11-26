@@ -6,7 +6,7 @@ import { useSearchParams } from "react-router-dom";
 import { sendEmailNotification } from "../../utils/emailUtils";
 
 const JobRating = (props: any) => {
-  const { jobData }: { jobData: Job } = props;
+  const { jobData, isDarkMode }: { jobData: Job; isDarkMode: boolean } = props;
   const [displayList, setDisplayList] = useState<Application[]>([]);
   const [searchParams] = useSearchParams();
 
@@ -98,63 +98,85 @@ const JobRating = (props: any) => {
 
   return (
     <>
-      <div className="text-2xl font-semibold text-gray-700 dark:text-black mb-4">
+      <div
+        className={`text-2xl font-semibold mb-4 ${
+          isDarkMode ? "text-yellow-300" : "text-blue-500"
+        }`}
+      >
         Rating
       </div>
       {displayList.length === 0 && (
-        <div className="text-base text-gray-500">No candidates available for rating</div>
+        <div
+          className={`text-base ${
+            isDarkMode ? "text-gray-400" : "text-gray-500"
+          }`}
+        >
+          No candidates available for rating
+        </div>
       )}
-      {displayList.map((item: Application) => {
-        return (
-          <div key={item._id} className="p-2">
-            <div className="bg-white dark:bg-gray-800 my-2 mx-1 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
-              <div className="flex justify-between items-center">
-                <div className="flex flex-col text-gray-700 dark:text-gray-200 space-y-1">
-                  <div>
-                    <span className="font-bold">Name:</span> {item.applicantname}
-                  </div>
-                  {!!item?.phonenumber && <div>Phone: {item.phonenumber}</div>}
-                  <div>
-                    <span className="font-bold">Email:</span> {item.applicantemail}
-                  </div>
-                  {!!item?.applicantSkills && (
-                    <div>
-                      <span className="font-bold">Skills:</span> {item.applicantSkills}
-                    </div>
-                  )}
-                  <div>
-                    <span className="font-bold">Rating:</span> {item.rating || "0"}
-                  </div>
+      {displayList.map((item: Application) => (
+        <div key={item._id} className="p-2">
+          <div
+            className={`my-2 mx-1 p-4 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200 ${
+              isDarkMode ? "bg-gray-800 text-gray-200" : "bg-white text-gray-700"
+            }`}
+          >
+            <div className="flex justify-between items-center">
+              <div className="flex flex-col space-y-1">
+                <div>
+                  <span className="font-bold">Name:</span> {item.applicantname}
                 </div>
-                <div className="flex gap-2">
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleAccept(item._id, item.applicantemail, item.applicantname);
-                    }}
-                    className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors duration-200"
-                  >
-                    Accept
-                  </button>
-                  <button
-                    onClick={(e) => {
-                      e.preventDefault();
-                      handleReject(item._id, item.applicantemail, item.applicantname);
-                    }}
-                    className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors duration-200"
-                  >
-                    Reject
-                  </button>
+                {!!item?.phonenumber && (
+                  <div>
+                    <span className="font-bold">Phone:</span> {item.phonenumber}
+                  </div>
+                )}
+                <div>
+                  <span className="font-bold">Email:</span> {item.applicantemail}
                 </div>
+                {!!item?.applicantSkills && (
+                  <div>
+                    <span className="font-bold">Skills:</span> {item.applicantSkills}
+                  </div>
+                )}
+                <div>
+                  <span className="font-bold">Rating:</span> {item.rating || "0"}
+                </div>
+              </div>
+              <div className="flex gap-2">
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleAccept(item._id, item.applicantemail, item.applicantname);
+                  }}
+                  className={`px-4 py-2 rounded transition-colors duration-200 ${
+                    isDarkMode
+                      ? "bg-green-500 hover:bg-green-600 text-gray-200"
+                      : "bg-green-600 hover:bg-green-700 text-white"
+                  }`}
+                >
+                  Accept
+                </button>
+                <button
+                  onClick={(e) => {
+                    e.preventDefault();
+                    handleReject(item._id, item.applicantemail, item.applicantname);
+                  }}
+                  className={`px-4 py-2 rounded transition-colors duration-200 ${
+                    isDarkMode
+                      ? "bg-red-500 hover:bg-red-600 text-gray-200"
+                      : "bg-red-600 hover:bg-red-700 text-white"
+                  }`}
+                >
+                  Reject
+                </button>
               </div>
             </div>
           </div>
-        );
-      })}
+        </div>
+      ))}
     </>
   );
 };
 
 export default JobRating;
-
-

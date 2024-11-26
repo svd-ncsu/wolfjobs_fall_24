@@ -88,7 +88,7 @@ const InformationPage: React.FC = () => {
         onClick={toggleDarkMode} 
         style={{ 
           position: "absolute",
-          top: "60px", // Lowered position
+          top: "80px", // Lowered position
           right: "20px", 
           padding: "10px 15px", 
           borderRadius: "5px", 

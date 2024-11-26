@@ -1,18 +1,15 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { signup } from "../../deprecateded/auth";
 import { useForm } from "react-hook-form";
-import { useState } from "react";
 import {
-  Button,
-  Grid,
-  Paper,
   TextField,
   Select,
   MenuItem,
-  SelectChangeEvent,
+  Button,
   InputLabel,
   FormControl,
-  Typography,
+  Stack,
 } from "@mui/material";
 
 type FormValues = {
@@ -26,7 +23,8 @@ type FormValues = {
 const RegistrationPage = () => {
   const navigate = useNavigate();
   const [role, setRole] = useState("Applicant");
-  const [affilation, setAffiliation] = useState("nc-state-dining");
+  const [affiliation, setAffiliation] = useState("nc-state-dining");
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to manage dark mode
 
   const form = useForm<FormValues>({
     defaultValues: {
@@ -50,190 +48,308 @@ const RegistrationPage = () => {
       data.confirmPassword,
       data.name,
       role,
-      role === "Manager" ? affilation : "",
+      role === "Manager" ? affiliation : "",
       data.skills,
       navigate
     );
   };
 
+  // Toggle Dark Mode
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
+
   return (
-    <Grid
-      container
+    <div
+      data-testid="registration-background"
       style={{
-        height: "120vh",
-        backgroundImage: "url('/images/WJ4.png')", // Set your background image
+        padding: "180px",
+        minHeight: "100vh",
+        overflow: "hidden",
+        backgroundImage: isDarkMode
+          ? "url('/images/WJ10.jpg')" // Replace with a suitable dark image
+          : "url('/images/WJ4.png')", // Light mode background
         backgroundSize: "cover",
         backgroundPosition: "center",
         backgroundRepeat: "no-repeat",
+        color: isDarkMode ? "#fff" : "#333", // Text color
       }}
     >
-      <Grid item xs={12} sm={6} md={4} component={Paper} elevation={6} square>
+      {/* Dark Mode Toggle */}
+      <button
+        onClick={toggleDarkMode}
+        style={{
+          position: "absolute",
+          top: "80px",
+          right: "20px",
+          padding: "10px 15px",
+          borderRadius: "5px",
+          backgroundColor: isDarkMode ? "#1E90FF" : "#FFFFA0", // Gold for light mode, blue for dark mode
+          color: isDarkMode ? "#333" : "#fff",
+          border: "none",
+          cursor: "pointer",
+          fontSize: "18px",
+          transition: "background-color 0.3s, color 0.3s",
+        }}
+      >
+        {isDarkMode ? "🌙" : "☀️"} {/* Sun for light mode, moon for dark mode */}
+      </button>
+
+      <div className="mx-auto flex flex-col justify-center items-center h-full">
         <div
+          className="p-4 border rounded"
           style={{
-            padding: "40px 20px",
-            borderRadius: "15px",
-            backgroundColor: "rgba(255, 255, 255, 0.9)",
+            marginTop: "-160px",
+            marginBottom: "-130px",
+            backgroundColor: isDarkMode
+              ? "rgba(50, 50, 50, 0.9)" // Semi-transparent dark
+              : "rgba(255, 255, 255, 0.8)", // Semi-transparent white
             backdropFilter: "blur(10px)",
+            width: "100%",
+            maxWidth: "400px",
+            color: isDarkMode ? "#fff" : "#333", // Text color
           }}
         >
-          <Typography variant="h5" align="center" gutterBottom>
+          <div
+            className="text-xl justify-center mb-4"
+            style={{
+              color: isDarkMode ? "#FFD700" : "#1E90FF",
+            }}
+          >
             Create New Account
-          </Typography>
-
-          <Grid container spacing={2}>
-            <Grid item xs={12}>
+          </div>
+          <form onSubmit={handleSubmit(onSubmit)} noValidate>
+            <Stack spacing={2} width="100%">
+              {[
+                { label: "Name", name: "name", type: "text" },
+                { label: "Email Id", name: "email", type: "email" },
+                { label: "Password", name: "password", type: "password" },
+                {
+                  label: "Confirm Password",
+                  name: "confirmPassword",
+                  type: "password",
+                },
+                { label: "Skills", name: "skills", type: "text" },
+              ].map((field) => (
+                <TextField
+                  key={field.name}
+                  label={field.label}
+                  type={field.type}
+                  {...register(field.name as keyof FormValues, {
+                    required: `${field.label} is required`,
+                  })}
+                  error={!!errors[field.name as keyof FormValues]}
+                  helperText={errors[field.name as keyof FormValues]?.message}
+                  sx={{
+                    "& label": {
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Field label color
+                    },
+                    "& input": {
+                      color: isDarkMode ? "#fff" : "#333", // Input text color
+                    },
+                    "& fieldset": {
+                      borderColor: isDarkMode ? "#FFD700" : "#1E90FF", // Border color
+                    },
+                  }}
+                />
+              ))}
               <FormControl fullWidth>
-                <InputLabel id="role-id">Role</InputLabel>
+                <InputLabel
+                  id="role-id"
+                  sx={{
+                    color: isDarkMode ? "#FFD700" : "#1E90FF", // Adjust color of the label
+                  }}
+                >
+                  Role
+                </InputLabel>
                 <Select
                   value={role}
                   labelId="role-id"
                   label="Role"
                   id="role"
-                  onChange={(e: SelectChangeEvent) => {
-                    setRole(e.target.value);
+                  onChange={(e) => setRole(e.target.value)}
+                  sx={{
+                    color: isDarkMode ? "#FFD700" : "#1E90FF", // Color of selected value
+                    backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.8)" : "rgba(255, 255, 255, 0.8)", // Background color of select area
+                    "& .MuiSelect-select": {
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Color of the displayed selected value
+                      backgroundColor: "transparent", // Make sure the background doesn't get overwritten
+                    },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: isDarkMode ? "#FFD700" : "#1E90FF", // Border color for normal state
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: isDarkMode ? "#FFD700" : "#1E90FF", // Border color on hover
+                    },
+                  }}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)", // Background color of dropdown menu
+                        color: isDarkMode ? "#FFD700" : "#1E90FF", // Text color of the menu items
+                      },
+                    },
                   }}
                 >
-                  <MenuItem value={"Manager"}>Manager</MenuItem>
-                  <MenuItem value={"Applicant"}>Applicant</MenuItem>
-                  <MenuItem value={"Admin"}>Admin</MenuItem> {/* Added Admin */}
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {/* Affiliation dropdown, only for Managers */}
-            {role === "Manager" && (
-              <Grid item xs={12}>
-                <FormControl fullWidth>
-                  <InputLabel id="affiliation-id">Affiliation</InputLabel>
-                  <Select
-                    value={affilation}
-                    labelId="affiliation-id"
-                    label="Affiliation"
-                    id="affiliation"
-                    onChange={(e: SelectChangeEvent) => {
-                      setAffiliation(e.target.value);
+                  <MenuItem
+                    value="Manager"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff", // Background of menu item
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Text color of menu item
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0", // Hover effect for menu items
+                      },
                     }}
                   >
-                    <MenuItem value={"nc-state-dining"}>NC State Dining</MenuItem>
-                    <MenuItem value={"campus-enterprises"}>Campus Enterprises</MenuItem>
-                    <MenuItem value={"wolfpack-outfitters"}>Wolfpack Outfitters</MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-            )}
+                    Manager
+                  </MenuItem>
+                  <MenuItem
+                    value="Applicant"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff", // Background of menu item
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Text color of menu item
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0", // Hover effect for menu items
+                      },
+                    }}
+                  >
+                    Applicant
+                  </MenuItem>
+                  <MenuItem
+                    value="Admin"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff", // Background of menu item
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Text color of menu item
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0", // Hover effect for menu items
+                      },
+                    }}
+                  >
+                    Admin
+                  </MenuItem>
+                </Select>
+              </FormControl>
 
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Name"
-                type="text"
-                {...register("name", {
-                  required: "Name is required",
-                })}
-                error={!!errors.name}
-                helperText={errors.name?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Email Id"
-                type="email"
-                {...register("email", {
-                  required: "Email is required",
-                  pattern: {
-                    value: /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/,
-                    message: "Enter a valid email",
-                  },
-                })}
-                error={!!errors.email}
-                helperText={errors.email?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Password"
-                type="password"
-                {...register("password", {
-                  required: "Password is required",
-                })}
-                error={!!errors.password}
-                helperText={errors.password?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Confirm password"
-                type="password"
-                {...register("confirmPassword", {
-                  required: "Password is required",
-                  validate: (val: string) => {
-                    if (watch("password") !== val) {
-                      return "Passwords don't match";
-                    }
-                  },
-                })}
-                error={!!errors.confirmPassword}
-                helperText={errors.confirmPassword?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
-              <TextField
-                fullWidth
-                label="Skills"
-                type="text"
-                {...register("skills", {
-                  required: "Skills are required",
-                })}
-                error={!!errors.skills}
-                helperText={errors.skills?.message}
-              />
-            </Grid>
-            <Grid item xs={12}>
+              {role === "Manager" && (
+                <FormControl fullWidth>
+                <InputLabel
+                  id="affiliation-id"
+                  sx={{
+                    color: isDarkMode ? "#FFD700" : "#1E90FF",
+                  }}
+                >
+                  Affiliation
+                </InputLabel>
+                <Select
+                  value={affiliation}
+                  labelId="affiliation-id"
+                  label="Affiliation"
+                  id="affiliation"
+                  onChange={(e) => setAffiliation(e.target.value)}
+                  sx={{
+                    color: isDarkMode ? "#FFD700" : "#1E90FF", // Selected value color
+                    backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.8)" : "rgba(255, 255, 255, 0.8)", // Selected area background
+                    "& .MuiSelect-select": {
+                      color: isDarkMode ? "#FFD700" : "#1E90FF", // Override displayed value color
+                      backgroundColor: "transparent", // Ensure no overlap with other styles
+                    },
+                    "& .MuiOutlinedInput-notchedOutline": {
+                      borderColor: isDarkMode ? "#FFD700" : "#1E90FF",
+                    },
+                    "&:hover .MuiOutlinedInput-notchedOutline": {
+                      borderColor: isDarkMode ? "#FFD700" : "#1E90FF",
+                    },
+                  }}
+                  MenuProps={{
+                    PaperProps: {
+                      style: {
+                        backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "rgba(255, 255, 255, 0.9)",
+                        color: isDarkMode ? "#FFD700" : "#1E90FF",
+                      },
+                    },
+                  }}
+                >
+                  <MenuItem
+                    value="nc-state-dining"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff",
+                      color: isDarkMode ? "#FFD700" : "#1E90FF",
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
+                      },
+                    }}
+                  >
+                    NC State Dining
+                  </MenuItem>
+                  <MenuItem
+                    value="campus-enterprises"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff",
+                      color: isDarkMode ? "#FFD700" : "#1E90FF",
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
+                      },
+                    }}
+                  >
+                    Campus Enterprises
+                  </MenuItem>
+                  <MenuItem
+                    value="wolfpack-outfitters"
+                    sx={{
+                      backgroundColor: isDarkMode ? "rgba(50, 50, 50, 0.9)" : "#fff",
+                      color: isDarkMode ? "#FFD700" : "#1E90FF",
+                      "&:hover": {
+                        backgroundColor: isDarkMode ? "#333" : "#e0e0e0",
+                      },
+                    }}
+                  >
+                    Wolfpack Outfitters
+                  </MenuItem>
+                </Select>
+              </FormControl>
+              
+              )}
+
               <Button
                 type="submit"
                 variant="contained"
-                color="primary"
-                fullWidth
                 style={{
-                  background: "#1E90FF",
+                  background: isDarkMode ? "#FFD700" : "#1E90FF",
+                  color: isDarkMode ? "#333" : "#fff",
                   borderRadius: "10px",
                   textTransform: "none",
                   fontSize: "16px",
                 }}
-                onClick={handleSubmit(onSubmit)} // Submit when button is clicked
               >
-                Sign up
+                Sign Up
               </Button>
-            </Grid>
-          </Grid>
-
-          <div style={{ textAlign: "center", margin: "20px 0" }}>
-            <hr style={{ borderColor: "#CCCCCC" }} />
-            <Typography variant="body2" color="#AAAAAA">
+            </Stack>
+          </form>
+          <div className="flex justify-center">
+            <p
+              className="mt-3"
+              style={{
+                color: isDarkMode ? "#FFD700" : "#1E90FF",
+              }}
+            >
               OR
-            </Typography>
-            <hr style={{ borderColor: "#CCCCCC" }} />
+            </p>
           </div>
-          <Typography
-            variant="body2"
-            color="#656565"
-            align="center"
+          <br />
+          <p
+            className="text-center cursor-pointer"
+            style={{
+              color: isDarkMode ? "#FFD700" : "#1E90FF",
+            }}
             onClick={() => {
               navigate("/login");
             }}
-            style={{
-              cursor: "pointer",
-              textDecoration: "underline",
-            }}
           >
-            Already have an Account? Login Here
-          </Typography>
+            Already have an account? Login here
+          </p>
         </div>
-      </Grid>
-    </Grid>
+      </div>
+    </div>
   );
 };
 

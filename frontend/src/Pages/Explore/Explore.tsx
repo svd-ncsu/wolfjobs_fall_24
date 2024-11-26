@@ -40,6 +40,7 @@ const Explore = () => {
   const [sortAlphabeticallyByCity, setSortAlphabeticallyByCity] = useState(false);
   const [employmentType, setEmploymentType] = useState<"full-time" | "part-time" | "both">("both");
   const [showOpenJobs, setShowOpenJobs] = useState(true);
+  const [isDarkMode, setIsDarkMode] = useState(false); // State to manage dark mode
   
   const handleSearchChange = (event: any) => {
     setSearchTerm(event.target.value);
@@ -157,14 +158,40 @@ const Explore = () => {
       inputElement.style.setProperty("color", "#000000"); // Change text color to black
       inputElement.style.setProperty("--placeholder-color", "#000000"); // Change placeholder color to black
     }
-  }, []);  
+  }, []);
+  
+  const toggleDarkMode = () => {
+    setIsDarkMode((prevMode) => !prevMode);
+  };
 
   return (
     <div
       data-testid="explore-content" 
       className="content bg-slate-50 bg-cover bg-center"
-      style={{ backgroundImage: "url('./images/dashboard.svg')" }} // Set the background image
+      style={{ backgroundImage: isDarkMode? "url('./images/dashboard_d.png')" : "url('./images/dashboard.svg')", 
+        backgroundColor: isDarkMode ? "#000" : "",
+      }} // Set the background image
     >
+      {/* Dark Mode Toggle */}
+      <button 
+        onClick={toggleDarkMode} 
+        style={{ 
+          position: "absolute",
+          top: "80px", // Lowered position
+          right: "20px", 
+          padding: "10px 15px", 
+          borderRadius: "5px", 
+          backgroundColor: isDarkMode ? "#1E90FF" : "#FFFFA0", // Gold for light mode, blue for dark mode
+          color: isDarkMode ? "#333" : "#fff", 
+          border: "none", 
+          cursor: "pointer",
+          fontSize: "18px",
+          transition: "background-color 0.3s, color 0.3s"
+        }}
+      >
+        {isDarkMode ? "🌙" : "☀️"} {/* Sun for light mode, moon for dark mode */}
+      </button>
+
       <div className="flex flex-col items-center">
         <div className="p-4 search-bar-container flex justify-center">
           <input
@@ -174,8 +201,9 @@ const Explore = () => {
             onChange={handleSearchChange}
             className="p-3 w-full rounded-lg border-2 border-blue-500 bg-white shadow-md outline-none transition duration-200 ease-in-out transform hover:scale-105 focus:scale-105 focus:border-blue-700 focus:ring-2 focus:ring-blue-300"
             style={{
-              backgroundColor: "#d3ebfb", // Light blue background
+              backgroundColor: isDarkMode ? "#1E3A5F" : "#d3ebfb", // Light blue background
               textAlign: "center", // Center align the text
+              borderColor: isDarkMode ? "#2563EB" : "#3B82F6",
             }}
           />
         </div>
@@ -183,12 +211,15 @@ const Explore = () => {
           <button
             onClick={handleSortChange}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            style = {{backgroundColor: isDarkMode ? "#1E3A5F" : "#3B82F6"}}
           >
             {sortHighestPay ? "Sort by High Pay : On" : "Sort by Highest Pay : Off"}
           </button>
           <button
             onClick={handleSortCityChange}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            style = {{backgroundColor: isDarkMode ? "#1E3A5F" : "#3B82F6"}}
+
           >
             {sortAlphabeticallyByCity ? "Sort by Location : On" : "Sort by Location : Off"}
           </button>
@@ -196,6 +227,8 @@ const Explore = () => {
             name="show-full-time-jobs"
             onClick={() => handleEmploymentTypeChange("full-time")}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            style = {{backgroundColor: isDarkMode ? "#1E3A5F" : "#3B82F6"}}
+
           >
             {employmentType === "full-time" ? "Show Full-Time Jobs : On" : "Show Full-Time Jobs : Off"}
           </button>
@@ -203,12 +236,16 @@ const Explore = () => {
             name="show-part-time-jobs"
             onClick={() => handleEmploymentTypeChange("part-time")}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            style = {{backgroundColor: isDarkMode ? "#1E3A5F" : "#3B82F6"}}
+
           >
             {employmentType === "part-time" ? "Show Part-Time Jobs : On" : "Show Part-Time Jobs : Off"}
           </button>
           <button
             onClick={toggleJobStatus}
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
+            style = {{backgroundColor: isDarkMode ? "#1E3A5F" : "#3B82F6"}}
+
           >
             {showOpenJobs ? "Show Closed Jobs" : "Show Open Jobs"}
           </button>
@@ -216,7 +253,7 @@ const Explore = () => {
       </div>
       <div className="flex flex-row" style={{ height: "calc(100vh - 72px)" }}>
         <JobsListView jobsList={filteredJobList} />
-        <JobDetailView />
+        <JobDetailView isDarkMode={isDarkMode}/>
       </div>
     </div>
   );
