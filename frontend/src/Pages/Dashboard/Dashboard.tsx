@@ -136,7 +136,7 @@ const Dashboard = () => {
         style={{ 
           position: "absolute",
           top: "10px", // Lowered position
-          right: "270px", 
+          right: "150px", 
           padding: "10px 15px", 
           borderRadius: "5px", 
           backgroundColor: isDarkMode ? "#1E90FF" : "#FFFFA0", // Gold for light mode, blue for dark mode
