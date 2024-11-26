@@ -1,27 +1,23 @@
 ![Banner](https://github.com/deepr41/WolfJobs/blob/GIF-Update/GIFs/Banner.png)
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![npm-build](https://github.com/YHY-NCSU/wolfjobs_fall_24/actions/workflows/build-checker.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-checker.yml)
-[![npm-build](https://github.com/YHY-NCSU/wolfjobs_fall_24/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/deepr41/WolfJobs/actions/workflows/build-test-upload.yml)
-[![PEP8](https://img.shields.io/badge/code%20style-pep8-orange.svg)](https://www.python.org/dev/peps/pep-0008/)
-[![Issues](https://img.shields.io/github/issues/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-[![Issues Closed](https://img.shields.io/github/issues-closed/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-![last commit](https://img.shields.io/github/last-commit/YHY-NCSU/wolfjobs_fall_24)
-![Lines of code](https://tokei.rs/b1/github/YHY-NCSU/wolfjobs_fall_24)
-[![Repo-size](https://img.shields.io/github/repo-size/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-[![file_count](https://img.shields.io/github/directory-file-count/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-[![language_count](https://img.shields.io/github/languages/count/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-[![Downloads](https://img.shields.io/github/downloads/YHY-NCSU/wolfjobs_fall_24/total)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
-[![Top Language](https://img.shields.io/github/languages/top/YHY-NCSU/wolfjobs_fall_24)](https://GitHub.com/YHY-NCSU/wolfjobs_fall_24/)
+[![License: MIT](https://img.shields.io/github/license/svd-ncsu/wolfjobs_fall_24.svg)](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/main/LICENSE)
+[![npm-build](https://github.com/svd-ncsu/wolfjobs_fall_24/actions/workflows/build-checker.yml/badge.svg)](https://github.com/svd-ncsu/wolfjobs_fall_24/actions/workflows/build-checker.yml)
+[![npm-build](https://github.com/svd-ncsu/wolfjobs_fall_24/actions/workflows/build-test-upload.yml/badge.svg)](https://github.com/svd-ncsu/wolfjobs_fall_24/actions/workflows/build-test-upload.yml)
+[![Issues](https://img.shields.io/github/issues/svd-ncsu/wolfjobs_fall_24)](https://github.com/svd-ncsu/wolfjobs_fall_24/)
+[![Issues Closed](https://img.shields.io/github/issues-closed/svd-ncsu/wolfjobs_fall_24)](https://github.com/svd-ncsu/wolfjobs_fall_24/)
+![last commit](https://img.shields.io/github/last-commit/svd-ncsu/wolfjobs_fall_24)
+![Lines of code](https://tokei.rs/b1/github/svd-ncsu/wolfjobs_fall_24)
+[![Repo-size](https://img.shields.io/github/repo-size/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
+[![file_count](https://img.shields.io/github/directory-file-count/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
+[![language_count](https://img.shields.io/github/languages/count/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
+[![Downloads](https://img.shields.io/github/downloads/svd-ncsu/wolfjobs_fall_24/total)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
+[![Top Language](https://img.shields.io/github/languages/top/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
 [![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
-[![Release](https://img.shields.io/github/v/release/deepr41/wolfjobs)](https://gitHub.com/YHY-NCSU/wolfjobs_fall_24)
+[![Release](https://img.shields.io/github/v/release/svd-ncsu/wolfjobs_fall_24)](https://gitHub.com/svd-ncsu/wolfjobs_fall_24)
 [![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
 
-<!-- ![Static Badge](https://img.shields.io/badge/any_text-i_like-blue) -->
 
 # Tech Stack:
-
-<!-- - ![Redux](https://img.shields.io/badge/redux-%23593d88.svg?style=for-the-badge&logo=redux&logoColor=white) -->
 
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![NodeJS](https://img.shields.io/badge/node.js-6DA55F?style=for-the-badge&logo=node.js&logoColor=white)
@@ -29,9 +25,9 @@
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![RestAPI](https://img.shields.io/badge/RestAPI-005571?style=for-the-badge&logo=restapi)
 
-# What's New:
+# What's New (v2.0):
 
- - **Automated Email Notifications: Instant updates keep applicants informed of every status change in their application journey.**
+ - Automated Email Notifications: Instant updates keep applicants informed of every status change in their application journey.
  - Branding, Colours and Typography
  - Components & States
  - Mutliple UI Screens _flows_ for Student & Manager Roles
@@ -41,12 +37,12 @@
  - Job Match Percentage: Applicants can now see a "match percentage" that shows how well their skills align with job requirements.
  - Visual and UI Enhancements: High-quality images and an intuitive, interactive design make the platform more engaging, professional, and user-friendly.
  - New functionalities or added to sort jobs in Explore page. 
-- University Admin Role: A new University Admin user type enables structured oversight and management of both students and hiring managers.
+ - University Admin Role: A new University Admin user type enables structured oversight and management of both students and hiring managers.
 
 
 # Presentation Video
 
-[![Watch the video](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/thumbnail.jpg)](https://drive.google.com/drive/u/2/folders/1Ys8NtxcmsuSIcsw4gpXddhQqAyLdBx-f)
+[![Watch the video](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/thumbnail.jpg)](https://drive.google.com/drive/folders/10ILYTGbCqnXAp8TGnAjq2FEeVyUuTugu?usp=sharing)
 
 # About Us
 
@@ -72,35 +68,35 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 ### Signup & Login
 
-![Signup & Login](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/applicantsignup%26login.gif)
+![Signup & Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/applicantsignup%26login.gif)
 
 ### Student Applies for Job
 
-![Apply for Job](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/studentloginandapply.gif)
+![Apply for Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/studentloginandapply.gif)
 
 ### Application Status & Questionaire
 
-![Questionaire](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/applicationstatus%26questionaire.gif)
+![Questionaire](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/applicationstatus%26questionaire.gif)
 
 ## Manager Side
 
 ### Manager Sign Up
-![Manager Sign Up](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/managersignup.gif)
+![Manager Sign Up](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/managersignup.gif)
 
 ### Manager Login
-![Manager Login](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/managerlogin.gif)
+![Manager Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/managerlogin.gif)
 
 ### Edit Profile
-![Edit Profile](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/editprofile.gif)
+![Edit Profile](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/editprofile.gif)
 
 ### Add/Close Job
-![Add/Close Job](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/createclosejob.gif)
+![Add/Close Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/createclosejob.gif)
 
 ### Screening
-![Screening](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/screening.gif)
+![Screening](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/screening.gif)
 
 ### Review & Accept Applications
-![Review Applications](https://github.com/YHY-NCSU/wolfjobs_fall_24/blob/feature/GIFs/reviewaccept.gif)
+![Review Applications](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/reviewaccept.gif)
 
 
 # Installation Instructions for Project Setup
@@ -111,7 +107,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 - Download and install the latest version of MongoDB from [MongoDB Official Website.](https://www.mongodb.com/try/download/community)
 - Make sure you have React version 18.0
 
-**Step 1: Clone the Repository from this [link](https://github.com/YHY-NCSU/wolfjobs_fall_24.git)**
+**Step 1: Clone the Repository from this [link](https://github.com/svd-ncsu/wolfjobs_fall_24.git)**
 
 **Step 2: Backend Setup**
 
@@ -160,7 +156,7 @@ Your app is ready to be deployed!
 
 **3. Enhanced Admin Functionality** –  Expanded features for admin users will streamline management and improve oversight capabilities.
 
-**4. UI Enhancements with Dark Mode** –  Introducing a dark mode option wherever possible and additional UI changes to enhance visual quality and user comfort..
+**4. UI Enhancements with Dark Mode** –  Introducing a dark mode option wherever possible and additional UI changes to enhance visual quality and user comfort.
 
 **5. General Messaging Page** –  A new messaging feature will promote communication among users, fostering a more interactive community.
 
@@ -169,8 +165,4 @@ Your app is ready to be deployed!
 # Acknowledgments
 We would like to express our gratitude to the original creators of this project, whose work provided a solid foundation for our development. This project builds upon their codebase, and we appreciate the efforts they invested in establishing a robust framework that we could enhance and extend.
 
-Repository Link: https://github.com/sanjitkverma/WolfJobs
-
-
-
-
+Repository Link: https://github.com/svd-ncsu/wolfjobs_fall_24
