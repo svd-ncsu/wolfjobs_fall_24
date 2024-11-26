@@ -175,7 +175,7 @@ const JobDetail = (props: any) => {
                   {application?.status
                     ? application.status.charAt(0).toUpperCase() +
                       application.status.slice(1)
-                    : "In Review"}
+                    : "Open"}
                 </span>
               </div>
             )}
