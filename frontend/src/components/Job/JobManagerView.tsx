@@ -10,6 +10,7 @@ import JobFinalReview from "./JobFinalReview";
 import { toast } from "react-toastify";
 
 const JobManagerView = (props: any) => {
+
   const { jobData }: { jobData: Job } = props;
   const role = useUserStore((state) => state.role);
   const userId = useUserStore((state) => state.id);
