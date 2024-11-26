@@ -3,6 +3,7 @@ import { useApplicationStore } from "../../store/ApplicationStore";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
+import { sendEmailNotification } from "../../utils/emailUtils";
 
 const JobRating = (props: any) => {
   const { jobData }: { jobData: Job } = props;
@@ -19,40 +20,80 @@ const JobRating = (props: any) => {
     );
   }, [searchParams, applicationList, jobData._id]);
 
-  const handleAccept = (applicantid: string) => {
+  const handleAccept = async (applicationId: string, email: string, name: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
-
+  
     const body = {
-      applicationId: applicantid,
+      applicationId: applicationId,
       status: "accepted",
     };
-
-    axios.post(url, body).then((res) => {
+  
+    try {
+      const res = await axios.post(url, body);
       if (res.status === 200) {
         toast.success("Accepted candidate");
-        setDisplayList((prevList) => prevList.filter((item) => item._id !== applicantid));
+  
+        // Send email notification
+        const emailSent = await sendEmailNotification(
+          email,
+          name,
+          `Accepted in Review`,
+          `Your application has successfully passed the Review stage!`
+        );
+  
+        if (emailSent) {
+          toast.success("Email notification sent.");
+        } else {
+          toast.error("Failed to send email notification.");
+        }
+  
+        // Remove the candidate from the list
+        setDisplayList((prevList) => prevList.filter((item) => item._id !== applicationId));
       } else {
-        toast.error("Failed to accept candidate");
+        toast.error("Failed to accept candidate.");
       }
-    });
+    } catch (error) {
+      console.error("Error accepting candidate:", error);
+      toast.error("An error occurred while accepting the candidate.");
+    }
   };
 
-  const handleReject = (applicantid: string) => {
+  const handleReject = async (applicationId: string, email: string, name: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
 
     const body = {
-      applicationId: applicantid,
+      applicationId: applicationId,
       status: "rejected",
     };
 
-    axios.post(url, body).then((res) => {
+    try {
+      const res = await axios.post(url, body);
       if (res.status === 200) {
         toast.success("Rejected candidate");
-        setDisplayList((prevList) => prevList.filter((item) => item._id !== applicantid));
+  
+        // Send email notification
+        const emailSent = await sendEmailNotification(
+          email,
+          name,
+          `Rejected in Review stage`,
+          `After careful review, your application has not been selected to proceed further.`
+        );
+  
+        if (emailSent) {
+          toast.success("Email notification sent.");
+        } else {
+          toast.error("Failed to send email notification.");
+        }
+  
+        // Remove the candidate from the list
+        setDisplayList((prevList) => prevList.filter((item) => item._id !== applicationId));
       } else {
-        toast.error("Failed to reject candidate");
+        toast.error("Failed to reject candidate.");
       }
-    });
+    } catch (error) {
+      console.error("Error rejecting candidate:", error);
+      toast.error("An error occurred while rejecting the candidate.");
+    }
   };
 
   return (
@@ -89,7 +130,7 @@ const JobRating = (props: any) => {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      handleAccept(item._id);
+                      handleAccept(item._id, item.applicantemail, item.applicantname);
                     }}
                     className="px-4 py-2 bg-green-600 text-white rounded hover:bg-green-700 transition-colors duration-200"
                   >
@@ -98,7 +139,7 @@ const JobRating = (props: any) => {
                   <button
                     onClick={(e) => {
                       e.preventDefault();
-                      handleReject(item._id);
+                      handleReject(item._id, item.applicantemail, item.applicantname);
                     }}
                     className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition-colors duration-200"
                   >
