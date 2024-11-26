@@ -7,7 +7,7 @@ import { useSearchParams } from "react-router-dom";
 import emailjs from "emailjs-com"; // Import EmailJS
 
 const JobScreening = (props: any) => {
-  const { jobData }: { jobData: Job } = props;
+  const { jobData, isDarkMode }: { jobData: Job; isDarkMode: boolean } = props;
   const [searchParams] = useSearchParams();
   const [displayList, setDisplayList] = useState<Application[]>([]);
   const applicationList = useApplicationStore((state) => state.applicationList);
@@ -29,10 +29,10 @@ const JobScreening = (props: any) => {
 
     try {
       const response = await emailjs.send(
-        "service_46pw691", // Replace with your EmailJS service ID
-        "template_rk6i5tv", // Replace with your EmailJS template ID
+        "service_sflejad", // Replace with your EmailJS service ID
+        "template_vsusodt", // Replace with your EmailJS template ID
         templateParams,
-        "HeiTyoRUqB2qPodAb" // Replace with your EmailJS user ID
+        "jrDCVvqI4peJwZ_Jd" // Replace with your EmailJS user ID
       );
       console.log("Email successfully sent!", response.status, response.text);
       return true; // Indicate success
@@ -100,18 +100,22 @@ const JobScreening = (props: any) => {
 
   return (
     <>
-      <div className="text-2xl font-semibold text-gray-700 dark:text-black mb-4">
+      <div
+        className={`text-2xl font-semibold ${isDarkMode ? 'text-yellow-300' : 'text-gray-700'} mb-4`}
+      >
         Screening
       </div>
       {displayList.length === 0 && (
-        <div className="text-base text-gray-500">List empty</div>
+        <div className={`text-base ${isDarkMode ? 'text-gray-400' : 'text-gray-500'}`}>List empty</div>
       )}
       {displayList?.map((item: Application) => (
         <div className="p-2" key={item._id}>
-          <div className="p-4 mx-1 my-2 bg-white dark:bg-gray-800 rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200">
+          <div
+            className={`p-4 mx-1 my-2 ${isDarkMode ? 'bg-gray-800' : 'bg-white'} rounded-lg shadow-md hover:shadow-lg transition-shadow duration-200`}
+          >
             <div className="flex flex-row justify-between items-center">
-              <div className="flex flex-col text-gray-700 dark:text-gray-200">
-                <div className="text-white-600 font-medium">Name: {item.applicantname}</div>
+              <div className={`flex flex-col ${isDarkMode ? 'text-gray-200' : 'text-gray-700'}`}>
+                <div className={`font-medium ${isDarkMode ? 'text-white' : 'text-gray-600'}`}>Name: {item.applicantname}</div>
                 {!!item?.phonenumber && <div>Phone: {item.phonenumber}</div>}
                 <div>Email: {item.applicantemail}</div>
                 {!!item?.applicantSkills && <div>Skills: {item.applicantSkills}</div>}
@@ -163,5 +167,3 @@ const JobScreening = (props: any) => {
 };
 
 export default JobScreening;
-
-
