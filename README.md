@@ -12,9 +12,9 @@
 [![language_count](https://img.shields.io/github/languages/count/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
 [![Downloads](https://img.shields.io/github/downloads/svd-ncsu/wolfjobs_fall_24/total)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
 [![Top Language](https://img.shields.io/github/languages/top/svd-ncsu/wolfjobs_fall_24)](https://GitHub.com/svd-ncsu/wolfjobs_fall_24/)
-[![DOI](https://zenodo.org/badge/429097663.svg)](https://zenodo.org/badge/latestdoi/429097663)
+[![DOI](https://zenodo.org/badge/891793660.svg)](https://doi.org/10.5281/zenodo.14226529)
 [![Release](https://img.shields.io/github/v/release/svd-ncsu/wolfjobs_fall_24)](https://gitHub.com/svd-ncsu/wolfjobs_fall_24)
-[![codecov](https://codecov.io/gh/deepr41/WolfJobs/graph/badge.svg?token=RH472ZM4PT)](https://codecov.io/gh/deepr41/WolfJobs)
+[![codecov](https://codecov.io/gh/svd-ncsu/wolfjobs_fall_24/graph/badge.svg?token=28FFB29XXP)](https://codecov.io/gh/svd-ncsu/wolfjobs_fall_24)
 
 
 # Tech Stack:
