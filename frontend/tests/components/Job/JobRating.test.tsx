@@ -1,5 +1,5 @@
-import { render, screen } from "@testing-library/react";
-import React from "react";
+import { render } from "@testing-library/react";
+ 
 import JobRating from "../../../src/components/Job/JobRating";
 import { MemoryRouter } from "react-router";
 

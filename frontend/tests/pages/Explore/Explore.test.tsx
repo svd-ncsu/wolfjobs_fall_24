@@ -1,5 +1,5 @@
 import { render, screen, fireEvent } from "@testing-library/react";
-import React from "react";
+ 
 import Explore from "../../../src/Pages/Explore/Explore";
 import { MemoryRouter } from "react-router";
 import { expect } from 'chai';

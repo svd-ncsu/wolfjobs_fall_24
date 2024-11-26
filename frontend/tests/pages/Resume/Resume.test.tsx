@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import React from "react";
+ 
 import Resume from "../../../src/Pages/Resume/Resume";
 import { expect } from 'chai';
 

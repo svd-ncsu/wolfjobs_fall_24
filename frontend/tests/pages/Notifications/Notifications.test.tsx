@@ -1,5 +1,5 @@
 import { render, screen } from "@testing-library/react";
-import React from "react";
+ 
 import Notifications from "../../../src/Pages/Notifications/Notifications";
 import { MemoryRouter } from "react-router";
 import { expect } from 'chai';
