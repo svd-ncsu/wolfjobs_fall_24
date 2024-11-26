@@ -29,7 +29,7 @@ type FormValues = {
   hours: string;
 };
 
-const ProfileEdit = ({ props }: { props: any }) => {
+const ProfileEdit = ({ props, isDarkMode }: { props: any; isDarkMode: boolean }) => {
   const {
     name,
     email,
@@ -91,175 +91,239 @@ const ProfileEdit = ({ props }: { props: any }) => {
       login(email, password, navigate);
     });
   };
-
+  
   return (
     <div className="my-1">
-      <form onSubmit={handleSubmit(handleSaveProfile)} noValidate>
-        <Stack direction="row" spacing={2} width={"100%"}> {/* Set horizontal direction */}
-          <Stack spacing={1} width={"50%"}> {/* Left half of the form */}
-            <TextField
-              label="Name"
-              type="text"
-              {...register("name", { required: "Name is required" })}
-              error={!!errors.name}
-              helperText={errors.name?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-            />
-            <TextField
-              label="Email"
-              type="email"
-              {...register("email", { required: "Email is required" })}
-              error={!!errors.email}
-              helperText={errors.email?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-              disabled
-              value={email}
-            />
-            <TextField
-              label="Role"
-              type="text"
-              {...register("role", { required: "Role is required" })}
-              error={!!errors.role}
-              helperText={errors.role?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-              disabled
-              value={role}
-            />
-            <TextField
-              label="Address"
-              type="text"
-              {...register("address")}
-              error={!!errors.address}
-              helperText={errors.address?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-            />
-            <TextField
-              label="Skills"
-              type="text"
-              {...register("skills")}
-              error={!!errors.skills}
-              helperText={errors.skills?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-            />
-          </Stack>
+  <form onSubmit={handleSubmit(handleSaveProfile)} noValidate>
+    <Stack direction="row" spacing={2} width={"100%"}> {/* Set horizontal direction */}
+      <Stack spacing={1} width={"50%"}> {/* Left half of the form */}
+        <TextField
+          label="Name"
+          type="text"
+          {...register("name", { required: "Name is required" })}
+          error={!!errors.name}
+          helperText={errors.name?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+        />
+        <TextField
+          label="Email"
+          type="email"
+          {...register("email", { required: "Email is required" })}
+          error={!!errors.email}
+          helperText={errors.email?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+          disabled
+          value={email}
+        />
+        <TextField
+          label="Role"
+          type="text"
+          {...register("role", { required: "Role is required" })}
+          error={!!errors.role}
+          helperText={errors.role?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+          disabled
+          value={role}
+        />
+        <TextField
+          label="Address"
+          type="text"
+          {...register("address")}
+          error={!!errors.address}
+          helperText={errors.address?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+        />
+        <TextField
+          label="Skills"
+          type="text"
+          {...register("skills")}
+          error={!!errors.skills}
+          helperText={errors.skills?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+        />
+      </Stack>
 
-          <Stack spacing={1} width={"50%"}> {/* Right half of the form */}
-            <TextField
-              label="Phone number"
-              type="text"
-              {...register("phonenumber")}
-              error={!!errors.phonenumber}
-              helperText={errors.phonenumber?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-            />
-            <FormControl>
-              <InputLabel id="available-id">Availability</InputLabel>
-              <Select
-                value={availabilityDrop}
-                labelId="available-id"
-                label="Availability"
-                id="available-id-1"
-                sx={{
-                  "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                  "& fieldset": {
-                    paddingLeft: (theme) => theme.spacing(1),
-                    borderRadius: "10px",
-                  },
-                  margin: '0',
-                }}
-                onChange={(e: SelectChangeEvent) => {
-                  setAvailabilityDtop(e.target.value);
-                }}
-              >
-                <MenuItem value={"4 Hours"}>4 Hours</MenuItem>
-                <MenuItem value={"8 Hours"}>8 Hours</MenuItem>
-                <MenuItem value={"12 Hours"}>12 Hours</MenuItem>
-                <MenuItem value={"16 Hours"}>16 Hours</MenuItem>
-                <MenuItem value={"20 Hours"}>20 Hours</MenuItem>
-              </Select>
-            </FormControl>
-            <TextField
-              label="Gender"
-              type="text"
-              {...register("gender")}
-              error={!!errors.gender}
-              helperText={errors.gender?.message}
-              sx={{
-                "& label": { paddingLeft: (theme) => theme.spacing(1) },
-                "& input": { paddingLeft: (theme) => theme.spacing(2) },
-                "& fieldset": {
-                  paddingLeft: (theme) => theme.spacing(1),
-                  borderRadius: "10px",
-                },
-                margin: '0',
-              }}
-            />
-            <Button
-              type="submit"
-              variant="contained"
-              color="primary"
-              style={{
-                background: "#1E90FF",
+      <Stack spacing={1} width={"50%"}> {/* Right half of the form */}
+        <TextField
+          label="Phone number"
+          type="text"
+          {...register("phonenumber")}
+          error={!!errors.phonenumber}
+          helperText={errors.phonenumber?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+        />
+        <FormControl>
+          <InputLabel 
+            id="available-id"
+            sx={{ color: isDarkMode ? "white" : "black" }}
+          >
+            Availability
+          </InputLabel>
+          <Select
+            value={availabilityDrop}
+            labelId="available-id"
+            label="Availability"
+            id="available-id-1"
+            sx={{
+              "& fieldset": {
                 borderRadius: "10px",
-                textTransform: "none",
-                fontSize: "16px",
-                marginTop: '8px', // Reduced top margin for button
-              }}
-            >
-              Save Profile
-            </Button>
-          </Stack>
-        </Stack>
-      </form>
-    </div>
+                borderColor: isDarkMode ? "#555" : "#ccc",
+              },
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+              color: isDarkMode ? "white" : "black",
+              margin: '0',
+            }}
+            onChange={(e: SelectChangeEvent) => {
+              setAvailabilityDtop(e.target.value);
+            }}
+          >
+            <MenuItem value={"4 Hours"}>4 Hours</MenuItem>
+            <MenuItem value={"8 Hours"}>8 Hours</MenuItem>
+            <MenuItem value={"12 Hours"}>12 Hours</MenuItem>
+            <MenuItem value={"16 Hours"}>16 Hours</MenuItem>
+            <MenuItem value={"20 Hours"}>20 Hours</MenuItem>
+          </Select>
+        </FormControl>
+        <TextField
+          label="Gender"
+          type="text"
+          {...register("gender")}
+          error={!!errors.gender}
+          helperText={errors.gender?.message}
+          sx={{
+            "& label": { 
+              paddingLeft: (theme) => theme.spacing(1), 
+              color: isDarkMode ? "white" : "black" 
+            },
+            "& input": { 
+              paddingLeft: (theme) => theme.spacing(2),
+              color: isDarkMode ? "white" : "black",
+              backgroundColor: isDarkMode ? "#333" : "#fff",
+            },
+            "& fieldset": {
+              paddingLeft: (theme) => theme.spacing(1),
+              borderRadius: "10px",
+              borderColor: isDarkMode ? "#555" : "#ccc",
+            },
+            margin: '0',
+          }}
+        />
+        <Button
+          type="submit"
+          variant="contained"
+          color="primary"
+          style={{
+            background: isDarkMode ? "#555" : "#1E90FF",
+            borderRadius: "10px",
+            textTransform: "none",
+            fontSize: "16px",
+            color: "white",
+            marginTop: '8px',
+          }}
+        >
+          Save Profile
+        </Button>
+      </Stack>
+    </Stack>
+  </form>
+</div>
+
   );
 };
 
