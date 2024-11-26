@@ -104,13 +104,13 @@ const Dashboard = () => {
   }, [role, jobList, applicationList]);
 
   // Function to handle admin-only page access
-  const handleAdminAccess = () => {
-    if (role !== "Admin") {
-      toast.error("Access Denied. Admins only!");
-    } else {
-      navigate("/admin");
-    }
-  };
+  // const handleAdminAccess = () => {
+  //   if (role !== "Admin") {
+  //     toast.error("Access Denied. Admins only!");
+  //   } else {
+  //     navigate("/admin");
+  //   }
+  // };
 
   return (
     <>
@@ -127,7 +127,7 @@ const Dashboard = () => {
           <div data-testid="job-list-container" className="w-4/12 pt-2 overflow-x-hidden overflow-y-scroll bg-transparent px-9">
             <div className="py-4 text-2xl font-semibold text-black-900 flex justify-between items-center">
               <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
-              {role === "Manager" && (
+              {(role === "Manager" || role=="Admin") && (
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
@@ -169,14 +169,14 @@ const Dashboard = () => {
             Information
           </Button>
 
-          <Button
+          {/* <Button
             onClick={handleAdminAccess}
             type="button"
             className="text-white bg-[#1E90FF] rounded-lg text-md px-5 py-2.5 shadow-md transition-transform hover:scale-105 hover:bg-opacity-90 font-lato"
             variant="contained"
           >
             Admin Only
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useApplicationStore } from "../../store/ApplicationStore";
 import JobManagerView from "./JobManagerView";
+import JobAdminView from "./JobAdminView";
 
 type FormValues = {
   answer1: string;
@@ -270,6 +271,12 @@ const JobDetail = (props: any) => {
           <JobManagerView jobData={jobData} />
         </div>
       )}
+      {role === "Admin" && jobData.status === "open" && (
+        <div>
+          <JobAdminView jobData={jobData} />
+        </div>
+      )}
+
     </div>
   );
 };

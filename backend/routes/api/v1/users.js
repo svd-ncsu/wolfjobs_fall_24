@@ -25,7 +25,16 @@ router.post("/generateOTP", usersApi.generateOtp);
 router.post("/verifyOTP", usersApi.verifyOtp);
 router.post("/rejectapplication", usersApi.rejectApplication);
 router.post("/closejob", jsonParser, usersApi.closeJob);
+router.post("/deletejob", jsonParser, usersApi.deleteJob);
 router.post("/createapplication", jsonParser, usersApi.createApplication);
+router.get("/getmanagers", jsonParser, usersApi.getManagers);
+router.post("/deletemanager", jsonParser, usersApi.deleteManager);
+router.get("/fetchapplicationsAdmin", usersApi.fetchApplicationAdmin);
+router.post("/deleteapplication", jsonParser, usersApi.deleteApplication);
+
+
+
+
 
 
 module.exports = router;

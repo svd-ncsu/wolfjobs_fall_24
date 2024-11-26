@@ -249,14 +249,69 @@ module.exports.getHistory = async function (req, res) {
   }
 };
 
+module.exports.getManagers = async function (req, res) {
+  try {
+    let managers = await User.find({ role: 'Manager' });
+    // console.log("indide backend")
+    // console.log(managers)
+    res.set("Access-Control-Allow-Origin", "*");
+    return res.json(200, {
+      message: "The Managers list",
+
+      data: {
+        //user.JSON() part gets encrypted
+
+        // token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "100000" }),
+        managers: managers,
+      },
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.json(500, {
+      message: "Internal Server Error",
+    });
+  }
+};
+
+module.exports.deleteManager = async function (req, res) {
+  try {
+    const managerId = req.body.managerId;
+    
+    // Find and delete the manager
+    const manager = await User.findByIdAndDelete(managerId);
+
+    if (!manager) {
+      return res.status(404).json({
+        success: false,
+        message: "Manager not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Manager deleted successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error deleting manager",
+    });
+  }
+        
+};
+
 module.exports.createJob = async function (req, res) {
   let user = await User.findOne({ _id: req.body.id });
   check = req.body.skills;
   try {
+    
     let job = await Job.create({
       name: req.body.name,
       managerid: user._id,
-      managerAffilication: user.affiliation,
+      managerAffilication: user.affiliation || "Admin",
       type: req.body.type,
       location: req.body.location,
       description: req.body.description,
@@ -267,6 +322,7 @@ module.exports.createJob = async function (req, res) {
       question3: req.body.question3,
       question4: req.body.question4,
     });
+    console.log(job)
     res.set("Access-Control-Allow-Origin", "*");
     return res.json(200, {
       data: {
@@ -299,7 +355,8 @@ module.exports.index = async function (req, res) {
 
 module.exports.fetchApplication = async function (req, res) {
   let application = await Application.find({}).sort("-createdAt");
-
+  console.log("fetched")
+  console.log(application)
   //Whenever we want to send back JSON data
   res.set("Access-Control-Allow-Origin", "*");
   return res.json(200, {
@@ -308,7 +365,48 @@ module.exports.fetchApplication = async function (req, res) {
     application: application,
   });
 };
+module.exports.fetchApplicationAdmin = async function (req, res) {
+  let application = await Application.find({}).sort("-createdAt");
+  // console.log("fetched")
+  // console.log(application)
+  //Whenever we want to send back JSON data
+  res.set("Access-Control-Allow-Origin", "*");
+  return res.json(200, {
+    message: "List of Applications",
+    success: true,
+    application: application,
+  });
+};
+module.exports.deleteApplication = async function (req, res) {
+  console.log("Inside");
+  try {
+    console.log(req.body)
+    const applicationId = req.body.applicationId;
+    console.log(applicationId)
+    
+    // Find and delete the manager
+    const application = await Application.findByIdAndDelete(applicationId);
 
+    if (!application) {
+      return res.status(404).json({
+        success: false,
+        message: "Application not found",
+      });
+    }
+
+    res.status(200).json({
+      success: true,
+      message: "Application deleted successfully",
+    });
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({
+      success: false,
+      message: "Error deleting application",
+    });
+  }
+        
+};
 module.exports.createApplication = async function (req, res) {
   // let user = await User.findOne({ _id: req.body.id });
   // check = req.body.skills;
@@ -485,6 +583,37 @@ module.exports.closeJob = async function (req, res) {
     });
   }
 };
+
+module.exports.deleteJob = async function (req, res) {
+  try {
+    // Find and delete the job with the given ID
+    const job = await Job.findByIdAndDelete(req.body.jobid);
+    console.log(job)
+
+    if (!job) {
+      return res.status(404).json({
+        message: "Job not found",
+        success: false,
+      });
+    }
+
+    res.set("Access-Control-Allow-Origin", "*");
+    return res.status(200).json({
+      message: "Job deleted successfully",
+      data: {
+        job, // Optionally return the deleted job details
+      },
+      success: true,
+    });
+  } catch (err) {
+    console.log(err);
+
+    return res.status(500).json({
+      message: "Internal Server Error",
+    });
+  }
+};
+
 
 function getTransport() {
   return nodemailer.createTransport({

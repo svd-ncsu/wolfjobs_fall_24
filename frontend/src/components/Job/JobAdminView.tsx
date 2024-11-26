@@ -9,11 +9,10 @@ import JobRating from "./JobRating";
 import JobFinalReview from "./JobFinalReview";
 import { toast } from "react-toastify";
 
-const JobManagerView = (props: any) => {
-
+const JobAdminView = (props: any) => {
   const { jobData }: { jobData: Job } = props;
   const role = useUserStore((state) => state.role);
-  const userId = useUserStore((state) => state.id);
+  //const userId = useUserStore((state) => state.id);
 
   const [searchParams, setSearchParams] = useSearchParams();
   const [viewManager, setViewManager] = useState("job-screening");
@@ -43,12 +42,32 @@ const JobManagerView = (props: any) => {
       });
   };
 
+  const handleDeleteJob = (e: any) => {
+    e.preventDefault();
+    console.log("Delete job");
+
+    const body = {
+      jobid: jobData._id,
+    };
+
+    axios
+      .post("http://localhost:8000/api/v1/users/deletejob", body)
+      .then((res) => {
+        if (res.status !== 200) {
+          toast.error("Failed to delete");
+          return;
+        }
+        toast.success("Job deleted");
+        location.reload();
+      });
+  };
+
   return (
     <>
-      {role === "Manager" &&
-        userId === jobData.managerid &&
-        jobData.status === "open" && (
-          <div className="m-4">
+      {role === "Admin" && (
+        <div className="m-4" >
+          <div className="m-4" style={{ display: "flex", gap: "10px" }}>
+          {jobData.status === "open" && (
             <div className="mx-2">
               <Button
                 onClick={handleCloseJob}
@@ -57,7 +76,6 @@ const JobManagerView = (props: any) => {
                 style={{
                   color: "#1E90FF",
                   borderColor: "#1E90FF",
-                  // borderRadius: "10px",
                   textTransform: "none",
                   fontSize: "16px",
                   minWidth: "200px",
@@ -67,11 +85,34 @@ const JobManagerView = (props: any) => {
                 Close job
               </Button>
             </div>
+          )}
+          <div className="mx-2">
+            <Button
+              onClick={handleDeleteJob}
+              type="button"
+              variant="outlined"
+              style={{
+                color: "#1E90FF",
+                borderColor: "#1E90FF",
+                textTransform: "none",
+                fontSize: "16px",
+                minWidth: "200px",
+                margin: "10px",
+              }}
+            >
+              Delete job
+            </Button>
+          
+          </div>
+          </div>
+          {jobData.status === "open" && (
             <div className="text-2xl my-4 text-blue-800">Candidates Review</div>
+          )}
+          {jobData.status === "open" && (
             <div className="flex flex-row justify-around">
               <Button
                 onClick={() => {
-                  const jobId: string = searchParams.get("jobId")!;
+                  const jobId = searchParams.get("jobId")!;
                   setSearchParams({ jobId: jobId, view: "job-screening" });
                 }}
                 type="button"
@@ -89,12 +130,11 @@ const JobManagerView = (props: any) => {
               </Button>
               <Button
                 onClick={() => {
-                  const jobId: string = searchParams.get("jobId")!;
+                  const jobId = searchParams.get("jobId")!;
                   setSearchParams({ jobId: jobId, view: "job-grading" });
                 }}
                 type="button"
                 variant={viewManager === "job-grading" ? "contained" : "text"}
-                // style={{ maxWidth: "500px" }}
                 fullWidth={true}
                 style={{
                   borderColor: viewManager === "job-grading" ? "" : "#FF5353",
@@ -107,14 +147,13 @@ const JobManagerView = (props: any) => {
               </Button>
               <Button
                 onClick={() => {
-                  const jobId: string = searchParams.get("jobId")!;
+                  const jobId = searchParams.get("jobId")!;
                   setSearchParams({ jobId: jobId, view: "job-rating" });
                 }}
                 type="button"
                 variant={viewManager === "job-rating" ? "contained" : "text"}
                 fullWidth={true}
                 style={{
-                  // borderColor: viewManager === "job-rating" ? "" : "#FF5353",
                   color: viewManager === "job-rating" ? "#FFFFFF" : "#1E90FF",
                   backgroundColor:
                     viewManager === "job-rating" ? "#1E90FF" : "",
@@ -124,8 +163,11 @@ const JobManagerView = (props: any) => {
               </Button>
               <Button
                 onClick={() => {
-                  const jobId: string = searchParams.get("jobId")!;
-                  setSearchParams({ jobId: jobId, view: "job-final-review" });
+                  const jobId = searchParams.get("jobId")!;
+                  setSearchParams({
+                    jobId: jobId,
+                    view: "job-final-review",
+                  });
                 }}
                 type="button"
                 variant={
@@ -144,8 +186,10 @@ const JobManagerView = (props: any) => {
                 Review
               </Button>
             </div>
-          </div>
-        )}
+          )}
+        </div>
+      )}
+  
       <div className="m-4">
         {viewManager === "job-screening" && <JobScreening jobData={jobData} />}
         {viewManager === "job-grading" && <JobGrading jobData={jobData} />}
@@ -156,8 +200,9 @@ const JobManagerView = (props: any) => {
       </div>
     </>
   );
+  
 };
 
-export default JobManagerView;
+export default JobAdminView;
 
 
