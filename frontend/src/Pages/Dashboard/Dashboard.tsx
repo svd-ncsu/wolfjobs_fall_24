@@ -105,13 +105,13 @@ const Dashboard = () => {
   }, [role, jobList, applicationList]);
 
   // Function to handle admin-only page access
-  const handleAdminAccess = () => {
-    if (role !== "Admin") {
-      toast.error("Access Denied. Admins only!");
-    } else {
-      navigate("/admin");
-    }
-  };
+  // const handleAdminAccess = () => {
+  //   if (role !== "Admin") {
+  //     toast.error("Access Denied. Admins only!");
+  //   } else {
+  //     navigate("/admin");
+  //   }
+  // };
 
   // Toggle Dark Mode
   const toggleDarkMode = () => {
@@ -156,7 +156,7 @@ const Dashboard = () => {
               style={{color: isDarkMode ? "#FFF" : "#000"}}
             >
               <span>{role === "Manager" ? "My Listings" : "My Applications"}</span>
-              {role === "Manager" && (
+              {(role === "Manager" || role=="Admin") && (
                 <Button
                   onClick={(e) => {
                     e.preventDefault();
@@ -201,7 +201,7 @@ const Dashboard = () => {
             Information
           </Button>
 
-          <Button
+          {/* <Button
             onClick={handleAdminAccess}
             // type="button"
             className="p-2 border rounded-md bg-blue-500 text-white transition duration-200 hover:bg-blue-700"
@@ -209,7 +209,7 @@ const Dashboard = () => {
             style={{color: "#FFF", backgroundColor: isDarkMode ? "#1E3A5F" : "#1E90FF", border: "1px solid", borderColor: isDarkMode ? "#FFF" : "#1E90FF"}}
           >
             Admin Only
-          </Button>
+          </Button> */}
         </div>
       </div>
     </>

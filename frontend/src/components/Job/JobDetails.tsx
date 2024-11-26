@@ -6,6 +6,7 @@ import { toast } from "react-toastify";
 import { useEffect, useState } from "react";
 import { useApplicationStore } from "../../store/ApplicationStore";
 import JobManagerView from "./JobManagerView";
+import JobAdminView from "./JobAdminView";
 
 type FormValues = {
   answer1: string;
@@ -180,7 +181,7 @@ const JobDetail = (props: any) => {
                   {application?.status
                     ? application.status.charAt(0).toUpperCase() +
                       application.status.slice(1)
-                    : "In Review"}
+                    : "Open"}
                 </span>
               </div>
             )}
@@ -282,6 +283,12 @@ const JobDetail = (props: any) => {
           <JobManagerView isDarkMode={isDarkMode} jobData={jobData} />
         </div>
       )}
+      {role === "Admin" && jobData.status === "open" && (
+        <div>
+          <JobAdminView jobData={jobData} />
+        </div>
+      )}
+
     </div>
   );
 };

@@ -4,7 +4,7 @@ import { Button } from "@mui/material";
 import axios from "axios";
 import { toast } from "react-toastify";
 import { useSearchParams } from "react-router-dom";
-import emailjs from "emailjs-com"; // Import EmailJS
+import { sendEmailNotification } from "../../utils/emailUtils";
 
 const JobScreening = (props: any) => {
   const { jobData, isDarkMode }: { jobData: Job; isDarkMode: boolean } = props;
@@ -20,28 +20,6 @@ const JobScreening = (props: any) => {
     );
   }, [searchParams, applicationList, jobData._id]);
 
-  const sendEmailNotification = async (recipientEmail: string, applicantName: string, status: string) => {
-    const templateParams = {
-      to_email: recipientEmail,
-      to_name: applicantName,
-      status: status,
-    };
-
-    try {
-      const response = await emailjs.send(
-        "service_sflejad", // Replace with your EmailJS service ID
-        "template_vsusodt", // Replace with your EmailJS template ID
-        templateParams,
-        "jrDCVvqI4peJwZ_Jd" // Replace with your EmailJS user ID
-      );
-      console.log("Email successfully sent!", response.status, response.text);
-      return true; // Indicate success
-    } catch (error) {
-      console.error("Failed to send email:", error);
-      return false; // Indicate failure
-    }
-  };
-
   const handleAccept = async (applicationId: string, email: string, name: string) => {
     const url = "http://localhost:8000/api/v1/users/modifyApplication";
 
@@ -54,7 +32,7 @@ const JobScreening = (props: any) => {
       const res = await axios.post(url, body);
       if (res.status === 200) {
         toast.success("Accepted candidate");
-        const emailSent = await sendEmailNotification(email, name, "accepted");
+        const emailSent = await sendEmailNotification(email, name, `Accepted in ${body.status}`, `Your Application has successfully passed the ${body.status} stage!`);
         if (emailSent) {
           toast.success("Email notification sent.");
         } else {
@@ -82,7 +60,7 @@ const JobScreening = (props: any) => {
       const res = await axios.post(url, body);
       if (res.status === 200) {
         toast.success("Rejected candidate");
-        const emailSent = await sendEmailNotification(email, name, "rejected");
+        const emailSent = await sendEmailNotification(email, name, `Rejected in Screening Stage`, `We regret to inform you that your application did not pass the Screening stage.`);
         if (emailSent) {
           toast.success("Email notification sent.");
         } else {

@@ -37,7 +37,7 @@ const JobPreview = () => {
 
   const onSubmit = (e: any) => {
     e.preventDefault();
-
+    console.log(userId)
     const url = `http://localhost:8000/api/v1/users/createjob`;
     const body = {
       id: userId,
