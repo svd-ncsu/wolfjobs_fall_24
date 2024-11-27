@@ -62,7 +62,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 - **Inclusivity & Belonging:** At WolfJobs, every student is a valuable asset. Our emphasis on inclusion ensures that you're not just taking up a job; you're becoming a part of a diverse, dynamic community where your voice matters.
 
-# Application Preview:
+# Application Preview (Scroll down to see new Chat Feature!):
 
 ## Applicant Side
 
@@ -97,6 +97,15 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 ### Review & Accept Applications
 ![Review Applications](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/reviewaccept.gif)
+
+### Emails during Application Review Procedure
+![Images of Emails](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/application-walkthrogh.jpg)
+
+### Email for Rejected Candidate
+![Rejected Candidate](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/rejected-candidate.png)
+
+### Chat Forum
+![Chat Forum](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/chat.gif)
 
 
 # Installation Instructions for Project Setup
