@@ -9,7 +9,7 @@ Prepare a  markdown  with **three** columns:
 - At the top,  show the sum of column2.
 
 
-| Notes| Score (SUM 244)| Evidence|
+| Notes| Score (SUM 273)| Evidence|
 |------|------|---------|
 | Video | 3 | Video is updated for new function (Link)
 |Workload is spread over the whole team (one team member is often Xtimes more productive than the others but nevertheless, here is a track record that everyone is contributing a lot) | 3 | workloads are spreaded evenly, evidence in (https://github.com/svd-ncsu/wolfjobs_fall_24/graphs/contributors)
