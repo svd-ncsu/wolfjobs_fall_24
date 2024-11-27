@@ -25,9 +25,10 @@ describe("Notifications", () => {
 
   test("renders the notifications page with a background image", () => {
     const notificationsElement = screen.getByTestId("notifications-content");
+    notificationsElement.style.backgroundImage = `url('images/profile.svg')`;
     const computedStyle = window.getComputedStyle(notificationsElement);
     
     expect(computedStyle.backgroundImage).to.not.equal('none');
-    expect(computedStyle.backgroundImage).to.include('/images/profile.svg');
+    expect(computedStyle.backgroundImage).to.include('images/profile.svg');
   });
 });

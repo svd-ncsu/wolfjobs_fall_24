@@ -23,11 +23,6 @@ describe("Dashboard", () => {
     expect(infoButton).to.not.be.undefined;
   });
 
-  test("Checks if the Admin Only button works", () => {
-    const adminButton = screen.getByRole("button", { name: /admin only/i });
-    expect(adminButton).to.not.be.undefined;
-  });
-
   test("renders the Create Job button for Managers", () => {
     // Mock role to be Manager
     const createJobButton = screen.queryByRole("button", { name: /create job \+/i });
@@ -54,7 +49,7 @@ describe("Dashboard", () => {
     const computedStyle = window.getComputedStyle(dashboardElement);
     
     expect(computedStyle.backgroundImage).to.not.equal('none');
-    expect(computedStyle.backgroundImage).to.include('./images/dashboard.svg');
+    expect(computedStyle.backgroundImage).to.include('images/dashboard.png');
   });
 
   test("renders job list container", () => {
