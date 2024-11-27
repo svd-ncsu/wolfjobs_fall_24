@@ -447,7 +447,7 @@ module.exports.createApplication = async function (req, res) {
         application: application,
         //token: jwt.sign(user.toJSON(), env.jwt_secret, { expiresIn: "7h" })
       },
-      message: "Job Created!!",
+      message: "Application created successfully",
       success: true,
     });
   } catch (err) {
