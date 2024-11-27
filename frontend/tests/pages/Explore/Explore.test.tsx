@@ -1,8 +1,17 @@
 import { render, screen, fireEvent } from "@testing-library/react";
- 
 import Explore from "../../../src/Pages/Explore/Explore";
 import { MemoryRouter } from "react-router";
-import { expect } from 'chai';
+import axios from 'axios';
+import { vi } from 'vitest';
+import {expect} from "chai";
+
+// Mocking axios globally before tests run
+vi.mock('axios');
+
+// Provide mock responses for the axios calls
+axios.get.mockResolvedValue({
+  data: { jobs: ['Job 1', 'Job 2'] } // Replace with appropriate mock data for your use case
+});
 
 describe("Explore", () => {
   beforeEach(() => {
