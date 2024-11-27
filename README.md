@@ -42,7 +42,7 @@
 
 # Presentation Video
 
-[![Watch the video](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/thumbnail.jpg)](https://drive.google.com/drive/folders/10ILYTGbCqnXAp8TGnAjq2FEeVyUuTugu?usp=sharing)
+[![Watch the video](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/thumbnail.png)](https://drive.google.com/drive/folders/10ILYTGbCqnXAp8TGnAjq2FEeVyUuTugu?usp=sharing)
 
 # About Us
 
