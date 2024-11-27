@@ -104,6 +104,9 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 ### Email for Rejected Candidate
 ![Rejected Candidate](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/rejected-candidate.png)
 
+### Admin Portal (New in v2.0)
+![Admin Portal](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/admin.gif)
+
 ### Chat Forum
 ![Chat Forum](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/chat.gif)
 
