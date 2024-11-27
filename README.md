@@ -99,7 +99,7 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 ![Review Applications](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/reviewaccept.gif)
 
 ### Emails during Application Review Procedure
-![Images of Emails](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/application-walkthrogh.jpg)
+![Images of Emails](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/application-walkthrough.jpg)
 
 ### Email for Rejected Candidate
 ![Rejected Candidate](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/rejected-candidate.png)
