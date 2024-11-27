@@ -68,35 +68,35 @@ At WolfJobs, it’s not just about work – it's about joining a vibrant pack wh
 
 ### Signup & Login
 
-![Signup & Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/applicantsignup%26login.gif)
+![Signup & Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/applicantsignup%26login.gif)
 
 ### Student Applies for Job
 
-![Apply for Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/studentloginandapply.gif)
+![Apply for Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/studentloginandapply.gif)
 
 ### Application Status & Questionaire
 
-![Questionaire](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/applicationstatus%26questionaire.gif)
+![Questionaire](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/applicationstatus%26questionaire.gif)
 
 ## Manager Side
 
 ### Manager Sign Up
-![Manager Sign Up](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/managersignup.gif)
+![Manager Sign Up](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/managersignup.gif)
 
 ### Manager Login
-![Manager Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/managerlogin.gif)
+![Manager Login](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/managerlogin.gif)
 
 ### Edit Profile
 ![Edit Profile](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/editprofile.gif)
 
-### Add/Close Job
-![Add/Close Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/createclosejob.gif)
+### Add Job
+![Add Job](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/createclosejob.gif)
 
 ### Screening
-![Screening](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/screening.gif)
+![Screening](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/screening.gif)
 
 ### Review & Accept Applications
-![Review Applications](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/feature/GIFs/reviewaccept.gif)
+![Review Applications](https://github.com/svd-ncsu/wolfjobs_fall_24/blob/v2.0/GIFs/reviewaccept.gif)
 
 
 # Installation Instructions for Project Setup
