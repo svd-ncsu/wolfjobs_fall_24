@@ -1,4 +1,5 @@
 import { render, screen } from "@testing-library/react";
+ 
 import Dashboard from "../../../src/Pages/Dashboard/Dashboard";
 import { MemoryRouter } from "react-router";
 import { expect } from 'chai';
@@ -41,6 +42,14 @@ describe("Dashboard", () => {
     if (jobTiles.length > 0) {
       expect(jobTiles.length).to.be.greaterThan(0);
     }
+  });
+
+  test("renders the dashboard with a background image and checks if the image is present or not", () => {
+    const dashboardElement = screen.getByTestId("dashboard-content");
+    const computedStyle = window.getComputedStyle(dashboardElement);
+    
+    expect(computedStyle.backgroundImage).to.not.equal('none');
+    expect(computedStyle.backgroundImage).to.include('dashboard.png');
   });
 
   test("renders job list container", () => {
