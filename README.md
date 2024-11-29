@@ -27,17 +27,14 @@
 
 # What's New (v2.0):
 
- - Automated Email Notifications: Instant updates keep applicants informed of every status change in their application journey.
- - Branding, Colours and Typography
- - Components & States
+ - **Automated Email Notifications**: Instant Email updates keep applicants informed of every status change in their application journey.
+ - **Dark Mode**, Branding, Colours and Typography
+ - Admin Portal Addition - Enables Admins to have a structured oversight and management of both students and hiring managers
  - Mutliple UI Screens _flows_ for Student & Manager Roles
-
-
  - Enhanced User Security: Passwords are securely hashed in MongoDB, ensuring stronger protection for user data.
  - Job Match Percentage: Applicants can now see a "match percentage" that shows how well their skills align with job requirements.
- - Visual and UI Enhancements: High-quality images and an intuitive, interactive design make the platform more engaging, professional, and user-friendly.
- - New functionalities or added to sort jobs in Explore page. 
- - University Admin Role: A new University Admin user type enables structured oversight and management of both students and hiring managers.
+ - Visual and UI Enhancements: Dark mode Inclusion, High-quality images and an intuitive, interactive design make the platform more engaging, professional, and user-friendly.
+ - New functionalities or added to sort jobs in Explore page.
 
 
 # Presentation Video
@@ -162,17 +159,13 @@ Your app is ready to be deployed!
 
 # Future Improvements✨
 
-**1. Email Service📧** - More emails will be sent for creating an accound or applying to a job or creating a new job.
+**1. Applicant Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
 
-**2. Interview Video Submission** - Managers can request applicants to submit a video screening file and applicants can upload a video on their side of the portal.
+**2. Schedule an Interview** - Managers can schedule an interview with applicant to get applicant's overview before providing a hiring offer.
 
-**3. Enhanced Admin Functionality** –  Expanded features for admin users will streamline management and improve oversight capabilities.
+**3. Reminders for Interview** - Applicants and Managers can get an automated reminder for the interview date and its timings.
 
-**4. UI Enhancements with Dark Mode** –  Introducing a dark mode option wherever possible and additional UI changes to enhance visual quality and user comfort.
-
-**5. General Messaging Page** –  A new messaging feature will promote communication among users, fostering a more interactive community.
-
-**6. System Stability and Speed Improvements** –  Enhancements will ensure faster loading times and greater stability, eliminating glitches for a smoother user experience.
+**4. Additional Test Scenarios** - Code Coverage can be improved along with reliability of the system by addition of more test cases focused towards functionality enhancement of the system.
 
 # Acknowledgments
 We would like to express our gratitude to the original creators of this project, whose work provided a solid foundation for our development. This project builds upon their codebase, and we appreciate the efforts they invested in establishing a robust framework that we could enhance and extend.
